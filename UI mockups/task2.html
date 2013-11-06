@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Task 2</title>
+		<meta name="viewport" content="widtd=device-widtd, initial-scale=1.0">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<!-- Bootstrap -->
+		<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css">
+        
+
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view tde page via file:// -->
+		<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+		<![endif]-->
+
+		<style type="text/css">
+				.col-md-4 {
+					background: #f3f3f3;
+					padding: 0px 10px 10px 10px;
+				}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<nav class="navbar navbar-default">
+			<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">SourceTheCrowd</a>
+				</div>
+				<div>
+					<ul class="nav navbar-nav navbar-right">
+						<li class="active"><a href="#">Logout</a></li>
+						<li>Logged in as: <bl>KaRo</bl></li>
+<!--					<li><p>logged in: <bl>KaRo</bl><p></li> -->
+					</ul>
+				</div><!--/.nav-collapse -->
+
+				<!-- Collect tde nav links, forms, and otder content for toggling -->
+<!--
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="#">Übersicht</a></li>
+						<li><a href="#">Ärzte Tagebuch</a></li>
+					</ul>
+				</div> --> <!-- /.navbar-collapse -->
+			</nav>
+			<!-- Task description -->
+
+			<div class="row">
+				<div class="col-md-12">
+					<div class="list-group">
+						<h2 >Your task</h2>
+					</div>
+				</div>
+				<div class="col-md-12">
+					<div class="list-group">
+						<h3 >Rate Keywords</h3>
+						<textarea class="form-control" rows="3" value="" readonly>Your task is to rate below listed keywords according on how they are mentioned in the article. Read the article crefully. Is the company mentioned in a positive manner? Is a product rated as to be good?
+	The better the product/company is mentioned in the text, the higher the rating shall be. If you cannot find a ceartain keyword, just rate it with zero.</textarea>
+					</div>
+				</div>
+
+			<!-- Text field with article -->
+				<div class="col-md-12">
+				<div class="list-group">
+					<h3 >Input</h3>
+					<textarea class="form-control" rows="7" value="" readonly>Text des Artikels
+Lorem ipsum
+							Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidun
+							Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidun
+							Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt.</textarea>
+				</div>
+			</div>
+
+		<!-- Keywords to be rated -->
+			<div class="col-md-12">
+			<h3 >Keywords</h3>
+				<div class="list-group">
+					<div class="list-group-item">
+						<h4 class="list-group-item-heading">Lore</h4>
+						<div class="row">
+							<div class="col-md-8"><p class="list-group-item-text">Product<p></div>
+							<div class="col-md-4">
+								<!-- TODO: Here is the star-chart -->
+								<!-- TODO: Here is the star-chart -->
+								<input type="radio" name="Sterne-Lore" value="0" checked> 0
+								<input type="radio" name="Sterne-Lore" value="1"> 1
+								<input type="radio" name="Sterne-Lore" value="2"> 2
+								<input type="radio" name="Sterne-Lore" value="3"> 3
+								<input type="radio" name="Sterne-Lore" value="4"> 4
+								<input type="radio" name="Sterne-Lore" value="5"> 5
+							</div>
+						</div>
+					</div>
+					<div class="list-group-item">
+						<h4 class="list-group-item-heading">Ipsum</h4>
+						<div class="row">
+							<div class="col-md-8">
+								<p class="list-group-item-text">Company<p>
+							</div>
+							<div class="col-md-4">
+								<!-- TODO: Here is the star-chart -->
+								<input type="radio" name="Sterne-Ipsum" value="0" checked> 0
+								<input type="radio" name="Sterne-Ipsum" value="1"> 1
+								<input type="radio" name="Sterne-Ipsum" value="2"> 2
+								<input type="radio" name="Sterne-Ipsum" value="3"> 3
+								<input type="radio" name="Sterne-Ipsum" value="4"> 4
+								<input type="radio" name="Sterne-Ipsum" value="5"> 5
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+			<button type="button" class="btn btn-default btn-lg" >Submit</button>
+			
+<!-- Lore, Ipsum, sit amet, tempor -->
+
+
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="https://code.jquery.com/jquery.js"></script>
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
+	</body>
+</html>
+
