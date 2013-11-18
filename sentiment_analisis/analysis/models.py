@@ -6,6 +6,9 @@ class Feed(models.Model):
     link = models.URLField()
     content = models.TextField()
 
+    def __unicode__(self):
+        return self.title
+
 
 class Keyword(models.Model):
     text = models.CharField(max_length=500)

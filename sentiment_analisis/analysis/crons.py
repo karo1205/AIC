@@ -3,9 +3,16 @@ from analysis.models import Feed
 #from django.core.files import File
 #import datetime
 import feedparser
+import logging
+logger = logging.getLogger(__name__)
 
 
 class Fetch_Feeds(CronJobBase):
+    """
+    Docstring.
+
+    """
+
     RUN_EVERY_MINS = 5  # every 5 mins
 
     schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
@@ -21,6 +28,7 @@ class Fetch_Feeds(CronJobBase):
             else:
                 f = Feed(link =item.id, title = item.title, content = item.summary_detail.value)
                 f.save()
+                logger.info("new feed was stored")
        # f = open('/tmp/hello.world', 'a')
        # myfile = File(f)
        # myfile.write(str(datetime.datetime.now()))
