@@ -64,7 +64,7 @@
 					<div class="col-md-12">
 						<div class="list-group">
 							<h3 >Identify Keywords</h3>
-							<textarea class="form-control" rows="3" value="" readonly>Your task is to read the text and identify keywords which either name a company or product. The keywords shown below are already reconized. Please do not add them to the list of keywords you found. Search for new keywords instead. </textarea>
+							<textarea class="form-control" rows="3" value="" readonly>Your task is to read the text and identify keywords which either name a company or product. The keywords shown below are already reconized. Please do not add them to the list of keywords you found. Search for new keywords instead. Rate every key word to either be a Product (P) or a Company (C).</textarea>
 						</div>
 					
 					</div>
@@ -74,10 +74,9 @@
 						<div class="list-group">
 							<h3 >Input</h3>
 								<textarea class="form-control" rows="7" value="" readonly>Text des Artikels
-Lorem ipsum
-								Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidun
-								Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidun
-								Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt.</textarea>
+Lorem ipsum	Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
+consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidun	Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidun 
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt.</textarea>
 						</div>
 					</div>
 				</div>
@@ -90,53 +89,45 @@ Lorem ipsum
 			<!-- Already found keywords -->
 				<div class="list-group">
 					<h3 >Keywords</h3>
-					<div class="list-group-item">
-						<div class="row">
-							<div class="col-md-8">
-								<textarea class="form-control" rows="1" value="">consetetur</textarea>
-							</div>
-							<div class="col-md-2">
-								<!-- TODO: Here is the star-chart -->
-								<!-- TODO: Here is the star-chart -->
-								<input type="radio" name="Lore" value="Product" checked> Product
-								<input type="radio" name="Lore" value="Company"> Company
-							</div>
-							<div class="col-md-1">
-								<button type="button" class="btn btn-default">Remove</button>
-							</div>
-							<div class="col-md-1">
-							</div>
-						</div>
-					</div>
-					<div class="list-group-item">
-						<div class="row">
-							<div class="col-md-8">
-								<textarea class="form-control" rows="1" value=""></textarea>
-							</div>
-							<div class="col-md-2">
-								<!-- TODO: Here is the star-chart -->
-								<input type="radio" name="Ipsum" value="Product" checked> Product
-								<input type="radio" name="Ipsum" value="Company"> Company
-							</div>
-							<div class="col-md-1">
-								<button type="button" class="btn btn-default">Remove</button>
-							</div>
-							<div class="col-md-1">
-								<button type="button" class="btn btn-default">Add</button>
-							</div>
-						</div>
-					</div>
-				</div>
+				    <div class="table-responsive">
+				      <table class="table table-bordered table-striped table-hover">
+				        <thead>
+				          <tr>
+				            <th>
+				              Keyword
+				            </th>
+				            <th>
+				              Product or Company (P or C)
+				            </th>
+				            <th>
+				            </th>
+				          </tr>
+
+				        <tbody>
+				          <tr>
+				            <td><textarea class="form-control" rows="1" value="">consetetur</textarea></td>
+				            <td><textarea class="form-control" rows="1" value="">P</textarea></td>
+				            <td><button type="button" class="btn btn-default">Remove</button></td>
+				          </tr>
+				          <tr>
+				            <td><textarea class="form-control" rows="1" value="">consetetur</textarea></td>
+				            <td><textarea class="form-control" rows="1" value="">P</textarea></td>
+				            <td><button type="button" class="btn btn-default">Remove</button></td>
+				          </tr>
+				          <tr>
+				            <td><textarea class="form-control" rows="1" value="">consetetur</textarea></td>
+				            <td><textarea class="form-control" rows="1" value="">P</textarea></td>
+				            <td><button type="button" class="btn btn-default">Add</button></td>
+				          </tr>
+				        </tbody>
+				      </table>
+
 				<div class="col-md-12">
 					<div class="list-group">
 						<button type="button" class="btn btn-default btn-lg" >Submit</button>
 					</div>
 				</div>
 			</div>
-
-			
-
-
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="https://code.jquery.com/jquery.js"></script>
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
