@@ -1,13 +1,14 @@
 from django_cron import CronJobBase, Schedule
-from analysis.models import Feed
+from analysis.models import Feed, Task
 #from django.core.files import File
-#import datetime
+import datetime
 import feedparser
 import logging
 logger = logging.getLogger(__name__)
 
 
 class Fetch_Feeds(CronJobBase):
+
     """
     Docstring.
 
@@ -26,10 +27,28 @@ class Fetch_Feeds(CronJobBase):
             if Feed.objects.filter(link=item.id):
                 pass
             else:
-                f = Feed(link =item.id, title = item.title, content = item.summary_detail.value)
+                f = Feed(link=item.id, title=item.title, content=item.summary_detail.value)
                 f.save()
                 logger.info("new feed was stored")
-       # f = open('/tmp/hello.world', 'a')
-       # myfile = File(f)
-       # myfile.write(str(datetime.datetime.now()))
-       # f.close()
+                t = Task(pub_date=datetime.datetime.now(), question='Question1', feed=f.id)
+                t.save()
+                #TODO: fill data field
+                logger.info("new task was stored")
+
+
+class Get_Tasks(CronJobBase):
+
+    """
+    This cronjobs checks periodicall on undone tasks in the Tasks table und requests the actual status from the
+    crowdsourcing plattform.
+    """
+
+    RUN_EVERY_MINS = 5  # every 5 mins
+
+    schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
+    code = 'analysis.get_tasks'    # a unique code
+
+    def do(self):
+        pass
+
+#
