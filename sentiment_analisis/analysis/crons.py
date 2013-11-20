@@ -3,6 +3,9 @@ from analysis.models import Feed, Task
 #from django.core.files import File
 import datetime
 import feedparser
+import json
+import urllib2
+
 import logging
 logger = logging.getLogger(__name__)
 
@@ -34,6 +37,13 @@ class Fetch_Feeds(CronJobBase):
                 t.save()
                 #TODO: fill data field
                 logger.info("new task was stored")
+                post = json.load(urllib2.urlopen('http://127.0.0.1:8001/api/v1/task/1/?format=json'))
+                post['data'] = f.content
+                post['price'] = 0
+                post['question'] = 'Please find keywords in this text'
+                post['callback_uri'] = 'testdata'
+                post['answer'] = ''
+                logger.info(post)
 
 
 class Get_Tasks(CronJobBase):
@@ -50,5 +60,3 @@ class Get_Tasks(CronJobBase):
 
     def do(self):
         pass
-
-#
