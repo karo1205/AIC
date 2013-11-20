@@ -40,11 +40,6 @@ Message to initiate the crowd.
             "required": true,
 			"description": "Short description, acts as a header in the document presented to the worker e.g. 'Rate Keywords' in task1"
 		},
-		"taskID": {
-			"type": "integer",
-            "required": true,
-			"description": "Unique ID related to this task. the answers coming to this task will provide the same ID"
-		},
 		"taskDescription": {
 			"type": "string",
             "required": true,
@@ -64,6 +59,11 @@ Message to initiate the crowd.
 			"type": "string",
             "required": false,
 			"description": "Optional additional input (like already identified keywords in our example)"
+		},
+		"price": {
+			"type": "float",
+            "required": true,
+			"description": "Price per answer"
 		},
 		"resultColumns": {
 			"type": "array",
@@ -90,11 +90,6 @@ Message to initiate the crowd.
 	"title": "Task Acceptance",
 	"type": "object",
 	"properties": {
-		"taskID": {
-			"type": "integer",
-            "required": true,
-			"description": "Unique ID of the task. "
-		},
 		"accepted": {
 			"type": "boolean",
             "required": true,
@@ -105,11 +100,11 @@ Message to initiate the crowd.
             "required": false,
 			"description": "Description, why the task is accepted (or not)."
 		}
-		"pollURI": {
+		"resourceURI": {
 			"type": "string",
 			"format": "uri",
-            "required": false,
-			"description": "URI, the results of the tasks can be polled from. MUST be given if there was no callBackURI in Crowd Request."
+            "required": true,
+			"description": "Eindeutige Task-ID. URI, the results of the tasks can be polled from. MUST be given."
 		}
 	}
 }
@@ -121,13 +116,13 @@ Message to initiate the crowd.
 	"title": "Crowd Answer",
 	"type": "object",
 	"properties": {
-		"taskID": {
+		"resourceURI": {
 			"type": "integer",
             "required": true,
-			"description": "Unique ID related to this task. the answers coming to this task will provide the same ID"
+			"description": "Unique ID related to this task. The answers coming to this task will provide the same ID"
 		},
 		"userID": {
-			"type": "integer",
+			"type": "string",
             "required": true,
 			"description": "Unique ID of the user who worked on the task."
 		},
@@ -145,12 +140,32 @@ Message to initiate the crowd.
 }
 
 
+ANMERKUNG:
+Die Antowrt oben in Crowd answer ist nicht ganz korrekt, da so nur eine zeile abgebildet werden könnte.
+Die Rückgabe wird in der folgenden form erfolgen:
+
+"resulColumns": {
+	"column": [{kw: "KW1", typ: V1"} , {kw: "KW2", typ: V2"}, {kw: "KW3", typ: V1"}]
+}
+
+wobei die kw: und typ: den headern im Request entspricht, also diese form:
+task {
+...
+	question: "Suche keywords und type"
+	columns: {
+		kw,
+		typ	
+	}
+}
+
+
+
 ==============================================================================================================
 ==============================================================================================================
 
 mobileWorks-requests
 
-1. Request
+1. Request 
 ==========
 --data '{"name": "My Trip", "instructions": "Find me flights from SF to LA on 09/28. Provide the airline, flight number, time, and price.", "data": {"columns": ["Airline Name", "Flight Number", "Lift Off Time", "Price"]}}' https://premiere.mobileworks.com/api/v3/project/
 
