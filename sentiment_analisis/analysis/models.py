@@ -1,4 +1,5 @@
 from django.db import models
+import datetime
 
 
 class Feed(models.Model):
@@ -27,15 +28,15 @@ class Task(models.Model):
     )
     status = models.CharField(max_length=1,choices=STATUS_CHOICES,default='NS')
     pub_date = models.DateTimeField('date published')
-    com_date = models.DateTimeField('date completed')
-    orphaned = models.BooleanField('Orphaned')
+    com_date = models.DateTimeField('date completed', default=datetime.datetime(2000, 1, 1, 1, 1, 1))
+    orphaned = models.BooleanField('Orphaned',default=0)
     price = models.IntegerField(default=0)
-    callback_uri = models.CharField(max_length=200)
+    callback_uri = models.CharField(max_length=200, default='NULL')
     question = models.TextField()
-    answer = models.TextField()
+    answer = models.TextField(default='NULL')
     feed = models.ForeignKey(Feed)
     keywords = models.ManyToManyField(Keyword)
-    worker = models.ForeignKey(Worker)
+    worker = models.ForeignKey(Worker, default=0)
 
 
 class Sentiment(models.Model):
