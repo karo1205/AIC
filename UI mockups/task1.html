@@ -39,18 +39,8 @@
 						<ul class="nav navbar-nav navbar-right">
 						<li class="active"><a href="#">Logout</a></li>
 						<li>Logged in as: <bl>KaRo</bl></li>
-	<!--					<li><p>logged in: <bl>KaRo</bl><p></li> -->
 						</ul>
 					</div><!--/.nav-collapse -->
-	
-					<!-- Collect tde nav links, forms, and otder content for toggling -->
-	<!--
-					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-						<ul class="nav navbar-nav">
-							<li class="active"><a href="#">Übersicht</a></li>
-							<li><a href="#">Ärzte Tagebuch</a></li>
-						</ul>
-					</div> --> <!-- /.navbar-collapse -->
 				</nav>
 
 			<!-- Task description -->
@@ -88,6 +78,10 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
 				</div>
 			<!-- Already found keywords -->
 				<div class="list-group">
+
+	<form role="form">
+<!-- TODO: hidden User ID in form -->
+<!-- TODO Hidden Task ID??? -->
 					<h3 >Keywords</h3>
 				    <div class="table-responsive">
 				      <table class="table table-bordered table-striped table-hover">
@@ -105,29 +99,32 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
 
 				        <tbody>
 				          <tr>
-				            <td><textarea class="form-control" rows="1" value="">consetetur</textarea></td>
-				            <td><textarea class="form-control" rows="1" value="">P</textarea></td>
+				            <td><input class="form-control" name="col0_0" value="consetetur"/></td>
+				            <td><input class="form-control" name="col0_1" value="P"/></td>
 				            <td><button type="button" class="btn btn-default">Remove</button></td>
 				          </tr>
 				          <tr>
-				            <td><textarea class="form-control" rows="1" value="">consetetur</textarea></td>
-				            <td><textarea class="form-control" rows="1" value="">P</textarea></td>
+				            <td><input class="form-control" id="col1_0" value="consetetur"></input></td>
+				            <td><input class="form-control" id="col1_1" value="P"/></td>
 				            <td><button type="button" class="btn btn-default">Remove</button></td>
 				          </tr>
 				          <tr>
-				            <td><textarea class="form-control" rows="1" value="">consetetur</textarea></td>
-				            <td><textarea class="form-control" rows="1" value="">P</textarea></td>
+				            <td><input class="form-control" id="col2_0" value=""/></td>
+				            <td><input class="form-control" id="col2_1" value=""/></td>
 				            <td><button type="button" class="btn btn-default">Add</button></td>
 				          </tr>
 				        </tbody>
 				      </table>
-
+				</div>
 				<div class="col-md-12">
 					<div class="list-group">
-						<button type="button" class="btn btn-default btn-lg" >Submit</button>
+						<button type="submit" class="btn btn-default btn-lg" >Submit</button>
 					</div>
 				</div>
 			</div>
+	</form>
+
+
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="https://code.jquery.com/jquery.js"></script>
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
