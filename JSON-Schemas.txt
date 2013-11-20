@@ -1,0 +1,181 @@
+General message flow:
+=====================
+Everything starts with a task, which is created by our platform towards the crowd simulator. If the simulator accepts the request it would forward the task to the human workers. The workers work on the task, provide an answer and store it to the crowd simulator where it is stored.
+Now there are two possible scenarios. One is, that our platform is polling the crowd simulator for answers. the 2nd one is, that the simulator is pushing he answers to a URI provided by the platform.
+Each POLL or PUSH gives one answer (or none, if there is none left).
+
+Overall Message folw:
+=====================
+
+platform						Crowd simulator				Comment
+---------------------------------------------------------------------------------------------------------------------------
+    ---------- Crowd Request -------->						HTTP-POST
+    <-------- Task Acceptance --------						immediate answer to the POST
+
+1st:														POLLING (callBackURI in crowd request was empty)
+    ---------- http-GET (URI) ------->						HTTP-GET without body
+    <---------- Crowd answer ---------						immediate response to the HTTP-GET
+				......
+    ---------- http-GET (URI) ------->						HTTP-GET without body
+    <---------- Crowd answer ---------						immediate response to the HTTP-GET (until openAnswers=false)
+
+2nd:														PUSHING (callBackURI in crowd request was set)
+    <--------- Crowd Answer ----------						HTTP-POST to URI given in Crowd Request
+    ----------- OK ------------------>						Simple HTTP-Response
+				....
+    <--------- Crowd Answer ----------						HTTP-POST to URI given in Crowd Request
+    ----------- OK ------------------>						Simple HTTP-Response (until no more answers)
+
+
+Crowd request
+-------------
+Message to initiate the crowd.
+
+{
+	"title": "Crowd Request",
+	"type": "object",
+	"properties": {
+		"taskTitle": {
+			"type": "string",
+            "required": true,
+			"description": "Short description, acts as a header in the document presented to the worker e.g. 'Rate Keywords' in task1"
+		},
+		"taskID": {
+			"type": "integer",
+            "required": true,
+			"description": "Unique ID related to this task. the answers coming to this task will provide the same ID"
+		},
+		"taskDescription": {
+			"type": "string",
+            "required": true,
+			"description": "Long description of the task as a text-field"
+		},
+		"input": {
+			"type": "string",
+            "required": false,
+			"description": "Long Input to be worked on. Always just a Text. Optional since everything might be said by taskDescription"
+		},
+		"additionalInputHeader": {
+			"type": "string",
+            "required": false,
+			"description": "Headefr for optional additional input (like already identified keywords in our example)"
+		},
+		"additionalInput": {
+			"type": "string",
+            "required": false,
+			"description": "Optional additional input (like already identified keywords in our example)"
+		},
+		"resultColumns": {
+			"type": "array",
+            "required": true,
+			"description": "Array of Strings defining the headers of the result-columns. Defines, which columns the answer should have. The GUI present them accordingly as headers of tables."
+		},
+		"coutOfAnswers": {
+			"type": "integer",
+			"minimum": 1,
+            "required": false,
+			"description": "How many ansers are expected? Defaults to 1."
+		},		
+		"callBackURI": {
+			"type": "string",
+			"format": "uri",
+            "required": false,
+			"description": "Where shall the answer be sent to? If not given answers will not be sent via call back but provided via poll-URI."
+		}
+	}
+}
+
+// Immediate answer to a Crowd Request:
+{
+	"title": "Task Acceptance",
+	"type": "object",
+	"properties": {
+		"taskID": {
+			"type": "integer",
+            "required": true,
+			"description": "Unique ID of the task. "
+		},
+		"accepted": {
+			"type": "boolean",
+            "required": true,
+			"description": "Is the task accepted by the system?"
+		},
+		"reason": {
+			"type": "string",
+            "required": false,
+			"description": "Description, why the task is accepted (or not)."
+		}
+		"pollURI": {
+			"type": "string",
+			"format": "uri",
+            "required": false,
+			"description": "URI, the results of the tasks can be polled from. MUST be given if there was no callBackURI in Crowd Request."
+		}
+	}
+}
+
+
+// One answer of a Crowd Request. Each poll and each call back provide exactly one anser to a task. 
+// Either the amount of answers is reached (countOfAnswers in Crowd Request) or some timeout has been reached (date)
+{
+	"title": "Crowd Answer",
+	"type": "object",
+	"properties": {
+		"taskID": {
+			"type": "integer",
+            "required": true,
+			"description": "Unique ID related to this task. the answers coming to this task will provide the same ID"
+		},
+		"userID": {
+			"type": "integer",
+            "required": true,
+			"description": "Unique ID of the user who worked on the task."
+		},
+		"resultColumns": {
+			"type": "array",
+            "required": false,
+			"description": "Array of Strings defining the headers of the result-columns. Defines, which columns the answer should have. The GUI present them accordingly as headers of tables. will be empty if no more answers are to provide or currently no answers are available."
+		},
+		"openAnswers": {
+			"type": "boolean",
+            "required": true,
+			"description": "Are there any more answers to the task? True if so, false otherwise. Note, that false does not mean, that there are no more answers at all as some of them might be provided later on."
+		}
+	}
+}
+
+
+==============================================================================================================
+==============================================================================================================
+
+mobileWorks-requests
+
+1. Request
+==========
+--data '{"name": "My Trip", "instructions": "Find me flights from SF to LA on 09/28. Provide the airline, flight number, time, and price.", "data": {"columns": ["Airline Name", "Flight Number", "Lift Off Time", "Price"]}}' https://premiere.mobileworks.com/api/v3/project/
+
+
+Example Status/Notification:
+{"status": "OK", "project": {"name": "My Trip", "id": "autoId777", "status": "complete", "results": {"csv": "https://premiere.mobileworks.com/api/v3/project/autoId777.results.csv", "xlsx": "https://premiere.mobileworks.com/api/v3/project/autoId777.results.xlsx", "ods": "https://premiere.mobileworks.com/api/v3/project/autoId777.results.ods"}}}
+ 
+
+
+JSON-Schema - example
+{
+	"title": "Example Schema",
+	"type": "object",
+	"properties": {
+		"firstName": {
+			"type": "string"
+		},
+		"lastName": {
+			"type": "string"
+		},
+		"age": {
+			"description": "Age in years",
+			"type": "integer",
+			"minimum": 0
+		}
+	},
+	"required": ["firstName", "lastName"]
+}
