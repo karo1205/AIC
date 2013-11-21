@@ -5,7 +5,7 @@ import datetime
 import feedparser
 import json
 import urllib2
-
+import requests
 import logging
 logger = logging.getLogger(__name__)
 
@@ -33,17 +33,23 @@ class Fetch_Feeds(CronJobBase):
                 f = Feed(link=item.id, title=item.title, content=item.summary_detail.value)
                 f.save()
                 logger.info("new feed was stored")
-                t = Task(pub_date=datetime.datetime.now(), question='Question1', feed=f.id)
+                t = Task(pub_date=datetime.datetime.now(), question='Question1', feed=f)
                 t.save()
                 #TODO: fill data field
                 logger.info("new task was stored")
-                post = json.load(urllib2.urlopen('http://127.0.0.1:8001/api/v1/task/1/?format=json'))
-                post['data'] = f.content
-                post['price'] = 0
-                post['question'] = 'Please find keywords in this text'
-                post['callback_uri'] = 'testdata'
-                post['answer'] = ''
-                logger.info(post)
+                payload = json.load(urllib2.urlopen('http://127.0.0.1:8002/api/v1/task/1/?format=json'))
+                payload['data'] = f.content
+                payload['price'] = 0
+                payload['question'] = 'Please find keywords in this text'
+                payload['callback_uri'] = 'testdata'
+                payload['answer'] = ''
+                payload.pop('resource_uri')
+                payload.pop('id')
+                logger.info(payload)
+                url = 'http://127.0.0.1:8002/api/v1/task'
+
+                headers = {'content-type': 'application/json'}
+                response = requests.post(url,data=json.dumps(payload), headers=headers)
 
 
 class Get_Tasks(CronJobBase):
