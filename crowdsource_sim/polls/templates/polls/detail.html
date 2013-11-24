@@ -1,0 +1,50 @@
+
+<h1> Your Task </h1>
+
+{{ task.question }}
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'polls:submit' task.id %}" method="post">
+{% csrf_token %}
+
+<div id="messagetext">Enter something:</div>
+
+<div class="list-group">
+					<h3 >Keywords</h3>
+				    <div class="table-responsive">
+				      <table class="table table-bordered table-striped table-hover">
+				        <thead>
+				          <tr>
+				            <th>
+				              Keyword
+				            </th>
+				            <th>
+				              Product or Company (P or C)
+				            </th>
+				            <th>
+				            </th>
+				          </tr>
+
+				        <tbody>
+				          <tr>
+				            <td><textarea name="keyword1" class="form-control" rows="1" value="">consetetur</textarea></td>
+				            <td><textarea name="type1" class="form-control" rows="1" value="">P</textarea></td>
+				            <td><button type="button" class="btn btn-default">Remove</button></td>
+				          </tr>
+				          <tr>
+				            <td><textarea name="keyword2" class="form-control" rows="1" value="">consetetur</textarea></td>
+				            <td><textarea name="type2" class="form-control" rows="1" value="">P</textarea></td>
+				            <td><button type="button" class="btn btn-default">Remove</button></td>
+				          </tr>
+				          <tr>
+				            <td><textarea name="keyword3" class="form-control" rows="1" value="">consetetur</textarea></td>
+				            <td><textarea name="type3" class="form-control" rows="1" value="">P</textarea></td>
+				            <td><button type="button" class="btn btn-default">Add</button></td>
+				          </tr>
+				        </tbody>
+				      </table>
+			</div> 
+
+<input type="submit" value="Submit" />
+</form>
