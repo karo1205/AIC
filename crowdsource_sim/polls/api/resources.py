@@ -3,7 +3,8 @@ from tastypie import fields
 from tastypie.resources import ModelResource
 from polls.models import Task, Worker
 from tastypie.authorization import Authorization
-
+import logging
+logger = logging.getLogger(__name__)
 
 class UserResource(ModelResource):
 
@@ -40,3 +41,21 @@ class TaskResource(ModelResource):
         authorization = Authorization()
 
 
+class TestResource(ModelResource):
+
+    """Docstring."""
+
+    name = fields.CharField(attribute='name')
+    age = fields.IntegerField(attribute='years_old', null=True)
+
+    class Meta:
+        queryset = Task.objects.all()
+        allowed_methods = ['get', 'post']
+        resource_name = 'test'
+        #authorization = DjangoAuthorization()
+        #authorization = Authorization()
+
+    def hydrate(self, bundle):
+        logger.info(bundle.data['name'])
+        logger.info(str(bundle.data['age']))
+        return bundle
