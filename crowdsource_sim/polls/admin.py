@@ -6,7 +6,7 @@ class TaskAdmin(admin.ModelAdmin):
 
     """This class controls the admin interface for Tasks."""
 
-    list_display = ('id', 'callback_uri', 'question', 'answer', 'data')
+    list_display = ('id', 'worker', 'callback_uri', 'question', 'answer', 'data')
 
 
 admin.site.register(Worker)

@@ -20,8 +20,15 @@ class FeedAdmin(admin.ModelAdmin):
     list_display = ('title', 'link')
 
 
+class WorkerAdmin(admin.ModelAdmin):
+
+    """This class controls the admin interface for Feeds."""
+
+    list_display = ('id', 'worker_uri')
+
+
 admin.site.register(Feed, FeedAdmin)
 admin.site.register(Keyword)
-admin.site.register(Worker)
+admin.site.register(Worker, WorkerAdmin)
 admin.site.register(Task, TaskAdmin)
 admin.site.register(Sentiment)

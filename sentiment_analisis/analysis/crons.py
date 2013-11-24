@@ -1,5 +1,5 @@
 from django_cron import CronJobBase, Schedule
-from analysis.models import Feed, Task
+from analysis.models import Feed, Task, Worker
 #from analysis.utils import *
 #from django.core.files import File
 import datetime
@@ -77,16 +77,29 @@ class Get_Tasks(CronJobBase):
 
     def do(self):
         logger.info('Getting open tasks from DB')
-        opentasks= Task.objects.filter(status='S')  #get all started tasks
+        opentasks = Task.objects.filter(status='S')  # get all started tasks
 
         for t in opentasks:
             payload = json.load(urllib2.urlopen(t.task_uri + '?format=json'))
             logger.info("Checking: " + payload['resource_uri'])
-            if payload['answer'] != 'NULL':  #save answer when there is one
+            if payload['answer'] != 'NULL':  # save answer when there is one
                 t.answer=payload['answer']
-                t.status='D'  #set to to done (enable for processeing)
+                t.status='D'  # set to to done (enable for processeing)
+                try:  # see of worker alread is known
+                    w = Worker.objects.get(worker_uri=payload['worker'])
+                    t.worker_id = w.id  # set Task-Worker realtion
+                    logger.info("worker is already known: id = " + str(w.id))
+                    logger.info("worker " + str(w.id) +  " did task " + str(t.id))
+                except Worker.DoesNotExist:
+                    # create new worker
+                    newworker=Worker(worker_uri=payload['worker'])
+                    newworker.save() # save befor assigning to t becasue newworker hast'got an id yet
+                    t.worker_id=newworker.id
+                    logger.info("new worker created: id = " + str(newworker.id))
+                    logger.info("worker " + str(newworker.id) +  " did task " + str(t.id))
                 t.save()
-                logger.info("new answer saved")
 
-        process_task_answers()
+
+
+#        process_task_answers()
 
