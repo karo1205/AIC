@@ -1,5 +1,6 @@
 from django_cron import CronJobBase, Schedule
 from analysis.models import Feed, Task
+#from analysis.utils import *
 #from django.core.files import File
 import datetime
 import feedparser
@@ -23,33 +24,43 @@ class Fetch_Feeds(CronJobBase):
     code = 'analysis.fetch_feeds'    # a unique code
 
     def do(self):
+        logger.info("Getting Feeds")
 #        d = feedparser.parse('http://ftr.fivefilters.org/makefulltextfeed.php?url=http%3A%2F%2Ffeeds.finance.yahoo.com%2Frss%2F2.0%2Fheadline%3Fs%3Dyhoo%2Cmsft%2Ctivo%26region%3DUS%26lang%3Den-US&max=3')
         d = feedparser.parse('http://derstandard.at/?page=rss')
         for item in d.entries:
-            print item.id
             if Feed.objects.filter(link=item.id):
+                logger.info("feed already in db: " + item.id)
                 pass
             else:
                 f = Feed(link=item.id, title=item.title, content=item.summary_detail.value)
                 f.save()
-                logger.info("new feed was stored")
+                logger.info("new feed was stored: " + item.id)
                 t = Task(pub_date=datetime.datetime.now(), question='Question1', feed=f)
                 t.save()
                 #TODO: fill data field
                 logger.info("new task was stored")
                 payload = json.load(urllib2.urlopen('http://127.0.0.1:8002/api/v1/task/1/?format=json'))
                 payload['data'] = f.content
+ #               payload['data'] = transform_task_to_data(t)
                 payload['price'] = 0
                 payload['question'] = 'Please find keywords in this text'
                 payload['callback_uri'] = 'testdata'
                 payload['answer'] = ''
                 payload.pop('resource_uri')
                 payload.pop('id')
-                logger.info(payload)
-                url = 'http://127.0.0.1:8002/api/v1/task'
+                logger.info('payload = ' + json.dumps(payload))
+                url = 'http://127.0.0.1:8002/api/v1/task/'
 
                 headers = {'content-type': 'application/json'}
                 response = requests.post(url,data=json.dumps(payload), headers=headers)
+
+                if response.status_code == 201:
+                    logger.info("Task sucessfull postet: " + str(response.status_code) + " " + response.reason)
+                    t.status='S'
+                    t.task_uri = response.headers.get('location')  #get the location of the saved Item
+                    t.save()
+                else:
+                    logger.error("Problem with CrowdSourcing App: " + str(response.status_code) + " " + response.reason)
 
 
 class Get_Tasks(CronJobBase):
@@ -65,4 +76,11 @@ class Get_Tasks(CronJobBase):
     code = 'analysis.get_tasks'    # a unique code
 
     def do(self):
-        pass
+        logger.info('Getting open tasks from DB')
+        opentasks= Task.objects.filter(status='S')  #get all started tasks
+
+        for t in opentasks:
+            payload = json.load(urllib2.urlopen(t.task_uri + '?format=json'))
+            logger.info(payload['resource_uri'])
+
+
