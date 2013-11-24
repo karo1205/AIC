@@ -18,6 +18,7 @@ class Keyword(models.Model):
 class Worker(models.Model):
     score = models.IntegerField(default=0)
     blocked = models.BooleanField('blocked')
+    worker_uri = models.CharField(max_length=200, default='NULL')
 
 
 class Task(models.Model):
@@ -39,9 +40,6 @@ class Task(models.Model):
     feed = models.ForeignKey(Feed)
     keywords = models.ManyToManyField(Keyword)
     worker = models.ForeignKey(Worker, default=0) #TODO many to many relation
-
-    def generate_data(Feed):
-        return '{ data: data }'
 
     def __unicode__(self):
         return self.question

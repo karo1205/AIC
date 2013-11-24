@@ -1,13 +1,14 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from tastypie.api import Api
-from polls.api.resources import TaskResource, UserResource
+from polls.api.resources import TaskResource, UserResource, WorkerResource
 
 admin.autodiscover()
 
 v1_api = Api(api_name='v1')
 v1_api.register(TaskResource())
 v1_api.register(UserResource())
+v1_api.register(WorkerResource())
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
