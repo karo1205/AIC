@@ -45,7 +45,7 @@ class Fetch_Feeds(CronJobBase):
                 payload['price'] = 0
                 payload['question'] = 'Please find keywords in this text'
                 payload['callback_uri'] = 'testdata'
-                payload['answer'] = ''
+                payload['answer'] = 'NULL'
                 payload.pop('resource_uri')
                 payload.pop('id')
                 logger.info('payload = ' + json.dumps(payload))
@@ -81,6 +81,12 @@ class Get_Tasks(CronJobBase):
 
         for t in opentasks:
             payload = json.load(urllib2.urlopen(t.task_uri + '?format=json'))
-            logger.info(payload['resource_uri'])
+            logger.info("Checking: " + payload['resource_uri'])
+            if payload['answer'] != 'NULL':  #save answer when there is one
+                t.answer=payload['answer']
+                t.status='D'  #set to to done (enable for processeing)
+                t.save()
+                logger.info("new answer saved")
 
+        process_task_answers()
 
