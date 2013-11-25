@@ -38,7 +38,7 @@
 					<div>
 						<ul class="nav navbar-nav navbar-right">
 						<li class="active"><a href="#">Logout</a></li>
-						<li>Logged in as: <bl>KaRo</bl></li>
+						<li>Logged in as: <bl>{{ task.userid }} </bl></li>
 						</ul>
 					</div><!--/.nav-collapse -->
 				</nav>
@@ -53,8 +53,8 @@
 					</div>
 					<div class="col-md-12">
 						<div class="list-group">
-							<h3 >Identify Keywords</h3>
-							<textarea class="form-control" rows="3" value="" readonly>Your task is to read the text and identify keywords which either name a company or product. The keywords shown below are already reconized. Please do not add them to the list of keywords you found. Search for new keywords instead. Rate every key word to either be a Product (P) or a Company (C).</textarea>
+							<h3 > {{ task.header }} </h3>
+							<textarea class="form-control" rows="3" value="" readonly> {{ task.question }} </textarea>
 						</div>
 					
 					</div>
@@ -63,56 +63,46 @@
 					<div class="col-md-12">
 						<div class="list-group">
 							<h3 >Input</h3>
-								<textarea class="form-control" rows="7" value="" readonly>Text des Artikels
-Lorem ipsum	Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidun	Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidun 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt.</textarea>
+								<textarea class="form-control" rows="7" value="" readonly>  {{ task.input }} </textarea>
 						</div>
 					</div>
 				</div>
 
+{% if task.additional_input %}
 				<!-- Already found keywords -->
 				<div class="list-group">
-					<h3 >Already identified keywords</h3>
-						<textarea class="form-control" rows="1" value="" readonly>Lore, Ipsum, sit amet, tempor</textarea>
+					<h3 >  {{ task.additional_header }} </h3>
+						<textarea class="form-control" rows="1" value="" readonly>  {{ task.additional_input }} </textarea>
 				</div>
+</p>{% endif %}
 			<!-- Already found keywords -->
 				<div class="list-group">
 
-	<form role="form">
+	<form role="form action="{% url 'polls:submit' task.id %}" method="post"">
 <!-- TODO: hidden User ID in form -->
 <!-- TODO Hidden Task ID??? -->
-					<h3 >Keywords</h3>
+					<h3 >Task solution</h3>
 				    <div class="table-responsive">
 				      <table class="table table-bordered table-striped table-hover">
 				        <thead>
 				          <tr>
+<!-- header-entries -->
+{% for header in task.headers %}
 				            <th>
-				              Keyword
+				              {{ header }}
 				            </th>
-				            <th>
-				              Product or Company (P or C)
-				            </th>
-				            <th>
-				            </th>
+{% endfor %}
 				          </tr>
-
 				        <tbody>
+<!-- FIRST VERSION: just one fixed sized tabel with as many comuns as there are headers and 10 rows -->
+{% for row in "0123456789" %}	<!-- i know, hacky but simple... (see http://stackoverflow.com/questions/1107737/numeric-for-loop-in-django-templates -->
 				          <tr>
-				            <td><input class="form-control" name="col0_0" value="consetetur"/></td>
-				            <td><input class="form-control" name="col0_1" value="P"/></td>
-				            <td><button type="button" class="btn btn-default">Remove</button></td>
+	{% for h in task.headers|length %}
+							<!-- TODO Name the fields of the table, so that they can be accessed on form-action -->
+				            <td><input class="form-control" name="col{{ row }}_" value=""/></td>
+	{% endfor %}
 				          </tr>
-				          <tr>
-				            <td><input class="form-control" id="col1_0" value="consetetur"></input></td>
-				            <td><input class="form-control" id="col1_1" value="P"/></td>
-				            <td><button type="button" class="btn btn-default">Remove</button></td>
-				          </tr>
-				          <tr>
-				            <td><input class="form-control" id="col2_0" value=""/></td>
-				            <td><input class="form-control" id="col2_1" value=""/></td>
-				            <td><button type="button" class="btn btn-default">Add</button></td>
-				          </tr>
+{% endfor %}
 				        </tbody>
 				      </table>
 				</div>
@@ -123,8 +113,6 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
 				</div>
 			</div>
 	</form>
-
-
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="https://code.jquery.com/jquery.js"></script>
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
