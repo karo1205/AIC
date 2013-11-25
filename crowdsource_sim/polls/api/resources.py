@@ -49,7 +49,8 @@ class TestResource(ModelResource):
     age = fields.IntegerField(attribute='years_old', null=True)
 
     class Meta:
-        queryset = Task.objects.all()
+        #queryset = Task.objects.all()
+        #queryset = None
         allowed_methods = ['get', 'post']
         resource_name = 'test'
         #authorization = DjangoAuthorization()
