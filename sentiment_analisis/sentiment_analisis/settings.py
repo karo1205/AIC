@@ -126,6 +126,7 @@ INSTALLED_APPS = (
     'analysis',
     'tastypie',
     'django_cron',
+    'south',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
@@ -163,7 +164,7 @@ LOGGING = {
             'class': 'django.utils.log.AdminEmailHandler'
         },
         'file': {
-            'level': 'DEBUG',
+            'level': 'ERROR',
             'class': 'logging.FileHandler',
             'filename': 'mysite.log',
             'formatter': 'verbose'

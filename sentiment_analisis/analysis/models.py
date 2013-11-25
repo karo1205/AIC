@@ -18,25 +18,31 @@ class Keyword(models.Model):
 class Worker(models.Model):
     score = models.IntegerField(default=0)
     blocked = models.BooleanField('blocked')
+    worker_uri = models.CharField(max_length=200, default='NULL')
 
 
 class Task(models.Model):
     STATUS_CHOICES = (
-	('NS', 'not started'),
+	('N', 'new'),
 	('S', 'started'),
-	('D', 'done')
+	('D', 'done'),
+    ('P', 'processed')
     )
-    status = models.CharField(max_length=1,choices=STATUS_CHOICES,default='NS')
-    pub_date = models.DateTimeField('date published')
+    status = models.CharField(max_length=1,choices=STATUS_CHOICES,default='N')
+    pub_date = models.DateTimeField('date publisheid', default=datetime.datetime(2000, 1, 1, 1, 1, 1))
     com_date = models.DateTimeField('date completed', default=datetime.datetime(2000, 1, 1, 1, 1, 1))
     orphaned = models.BooleanField('Orphaned',default=0)
     price = models.IntegerField(default=0)
     callback_uri = models.CharField(max_length=200, default='NULL')
+    task_uri = models.CharField(max_length=200, default='NULL')
     question = models.TextField()
     answer = models.TextField(default='NULL')
     feed = models.ForeignKey(Feed)
     keywords = models.ManyToManyField(Keyword)
-    worker = models.ForeignKey(Worker, default=0)
+    worker = models.ForeignKey(Worker, default=0) #TODO many to many relation
+
+    def __unicode__(self):
+        return self.question
 
 
 class Sentiment(models.Model):
