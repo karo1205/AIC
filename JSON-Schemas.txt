@@ -68,7 +68,7 @@ Message to initiate the crowd.
 		"resultColumns": {
 			"type": "array",
             "required": true,
-			"description": "Array of Strings defining the headers of the result-columns. Defines, which columns the answer should have. The GUI present them accordingly as headers of tables."
+			"description": ["Header1","Header2","Header3"]//"Array of Strings defining the headers of the result-columns. Defines, which columns the answer should have. The GUI present them accordingly as headers of tables."
 		},
 		"coutOfAnswers": {
 			"type": "integer",

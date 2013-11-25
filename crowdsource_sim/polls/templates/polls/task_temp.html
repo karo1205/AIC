@@ -102,7 +102,7 @@
 				          <tr>
 	{% for h in headers %}
 							<!-- TODO Name the fields of the table, so that they can be accessed on form-action -->
-				            <td><input class="form-control" name="col{{ row }}_" value=""/></td>
+				            <td><input class="form-control" name="{{ h }}_{{ row }}" value=""/></td>
 	{% endfor %}
 				          </tr>
 {% endfor %}
