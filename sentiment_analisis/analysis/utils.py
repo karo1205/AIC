@@ -14,7 +14,18 @@ def transform_task_to_data(Task):
 
     """
 
-    return "{data : data}"
+    data={}
+    data['header'] = "Identify Product and Company Names"
+    data['question'] = """
+    Plaese read this text carefully, filter out product and
+    company names and put them into the textfields below
+    """
+    data['additional_header'] = ""
+    data['additional_input']={}
+    for i in range(1,6):
+        data['additional_input']['keyword' + str(i)] = ''
+
+    return data
 
 
 def process_task_answers():

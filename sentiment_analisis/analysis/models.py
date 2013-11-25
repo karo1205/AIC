@@ -14,6 +14,9 @@ class Feed(models.Model):
 class Keyword(models.Model):
     text = models.CharField(max_length=500)
 
+    def __unicode__(self):
+        return self.text
+
 
 class Worker(models.Model):
     score = models.IntegerField(default=0)

@@ -1,6 +1,6 @@
 from django_cron import CronJobBase, Schedule
 from analysis.models import Feed, Task, Worker
-#from analysis.utils import *
+from analysis.utils import *
 #from django.core.files import File
 import datetime
 import feedparser
@@ -40,8 +40,8 @@ class Fetch_Feeds(CronJobBase):
                 #TODO: fill data field
                 logger.info("new task was stored")
                 payload = json.load(urllib2.urlopen('http://127.0.0.1:8002/api/v1/task/1/?format=json'))
-                payload['data'] = f.content
- #               payload['data'] = transform_task_to_data(t)
+#                payload['data'] = f.content
+                payload['data'] = transform_task_to_data(t)
                 payload['price'] = 0
                 payload['question'] = 'Please find keywords in this text'
                 payload['callback_uri'] = 'testdata'
