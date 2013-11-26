@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Querypage</title>
+		<meta name="viewport" content="widtd=device-widtd, initial-scale=1.0">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<!-- Bootstrap -->
+		<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css">
+        
+
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view tde page via file:// -->
+		<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+		<![endif]-->
+
+		<style type="text/css">
+				.col-md-4 {
+					background: #f3f3f3;
+					padding: 0px 10px 10px 10px;
+				}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+				<nav class="navbar navbar-default">
+				<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="#">SourceTheCrowd</a>
+					</div>
+					<div>
+						<ul class="nav navbar-nav navbar-right">
+						<li class="active"><a href="#">Logout</a></li>
+						<li>Logged in as: <bl>{{ userid }} </bl></li>
+						</ul>
+					</div><!--/.nav-collapse -->
+				</nav>
+
+		</div>
+
+
+				<div class="list-group">
+
+<form action="{% url 'analysis:result' %}" method="post">
+{% csrf_token %}
+
+		<h3 >Query for Sentiment Analysis of Keyword:</h3>
+
+		<select name="selectbox">
+
+{% for k in keywords %}
+		<option value="{{ k.id }}">{{ k.text }}</option>
+{% endfor %}
+
+
+		</select> 
+  			
+	
+		<div class="col-md-12">
+			<div class="list-group">
+				<button type="submit" class="btn btn-default btn-lg" >Query</button>
+			</div>
+		</div>
+			
+	</form>
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="https://code.jquery.com/jquery.js"></script>
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
+	</body>
+</html>
+
