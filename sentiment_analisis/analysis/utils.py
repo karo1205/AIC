@@ -4,10 +4,12 @@ the crowdsorucing platform
 Docstring
 
 """
+import json
+
 #from analysis.models import Feed, Task
 
 
-def transform_task_to_data(Task):
+def transform_task_to_data(task):
 
     """This function generates a JSON Structure out of the properties of the
     specific task
@@ -23,8 +25,9 @@ def transform_task_to_data(Task):
     data['additional_header'] = ""
     data['additional_input']={}
     for i in range(1,6):
-        data['additional_input']['keyword' + str(i)] = ''
-
+        data['additional_input']['keyword' + str(i)] = ""
+    data['headers'] = ("Keyword", "Rating")
+    data['input'] = task.feed.content
     return data
 
 
