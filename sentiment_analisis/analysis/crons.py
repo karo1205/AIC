@@ -37,11 +37,9 @@ class Fetch_Feeds(CronJobBase):
                 logger.info("new feed was stored: " + item.id)
                 t = Task(pub_date=datetime.datetime.now(), question='Question1', feed=f)
                 t.save()
-                #TODO: fill data field
                 logger.info("new task was stored")
                 payload = json.load(urllib2.urlopen('http://127.0.0.1:8002/api/v1/task/1/?format=json'))
-#                payload['data'] = f.content
-                payload['data'] = transform_task_to_data(t)
+                payload['data'] = json.dumps(transform_task_to_data(t))
                 payload['price'] = 0
                 payload['question'] = 'Please find keywords in this text'
                 payload['callback_uri'] = 'testdata'
