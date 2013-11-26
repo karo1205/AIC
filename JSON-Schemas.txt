@@ -70,7 +70,7 @@ Message to initiate the crowd.
             "required": true,
 			"description": ["Header1","Header2","Header3"]//"Array of Strings defining the headers of the result-columns. Defines, which columns the answer should have. The GUI present them accordingly as headers of tables."
 		},
-		"coutOfAnswers": {
+		"countOfAnswers": {
 			"type": "integer",
 			"minimum": 1,
             "required": false,

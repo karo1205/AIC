@@ -98,7 +98,7 @@
 				          </tr>
 				        <tbody>
 <!-- FIRST VERSION: just one fixed sized tabel with as many comuns as there are headers and 10 rows -->
-{% for row in "0123456789" %}	<!-- i know, hacky but simple... (see http://stackoverflow.com/questions/1107737/numeric-for-loop-in-django-templates -->
+{% for row in answers_amount %}	<!-- i know, hacky but simple... (see http://stackoverflow.com/questions/1107737/numeric-for-loop-in-django-templates -->
 				          <tr>
 	{% for h in headers %}
 							<!-- TODO Name the fields of the table, so that they can be accessed on form-action -->

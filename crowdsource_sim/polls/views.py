@@ -35,8 +35,15 @@ def detail(request, task_id):
       additionalInput = decoded['properties']['additionalInput']['description']
       additional_header = decoded['properties']['additionalInputHeader']['description']
       headers = decoded['properties']['resultColumns']['description']
+
+      answers_amount = decoded['properties']['countOfAnswers']['description']
+
+      answers_amount = [i+1 for i in range(int(answers_amount))]
+	
       #context = {'userid' : 'iwas', 'question': 'Meine Frage?', 'header' : 'Mein Header !', 'input' : 'Input is das ;-)', 'taskid' : '1', 'headers' : headers}
-      context = {'userid' : 'MyUser', 'question' : taskDescription, 'header' : taskTitle, 'input' : taskInput, 'additional_input' : additionalInput, 'additional_header' : additional_header, 'taskid': task_id, 'headers' : headers}
+      context = {'userid' : 'MyUser', 'question' : taskDescription, 'header' : taskTitle, 'input' : taskInput, 'additional_input' : additionalInput, 'additional_header' : additional_header, 'taskid': task_id, 'headers' : headers, 'answers_amount' : answers_amount}
+      	
+
       return render(request, 'polls/task_temp.html', context)  	
     except (ValueError, KeyError, TypeError):  
       print "JSON format error"
