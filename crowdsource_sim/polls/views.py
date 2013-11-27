@@ -86,7 +86,7 @@ def submit(request, task_id):
             buff['keywords']={}
             for row in range(1,9):
                 buff['keywords'][request.POST[headers[0] + '_' + str(row)]]=request.POST[headers[1] + '_' + str(row)]
-            t.answer = buff
+            t.answer = json.dumps(buff)
             t.save()
 
         except (ValueError, KeyError, TypeError):
