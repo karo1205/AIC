@@ -1,14 +1,9 @@
-
 import json
-
 from django.shortcuts import render, get_object_or_404
-
+from django.shortcuts import render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
-
 from django.http import Http404
-
 from django.template import RequestContext, loader
-
 from polls.models import Task, Worker
 
 
@@ -24,8 +19,8 @@ def index(request):
 def detail(request, task_id):
     task = get_object_or_404(Task, id=task_id)
 #<<<<<<< HEAD
-   
-    
+
+
 #    try:
 #      decoded = json.loads(task.data)
     #  headers = {'Header1', 'Header2', 'Header3'}
@@ -40,13 +35,13 @@ def detail(request, task_id):
 #      answers_amount = decoded['properties']['countOfAnswers']['description']
 #
 #      answers_amount = [i+1 for i in range(int(answers_amount))]
-#	
+#
 #      #context = {'userid' : 'iwas', 'question': 'Meine Frage?', 'header' : 'Mein Header !', 'input' : 'Input is das ;-)', 'taskid' : '1', 'headers' : headers}
 #      context = {'userid' : 'MyUser', 'question' : taskDescription, 'header' : taskTitle, 'input' : taskInput, 'additional_input' : additionalInput, 'additional_header' : additional_header, 'taskid': task_id, 'headers' : headers, 'answers_amount' : answers_amount}
-#      	
 #
-#      return render(request, 'polls/task_temp.html', context)  	
-#    except (ValueError, KeyError, TypeError):  
+#
+#      return render(request, 'polls/task_temp.html', context)
+#    except (ValueError, KeyError, TypeError):
 #      print "JSON format error"
 #=======
 
@@ -60,12 +55,13 @@ def detail(request, task_id):
     additional_header = decoded['additional_header']
     headers = decoded['headers']
 
-    answers_amount = [i+1 for i in range(int(9))]
+    answers_amount = [i + 1 for i in range(int(9))]
     #context = {'userid' : 'iwas', 'question': 'Meine Frage?', 'header' : 'Mein Header !', 'input' : 'Input is das ;-)', 'taskid' : '1', 'headers' : headers}
     context = {'userid' : 'MyUser', 'question' : taskDescription, 'header' : taskTitle, 'input' : taskInput, 'additional_input' : additionalInput, 'additional_header' : additional_header, 'taskid': task_id, 'headers' : headers, 'answers_amount' : answers_amount}
-    return render(request, 'polls/task_temp.html', context)
+    #return render(request, 'polls/task_temp.html', context)
+    return render_to_response('polls/task_temp.html', RequestContext(request, context))
   #  except (ValueError, KeyError, TypeError):
-   #     print "JSON format error"
+   #     print "JSON formaterror"
 
     return HttpResponse("Something went wrong with JSON")
 
@@ -76,42 +72,22 @@ def results(request, task_id):
 
 def submit(request, task_id):
     if request.method == 'POST':  # If the form has been submitted...
-    #print request.POST['keyword2']
         t = get_object_or_404(Task, id=task_id)
 
         try:
             decoded = json.loads(t.data)
             headers = decoded['headers']
-            buff = "{'keywords': {"#'Windows': 'P', 'IBM': 'C', 'Microsoft': 'C'}}"
-            
+            buff={}
+            buff['worker']=request.POST.get("worker")
+            """ TODO:   check if worker exists, if yes assign the task to him
+                                                if no create and assign him
+                                                check out analyisis.crons
+            """
+            buff['keywords']={}
             for row in range(1,9):
-	      buff += " , "
-	      cnt = 0
-	      for column in headers:
-	        cnt = cnt+1;
-		if cnt == len(headers):
-		  buff += "'"+request.POST[column+'_'+str(row)]+"'"
-		else:  
-		  buff += "'"+request.POST[column+'_'+str(row)]+"' :"
-
-	    buff += "}}"
-	    #for column in headers:
-            #    buff += column + ": \n"
-            #    for row in range(0, 9):
-            #        buff += "Row" + str(row) + ":  " + request.POST[column + '_' + str(row)] + "\n"
-
-
-            # pretty printing of json-formatted string
-            #  print json.dumps(decoded, sort_keys=True, indent=4)
-
-            #  buff = request.POST['keyword1']+' ; '+request.POST['type1']+' ,\n '
-            #  buff += request.POST['keyword2']+' ; '+request.POST['type2']+' ,\n '
-            #  buff += request.POST['keyword3']+' ; '+request.POST['type3']+' ,\n '
-            #  print buff
+                buff['keywords'][request.POST[headers[0] + '_' + str(row)]]=request.POST[headers[1] + '_' + str(row)]
             t.answer = buff
             t.save()
-            #print "JSON parsing example: ", decoded['title']
-            #print "Complex JSON parsing example: ", decoded['two']['list'][1]['item']
 
         except (ValueError, KeyError, TypeError):
             print "JSON format error"
@@ -120,4 +96,3 @@ def submit(request, task_id):
 
     return HttpResponse('Somethng is wrong: Not POST Request Methode')
 
-# Create your views here.

@@ -174,11 +174,11 @@ LOGGING = {
         'django': {
             'handlers':['file'],
             'propagate': True,
-            'level':'DEBUG',
+            'level':'INFO',
         },
         'analysis': {
             'handlers': ['file'],
-            'level': 'DEBUG',
+            'level': 'INFO',
         },
         'django.request': {
             'handlers': ['mail_admins'],
