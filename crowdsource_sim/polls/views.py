@@ -79,7 +79,10 @@ def submit(request, task_id):
             headers = decoded['headers']
             buff={}
             buff['worker']=request.POST.get("worker")
-            #buff['worker']='David'
+            """ TODO:   check if worker exists, if yes assign the task to him
+                                                if no create and assign him
+                                                check out analyisis.crons
+            """
             buff['keywords']={}
             for row in range(1,9):
                 buff['keywords'][request.POST[headers[0] + '_' + str(row)]]=request.POST[headers[1] + '_' + str(row)]
