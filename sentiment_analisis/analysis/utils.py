@@ -28,6 +28,7 @@ def transform_task_to_data(task):
         data['additional_input']['keyword' + str(i)] = ""
     data['headers'] = ("Keyword", "Rating")
     data['input'] = task.feed.content
+    data['keyword_count'] = 5
     return data
 
 
