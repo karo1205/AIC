@@ -28,8 +28,3 @@ class Task(models.Model):
 
     def __unicode__(self):
         return self.question
-
-    def save(self, *args, **kwargs):
-        self.worker_id = 1
-
-        super(Task, self).save(*args, **kwargs)
