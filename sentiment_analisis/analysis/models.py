@@ -6,7 +6,7 @@ class Feed(models.Model):
     title = models.CharField(max_length=500)
     link = models.URLField()
     content = models.TextField()
-
+    pub_date = models.DateTimeField('date published', default=datetime.datetime(2000, 1, 1, 1, 1, 1))
     def __unicode__(self):
         return self.title
 
@@ -32,7 +32,7 @@ class Task(models.Model):
     ('P', 'processed')
     )
     status = models.CharField(max_length=1,choices=STATUS_CHOICES,default='N')
-    pub_date = models.DateTimeField('date publisheid', default=datetime.datetime(2000, 1, 1, 1, 1, 1))
+    pub_date = models.DateTimeField('date published', default=datetime.datetime(2000, 1, 1, 1, 1, 1))
     com_date = models.DateTimeField('date completed', default=datetime.datetime(2000, 1, 1, 1, 1, 1))
     orphaned = models.BooleanField('Orphaned',default=0)
     price = models.IntegerField(default=0)
@@ -52,6 +52,7 @@ class Sentiment(models.Model):
     keyword = models.ForeignKey(Keyword)
     worker = models.ForeignKey(Worker)
     score = models.IntegerField(default=0)
-
+    feed = models.ForeignKey(Feed)
+    com_date = models.DateTimeField('date completed', default=datetime.datetime(2000, 1, 1, 1, 1, 1))
 
 # Create your models here.
