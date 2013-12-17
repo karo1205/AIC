@@ -19,15 +19,15 @@ class Fetch_Feeds(CronJobBase):
 
     """
 
-    RUN_EVERY_MINS = 5  # every 5 mins
+    RUN_EVERY_MINS = 3  # every 5 mins
 
     schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
     code = 'analysis.fetch_feeds'    # a unique code
 
     def do(self):
         logger.info("Getting Feeds")
-#        d = feedparser.parse('http://ftr.fivefilters.org/makefulltextfeed.php?url=http%3A%2F%2Ffeeds.finance.yahoo.com%2Frss%2F2.0%2Fheadline%3Fs%3Dyhoo%2Cmsft%2Ctivo%26region%3DUS%26lang%3Den-US&max=3')
-        d = feedparser.parse('http://derstandard.at/?page=rss')
+        d = feedparser.parse('http://ftr.fivefilters.org/makefulltextfeed.php?url=http%3A%2F%2Ffeeds.finance.yahoo.com%2Frss%2F2.0%2Fheadline%3Fs%3Dyhoo%2Cmsft%2Ctivo%26region%3DUS%26lang%3Den-US&max=3')
+#        d = feedparser.parse('http://derstandard.at/?page=rss')
         for item in d.entries:
             if Feed.objects.filter(link=item.id):
                 logger.info("feed already in db: " + item.id)
@@ -43,11 +43,11 @@ class Fetch_Feeds(CronJobBase):
                 payload['data'] = json.dumps(transform_task_to_data(t))
                 payload['price'] = 0
                 payload['question'] = 'Please find keywords in this text'
-                payload['callback_uri'] = 'testdata'
+                payload['callback_uri'] = 'tbd'
                 payload['keyword_count'] = 5
                 payload.pop('resource_uri')
                 payload.pop('id')
-                logger.info('payload = ' + json.dumps(payload))
+                logger.info('payload = ' + json.dumps(payload)[:50])
                 url = 'http://127.0.0.1:8002/api/v1/task/'
 
                 headers = {'content-type': 'application/json'}
@@ -69,7 +69,7 @@ class Get_Tasks(CronJobBase):
     crowdsourcing plattform.
     """
 
-    RUN_EVERY_MINS = 5  # every 5 mins
+    RUN_EVERY_MINS = 3  # every 5 mins
 
     schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
     code = 'analysis.get_tasks'    # a unique code
