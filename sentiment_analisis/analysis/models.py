@@ -23,6 +23,11 @@ class Worker(models.Model):
     blocked = models.BooleanField('blocked')
     worker_uri = models.CharField(max_length=200, default='NULL')
 
+class Order(models.Model):
+    keyword = models.ForeignKey(Keyword)
+    budgetlimit = models.IntegerField(default=0)
+    start_date = models.DateTimeField('start date', default=datetime.datetime(2000, 1, 1, 1, 1, 1))
+    end_date = models.DateTimeField('end date', default=datetime.datetime(2000, 1, 1, 1, 1, 1))
 
 class Task(models.Model):
     STATUS_CHOICES = (
