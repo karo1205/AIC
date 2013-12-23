@@ -10,11 +10,12 @@ from polls.models import Task, Worker
 def index(request):
 #    latest_poll_list = Task.objects.all().order_by('-id')[:5]
 #    context = {'latest_poll_list': latest_poll_list}
-    test  = 'Meine UserId'
+    test = 'Meine UserId'
     test2 = 'Das ist noch ein Test :-)'
     headers = {'Header1', 'Header2', 'Header3'}
     context = {'userid' : test, 'question': 'Meine Frage?', 'header' : 'Mein Header !', 'input' : 'Input is das ;-)', 'taskid' : '1', 'headers' : headers}
     return render(request, 'polls/task_temp.html', context)
+
 
 def detail(request, task_id):
     task = get_object_or_404(Task, id=task_id)
@@ -44,6 +45,7 @@ def detail(request, task_id):
 #    except (ValueError, KeyError, TypeError):
 #      print "JSON format error"
 #=======
+
 
     try:
       decoded = json.loads(task.data)
@@ -95,9 +97,14 @@ def submit(request, task_id):
                 buff['keywords'].pop('')
             except KeyError:
                 pass
-            #t.answer = json.dumps(buff)
-            t.answer = buff
+            t.answer = json.dumps(buff)
+            #t.answer = buff
             t.save()
+            #TODO: implement callback
+            #payload = json.load(urllib2.urlopen(t[252].callback_uri))
+            #pop resource_uri
+            #set headers
+            # response = requests.put(t[251].callback_uri, data=json.dumps(payload), headers=headers)
 
         except (ValueError, KeyError, TypeError):
             print "JSON format error"
