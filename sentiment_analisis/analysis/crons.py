@@ -107,7 +107,8 @@ class Get_Tasks(CronJobBase):
         for t in opentasks:
             logger.info("Processing Task " + str(t.id))
             try:
-                answer = json.loads(t.answer)
+                #answer = json.loads(t.answer)
+                answer = t.answer  #TODO replace all anser with t.answer
             except ValueError:
                 logger.error("the answer field of task " + str(t.id) + " does not contain a valid JSON Format. Skipping.")
                 continue    # if there is not valid JSON there is no pint of considerung this answer

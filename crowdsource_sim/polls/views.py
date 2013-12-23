@@ -79,22 +79,24 @@ def submit(request, task_id):
             headers = decoded['headers']
             try:  # see if worker alread is known
               w = Worker.objects.get(name=request.POST.get("worker"))
-            except Worker.DoesNotExist:
-                    # create new worker
-              newworker=Worker(name=request.POST.get("worker"))
+              t.worker_id = w.id
+            except Worker.DoesNotExist:     # create new worker
+              newworker = Worker(name = request.POST.get("worker"))
               newworker.save() # save befor assigning to t becasue newworker hast'got an id yet
-              t.worker_id=newworker.id
-              t.save()
+              t.worker_id = newworker.id
+            t.save()
+            buff = {}
+            buff['worker'] = request.POST.get("worker")
+            buff['keywords'] = {}
 
-	    buff={}
-            buff['worker']=request.POST.get("worker")
-            buff['keywords']={}
-	    
-            for row in range(1,9):
-              print request.POST[headers[0] + '_' + str(row)]+" : "+ request.POST[headers[1] + '_' + str(row)]
-                
-	      buff['keywords'][request.POST[headers[0] + '_' + str(row)]]=request.POST[headers[1] + '_' + str(row)]
-            t.answer = json.dumps(buff)
+            for row in range(1, 9):
+                buff['keywords'][request.POST[headers[0] + '_' + str(row)]] = request.POST[headers[1] + '_' + str(row)]
+            try:
+                buff['keywords'].pop('')
+            except KeyError:
+                pass
+            #t.answer = json.dumps(buff)
+            t.answer = buff
             t.save()
 
         except (ValueError, KeyError, TypeError):
