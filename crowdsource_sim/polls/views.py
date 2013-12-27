@@ -114,7 +114,7 @@ def submit(request, task_id):
             response = requests.put(t.callback_uri, data=json.dumps(payload), headers=headers)
 
             if response.status_code == 204:
-                logger.error("Callback on " + t.callback_uri + "sucessfully placed: " + str(response.status_code) + " " + response.reason)
+                logger.info("Callback on " + t.callback_uri + "sucessfully placed: " + str(response.status_code) + " " + response.reason)
             else:
                 logger.error("Problem with Callback on " + t.callback_uri + ":" + str(response.status_code) + " " + response.reason)
                 #TODO: mark task as not called back
