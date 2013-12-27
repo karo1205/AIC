@@ -107,22 +107,26 @@ def submit(request, task_id):
             #t.answer = buff
             t.save()
             #TODO: implement callback
-            payload = json.load(urllib2.urlopen(t.callback_uri))  #get json template from callback_uri
-            payload.pop('resource_uri')
-            payload['answer'] = t.answer
-            headers = {'content-type': 'application/json'}
-            response = requests.put(t.callback_uri, data=json.dumps(payload), headers=headers)
+            try:
+                payload = json.load(urllib2.urlopen(t.callback_uri))  #get json template from callback_uri
+                payload.pop('resource_uri')
+                payload['answer'] = t.answer
+                headers = {'content-type': 'application/json'}
+                response = requests.put(t.callback_uri, data=json.dumps(payload), headers=headers)
 
-            if response.status_code == 204:
-                logger.info("Callback on " + t.callback_uri + "sucessfully placed: " + str(response.status_code) + " " + response.reason)
-            else:
-                logger.error("Problem with Callback on " + t.callback_uri + ":" + str(response.status_code) + " " + response.reason)
-                #TODO: mark task as not called back
-
+                if response.status_code == 204:
+                    logger.info("Callback on " + t.callback_uri + "sucessfully placed: " + str(response.status_code) + " " + response.reason)
+                else:
+                    logger.error("Problem with Callback on " + t.callback_uri + ":" + str(response.status_code) + " " + response.reason)
+                    #TODO: mark task as not called back
+            except urllib2.HTTPError:
+                logger.error("Duplicate task has been answered")
+                return HttpResponse('This Task already has been answered')
 
         except (ValueError, KeyError, TypeError):
             print "JSON format error"
 
+        logger.info("Task " + str(t.id) + "has been answered")
         return HttpResponse('Task finished successfully ')
 
     return HttpResponse('Somethng is wrong: Not POST Request Methode')
