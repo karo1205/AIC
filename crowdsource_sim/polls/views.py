@@ -109,6 +109,7 @@ def submit(request, task_id):
             #TODO: implement callback
             payload = json.load(urllib2.urlopen(t.callback_uri))  #get json template from callback_uri
             payload.pop('resource_uri')
+            payload['answer'] = t.answer
             headers = {'content-type': 'application/json'}
             response = requests.put(t.callback_uri, data=json.dumps(payload), headers=headers)
 
