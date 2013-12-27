@@ -1,10 +1,16 @@
+"""Docstring."""
+
 import json
+import urllib2
+import requests
 from django.shortcuts import render, get_object_or_404
 from django.shortcuts import render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from django.http import Http404
 from django.template import RequestContext, loader
 from polls.models import Task, Worker
+import logging
+logger = logging.getLogger(__name__)
 
 
 def index(request):
@@ -80,12 +86,12 @@ def submit(request, task_id):
             decoded = json.loads(t.data)
             headers = decoded['headers']
             try:  # see if worker alread is known
-              w = Worker.objects.get(name=request.POST.get("worker"))
-              t.worker_id = w.id
+                w = Worker.objects.get(name=request.POST.get("worker"))
+                t.worker_id = w.id
             except Worker.DoesNotExist:     # create new worker
-              newworker = Worker(name = request.POST.get("worker"))
-              newworker.save() # save befor assigning to t becasue newworker hast'got an id yet
-              t.worker_id = newworker.id
+                newworker = Worker(name = request.POST.get("worker"))
+                newworker.save() # save befor assigning to t becasue newworker hast'got an id yet
+                t.worker_id = newworker.id
             t.save()
             buff = {}
             buff['worker'] = request.POST.get("worker")
@@ -101,10 +107,17 @@ def submit(request, task_id):
             #t.answer = buff
             t.save()
             #TODO: implement callback
-            #payload = json.load(urllib2.urlopen(t[252].callback_uri))
-            #pop resource_uri
-            #set headers
-            # response = requests.put(t[251].callback_uri, data=json.dumps(payload), headers=headers)
+            payload = json.load(urllib2.urlopen(t.callback_uri))  #get json template from callback_uri
+            payload.pop('resource_uri')
+            headers = {'content-type': 'application/json'}
+            response = requests.put(t.callback_uri, data=json.dumps(payload), headers=headers)
+
+            if response.status_code == 204:
+                logger.error("Callback on " + t.callback_uri + "sucessfully placed: " + str(response.status_code) + " " + response.reason)
+            else:
+                logger.error("Problem with Callback on " + t.callback_uri + ":" + str(response.status_code) + " " + response.reason)
+                #TODO: mark task as not called back
+
 
         except (ValueError, KeyError, TypeError):
             print "JSON format error"

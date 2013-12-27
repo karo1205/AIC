@@ -43,7 +43,8 @@ class Fetch_Feeds(CronJobBase):
                 payload['data'] = json.dumps(transform_task_to_data(t))
                 payload['price'] = 0
                 payload['question'] = 'Please find keywords in this text'
-                payload['callback_uri'] = 'tbd'
+                #TODO: callback uri
+                payload['callback_uri'] = 'http://127.0.0.1:8000/api/v1/task/'+ str(t.id) +'/'
                 payload['keyword_count'] = 5
                 payload.pop('resource_uri')
                 payload.pop('id')

@@ -30,5 +30,5 @@ class TaskResource(ModelResource):
         return "{data:data}"
 
     def hydrate(self,bundle):
-        logger.info("callback")
+        logger.error("callback")
         return bundle
