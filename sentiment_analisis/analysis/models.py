@@ -1,6 +1,10 @@
 from django.db import models
 from django.utils import timezone
-import datetime
+from django.dispatch import receiver
+from django.db.models.signals import post_save
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class Feed(models.Model):
@@ -49,6 +53,17 @@ class Task(models.Model):
     def __unicode__(self):
         return self.question
 
+
+#@receiver(post_save, sender=Task)
+def do_something(sender, **kwargs):
+    """
+    Docstring.
+    """
+    t = kwargs['instance']
+    logger.error('signal from API received')
+    print 'signal from API received'
+
+post_save.connect(do_something, sender=Task)
 
 class Sentiment(models.Model):
     keyword = models.ForeignKey(Keyword)
