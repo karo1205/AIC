@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Querypage</title>
+		<title>Make Order</title>
 		<meta name="viewport" content="widtd=device-widtd, initial-scale=1.0">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<!-- Bootstrap -->
@@ -51,9 +51,9 @@
 <form action="{% url 'analysis:result' %}" method="post">
 {% csrf_token %}
 
-		<h3 >Query for Sentiment Analysis of Keyword:</h3>
+		<h3 >Make an Order for Sentiment Analysis!</h3>
 
-		<select name="selectbox">
+		<select name=mytextarea size=5 multiple>
 
 {% for k in keywords %}
 		<option value="{{ k.id }}">{{ k.text }}</option>
@@ -61,11 +61,13 @@
 
 
 		</select> 
-  			
-	
+  			<br><br>
+		<label for="budget">Budget:</label>
+		<input type="text" class="textfield">0</input>
+		<br>
 		<div class="col-md-12">
 			<div class="list-group">
-				<button type="submit" class="btn btn-default btn-lg" >Query</button>
+				<button type="submit" class="btn btn-default btn-lg" >Send</button>
 			</div>
 		</div>
 			

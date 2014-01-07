@@ -24,7 +24,7 @@ class Worker(models.Model):
     worker_uri = models.CharField(max_length=200, default='NULL')
 
 class Order(models.Model):
-    keyword = models.ForeignKey(Keyword)
+    keyword = models.ManyToManyField(Keyword)
     budgetlimit = models.IntegerField(default=0)
     start_date = models.DateTimeField('start date', default=datetime.datetime(2000, 1, 1, 1, 1, 1))
     end_date = models.DateTimeField('end date', default=datetime.datetime(2000, 1, 1, 1, 1, 1))
@@ -57,7 +57,7 @@ class Sentiment(models.Model):
     keyword = models.ForeignKey(Keyword)
     worker = models.ForeignKey(Worker)
     score = models.IntegerField(default=0)
-    feed = models.ForeignKey(Feed)
     com_date = models.DateTimeField('date completed', default=datetime.datetime(2000, 1, 1, 1, 1, 1))
+#   feed = models.ForeignKey(Feed)
 
 # Create your models here.
