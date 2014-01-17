@@ -36,7 +36,7 @@
 						<a class="navbar-brand" href="#">SourceTheCrowd</a>
 					</div>
 					<div>
-						<ul class="nav navbar-nav navbar-right">
+					<!--	<ul class="nav navbar-nav navbar-right">
 						<li class="active"><a href="#">Logout</a></li>
 						<li>Logged in as: <bl>{{ userid }} </bl></li>
 						</ul>
@@ -48,12 +48,27 @@
 
 				<div class="list-group">
 
-<form action="{% url 'analysis:result' %}" method="post">
+<form action="{% url 'analysis:confirm' %}" method="post">
 {% csrf_token %}
-
+		
 		<h3 >Make an Order for Sentiment Analysis!</h3>
+		
+		<br><br>
+		<label for="username">Username:</label>
+		<input type="text" class="textfield"/>
+		<br>
 
-		<select name=mytextarea size=5 multiple>
+		<br><br>
+		<label for="datestart">Date-start:</label>
+		<input type="text" class="textfield"/>
+		<br>
+	
+		<br><br>
+		<label for="dateend">Date-end:</label>
+		<input type="text" class="textfield"/>
+		<br>
+
+		<select name="mytextarea[]" size=5 multiple="multiple">
 
 {% for k in keywords %}
 		<option value="{{ k.id }}">{{ k.text }}</option>
@@ -63,7 +78,7 @@
 		</select> 
   			<br><br>
 		<label for="budget">Budget:</label>
-		<input type="text" class="textfield">0</input>
+		<input type="text" class="textfield"/>
 		<br>
 		<div class="col-md-12">
 			<div class="list-group">
