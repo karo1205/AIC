@@ -55,6 +55,8 @@ def detail(request, task_id):
       additional_header = decoded['additional_header']
       headers = decoded['headers']
 
+      print headers
+
       answers_amount = [i + 1 for i in range(int(9))]
     #context = {'userid' : 'iwas', 'question': 'Meine Frage?', 'header' : 'Mein Header !', 'input' : 'Input is das ;-)', 'taskid' : '1', 'headers' : headers}
       context = {'userid' : 'MyUser', 'question' : taskDescription, 'header' : taskTitle, 'input' : taskInput, 'additional_input' : additionalInput, 'additional_header' : additional_header, 'taskid': task_id, 'headers' : headers, 'answers_amount' : answers_amount}
