@@ -42,9 +42,6 @@
 						</ul>
 					</div><!--/.nav-collapse -->
 				</nav>
-
-		</div>
-
 		
 			<!-- Task description -->
 
@@ -96,8 +93,9 @@
 				          <tr>
 <!-- header-entries -->
 {% for header in headers %}
+<!-- headers.text gibt die Tabellenueberschrift an -->
 				            <th>
-				              {{ header }}
+				              {{ header.text }}
 				            </th>
 {% endfor %}
 				          </tr>
@@ -106,14 +104,23 @@
 {% for row in answers_amount %}	<!-- i know, hacky but simple... (see http://stackoverflow.com/questions/1107737/numeric-for-loop-in-django-templates -->
 				          <tr>
 	{% for h in headers %}
-<!-- TODO robert: h.type ("text" oder "combo"). Wenn cobmbo, dann array von Werten 
-	combo und array vderwendet in "P", "C" bzw. Rating (1..5) und Liste von Keywords im array h.values -->.
-
+<!-- TODO robert: h.values is eine Liste von möglichen Werten. wenn die Liste leer ist, dann wird ein Textfeld zur freien Eingabe angezeigt, 
+	sonst eine Combobox mit den möglichen Werten zur Auswahl. Liste wird verwendet z.B. in taks 1 für "P", "C" bzw. Rating (1..5) -->
+		{% if h.values|length > 0 %}
+							<!-- Eine liste von Werten ==> Combobox -->
+				            <td><select class="form-control" name="{{ h }}_{{ row }}" value="">
+			{% for value in h.values %}
+								  <option>{{ value }}</option>
+			{% endfor %}
+							</select></td>
+		{% else %}
 							<!-- TODO Name the fields of the table, so that they can be accessed on form-action -->
 				            <td><input class="form-control" name="{{ h }}_{{ row }}" value=""/></td>
-	{% endfor %}
+		{% endif %}
+		
+	{% endfor %} <!-- headers -->
 				          </tr>
-{% endfor %}
+{% endfor %} <!-- answers amount -->
 				        </tbody>
 				      </table>
 				</div>
