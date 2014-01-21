@@ -7,11 +7,7 @@ Docstring
 import json
 import nltk
 import logging
-from django.db.models.signals import post_save
-from analysis.models import Task
-from tastypie.resources import BaseModelResource
-from analysis.api import TaskResource
-from django.dispatch import receiver
+#from analysis.models import Task
 
 logger = logging.getLogger(__name__)
 
