@@ -39,13 +39,8 @@ class Task(models.Model):
     ('P', 'processed')
     )
     status = models.CharField(max_length=1,choices=STATUS_CHOICES,default='N')
-<<<<<<< HEAD
     pub_date = models.DateTimeField('date publisheid', default=timezone.now())
     com_date = models.DateTimeField('date completed', default=timezone.now())
-=======
-    pub_date = models.DateTimeField('date published', default=datetime.datetime(2000, 1, 1, 1, 1, 1))
-    com_date = models.DateTimeField('date completed', default=datetime.datetime(2000, 1, 1, 1, 1, 1))
->>>>>>> 6e6eea1891c05de43075e50bd1cc189997fd656e
     orphaned = models.BooleanField('Orphaned',default=0)
     price = models.IntegerField(default=0)
     callback_uri = models.CharField(max_length=200, default='NULL')
