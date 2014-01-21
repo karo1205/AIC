@@ -59,9 +59,9 @@ def do_something(sender, **kwargs):
     """
     Docstring.
     """
-    t = kwargs['instance']
-    logger.error('signal from API received')
-    print 'signal from API received'
+    t = kwargs['instance']  #get task t from signal
+    logger.error('answer for task ' + str(t.id) + 'was recieved')
+    logger.error('mark task ' + str(t.id) + 'as DONE')
 
 post_save.connect(do_something, sender=Task)
 

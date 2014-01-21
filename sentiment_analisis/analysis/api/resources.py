@@ -20,7 +20,7 @@ class TaskResource(ModelResource):
                     'id',
                     'orphaned',
                     'pub_date',
-                    'status',
+                    # 'status',
                     'price',
                     'callback_uri']
         #authorization = DjangoAuthorization()
@@ -30,5 +30,6 @@ class TaskResource(ModelResource):
         return "{data:data}"
 
     def hydrate(self,bundle):
-        logger.error("callback")
+        bundle.data['status'] = 'DONE'
+        logger.error("callback" + bundle.data['status'])
         return bundle
