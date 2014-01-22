@@ -43,7 +43,8 @@ class Fetch_Feeds(CronJobBase):
                 payload['data'] = json.dumps(transform_task_to_data(t))
                 payload['price'] = 0
                 payload['question'] = 'Please find keywords in this text'
-                payload['callback_uri'] = 'tbd'
+                #TODO: callback uri
+                payload['callback_uri'] = 'http://127.0.0.1:8000/api/v1/task/'+ str(t.id) +'/'
                 payload['keyword_count'] = 5
                 payload.pop('resource_uri')
                 payload.pop('id')
@@ -107,7 +108,8 @@ class Get_Tasks(CronJobBase):
         for t in opentasks:
             logger.info("Processing Task " + str(t.id))
             try:
-                answer = json.loads(t.answer)
+                #answer = json.loads(t.answer)
+                answer = t.answer  #TODO replace all anser with t.answer
             except ValueError:
                 logger.error("the answer field of task " + str(t.id) + " does not contain a valid JSON Format. Skipping.")
                 continue    # if there is not valid JSON there is no pint of considerung this answer

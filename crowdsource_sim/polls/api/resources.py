@@ -40,6 +40,10 @@ class TaskResource(ModelResource):
         #authorization = DjangoAuthorization()
         authorization = Authorization()
 
+    def dehydrate(self, bundle):
+        bundle.data['callback_uri'] += "?format=json"
+        return bundle
+
 
 class TestResource(ModelResource):
 
