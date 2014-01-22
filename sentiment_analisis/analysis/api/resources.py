@@ -25,6 +25,10 @@ class TaskResource(ModelResource):
         #authorization = DjangoAuthorization()
         authorization = Authorization()
 
+    def dehydrate(self, bundle):
+        bundle.data['task_uri'] += "?format=json"
+        return bundle
+
     def dehydrate_data(self, bundle):
         return "{data:data}"
 

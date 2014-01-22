@@ -40,11 +40,12 @@ def transform_task_to_data(task):
 
 def process_task_answers():
 
-    """This funcion  goes trough all unprocessed tasks and add news
+    """
+    This funcion  goes trough all unprocessed tasks and add news
     keywords,sentiments, workes and relations
 
-    Docstring
-
     """
+
+    logger.info("start processing keywords")
 
     pass
