@@ -27,7 +27,7 @@ def transform_task_to_data(task):
     #for i in range(1,6):
     #    data['additional_input']['keyword' + str(i)] = ""
     data['additional_input'] = "Please identifiy product and company names out of the given text and put the names into the 'keywords' collumn. Further put either a 'C' for company or a 'P' for product in to the second collumn"
-    data['headers'] = ("Keyword", "Product or Company?")
+    data['headers'] = [{"text":"Keyword","values":[]}, {"text":"Product or Company?","values":["P","C"]}]
     data['input'] = nltk.clean_html(task.feed.content)
     data['keyword_count'] = 5
     return data
