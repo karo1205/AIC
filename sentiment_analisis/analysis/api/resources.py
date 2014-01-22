@@ -35,4 +35,5 @@ class TaskResource(ModelResource):
     def hydrate(self,bundle):
         bundle.data['status'] = 'D'
         logger.error("callback" + bundle.data['status'])
+        bundle.data['task_uri']=bundle.data['task_uri'].split('?')[0]
         return bundle

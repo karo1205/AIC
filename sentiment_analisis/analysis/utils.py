@@ -1,17 +1,12 @@
 """ This module contains helper functions needed for preccessing data coming from
 the crowdsorucing platform
-
-Docstring
-
 """
 import json
 import nltk
 import logging
-#from analysis.models import Task
+#from analysis.models import Task, Keyword
 
 logger = logging.getLogger(__name__)
-
-
 
 
 def transform_task_to_data(task):
@@ -47,5 +42,38 @@ def process_task_answers():
     """
 
     logger.info("start processing keywords")
+
+    """
+    Process Task Type 1
+
+    """
+
+    opentasks = Task.objects.filter(status='D')  # get all started tasks
+    logger.info('Getting done tasks from DB. ' + str(opentasks.count()) + ' elements found')
+    for t in opentasks:
+        logger.info("Processing Task " + str(t.id))
+        try:
+            answer = json.loads(t.answer)
+            #answer = t.answer
+        except ValueError:
+            logger.error("the answer field of task " + str(t.id) + " does not contain a valid JSON Format. Skipping.")
+            continue    # if there is not valid JSON there is no pint of considerung this answer
+                        # TODO: Implement quality control and pot task
+                        # again
+
+        for kw in answer['keywords'].keys():
+            try:
+                keyword = Keyword.objects.get(text=kw)
+                logger.info('Keyword "' + kw + '" already in DB')
+                t.keywords.add(keyword)
+                logger.info('Keyword "' + kw + '" assigned to Task' + str(t.id))
+            except Keyword.DoesNotExist:
+                newkeyword=Keyword(text=str(kw), category=answer['keywords'][kw])
+                newkeyword.save()
+                t.keywords.add(newkeyword)
+                logger.info('new keyword "' + kw + '" created and assigned to Task' + str(t.id))
+
+        t.status='P'  # set status to processed
+        t.save()
 
     pass
