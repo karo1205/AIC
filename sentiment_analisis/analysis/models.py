@@ -105,7 +105,7 @@ def do_something(sender, **kwargs):
             logger.info("new worker created: id = " + str(newworker.id))
             logger.info("worker " + str(newworker.id) + " did task " + str(t.id))
         t.save()
-        post_save.disconnect(do_something, sender=Task)
+        post_save.connect(do_something, sender=Task)
 
         process_task_answers()
 post_save.connect(do_something, sender=Task)
