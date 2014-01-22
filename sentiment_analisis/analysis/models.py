@@ -80,7 +80,7 @@ class Task(models.Model):
 
 
 #@receiver(post_save, sender=Task)
-def do_something(sender, **kwargs):
+def save_task_and_worker(sender, **kwargs):
 
     """Docstring."""
 
@@ -90,7 +90,7 @@ def do_something(sender, **kwargs):
         logger.info('answer for task ' + str(t.id) + ' was recieved')
         t_answer = json.loads(t.answer)
         logger.info('worker' + t_answer['worker'] + ' did the work')
-        post_save.disconnect(do_something, sender=Task)
+        post_save.disconnect(save_task_and_worker, sender=Task)
         try:  # see of worker alread is known
             w = Worker.objects.get(worker_uri=t_answer['worker'])  #TODO get worker URI
             t.worker_id = w.id  # set Task-Worker realtion
@@ -104,10 +104,10 @@ def do_something(sender, **kwargs):
             logger.info("new worker created: id = " + str(newworker.id))
             logger.info("worker " + str(newworker.id) + " did task " + str(t.id))
         t.save()
-        post_save.connect(do_something, sender=Task)
+        post_save.connect(save_task_and_worker, sender=Task)
 
         process_task_answers()
-post_save.connect(do_something, sender=Task)
+post_save.connect(save_task_and_worker, sender=Task)
 
 #at the end because of circular imports of models
 from analysis.utils import *
