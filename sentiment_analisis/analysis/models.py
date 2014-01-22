@@ -17,7 +17,7 @@ class Feed(models.Model):
     title = models.CharField(max_length=500)
     link = models.URLField()
     content = models.TextField()
-
+    pub_date = models.DateTimeField('date published', default=datetime.datetime(2000, 1, 1, 1, 1, 1))
     def __unicode__(self):
         return self.title
 
@@ -44,11 +44,19 @@ class Worker(models.Model):
     def __unicode__(self):
         return self.worker_uri
 
+class Order(models.Model):
+    keyword = models.ForeignKey(Keyword)
+    budgetlimit = models.IntegerField(default=0)
+    start_date = models.DateTimeField('start date', default=datetime.datetime(2000, 1, 1, 1, 1, 1))
+    end_date = models.DateTimeField('end date', default=datetime.datetime(2000, 1, 1, 1, 1, 1))
 
 class Sentiment(models.Model):
     keyword = models.ForeignKey(Keyword)
     worker = models.ForeignKey(Worker)
     score = models.IntegerField(default=0)
+    feed = models.ForeignKey(Feed)
+    com_date = models.DateTimeField('date completed', default=datetime.datetime(2000, 1, 1, 1, 1, 1))
+
 
 
 
