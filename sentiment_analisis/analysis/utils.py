@@ -4,7 +4,7 @@ the crowdsorucing platform
 import json
 import nltk
 import logging
-#from analysis.models import Task, Keyword
+from analysis.models import Task, Keyword
 
 logger = logging.getLogger(__name__)
 

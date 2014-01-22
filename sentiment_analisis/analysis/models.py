@@ -7,7 +7,6 @@ from django.utils import timezone
 from django.db.models.signals import post_save
 import logging
 import json
-from analysis.utils import *
 logger = logging.getLogger(__name__)
 
 
@@ -110,4 +109,5 @@ def do_something(sender, **kwargs):
         process_task_answers()
 post_save.connect(do_something, sender=Task)
 
-
+#at the end because of circular imports of models
+from analysis.utils import *
