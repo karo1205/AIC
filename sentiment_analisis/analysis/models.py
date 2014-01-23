@@ -57,7 +57,7 @@ class Task(models.Model):
 
 class Sentiment(models.Model):
     keyword = models.ForeignKey(Keyword)
-    worker = models.ForeignKey(Worker)
+    worker = models.ForeignKey(Worker)  # Many to many relation
     score = models.IntegerField(default=0)
     feed = models.ForeignKey(Feed)
     com_date = models.DateTimeField('date completed', default=datetime.datetime(2000, 1, 1, 1, 1, 1))
