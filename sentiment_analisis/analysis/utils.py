@@ -63,13 +63,21 @@ def process_task_answers():
 
         for kw in answer['keywords'].keys():
             try:
-                keyword = Keyword.objects.get(text=kw)
+                keyword = Keyword.objects.get(text = kw, category = answer['keywords'][kw])
                 logger.info('Keyword "' + kw + '" already in DB')
                 t.keywords.add(keyword)
                 logger.info('Keyword "' + kw + '" assigned to Task' + str(t.id))
+                # TODO debug here
+                keyword_inverse = Keyword.objects.filter(text=kw).exclude(category=answer['keywords'][kw])
+                if len(keyword_inverse) == 0:
+                    continue
+                elif keyword.task_set.count() / (keyword_inverse.task_set.count() + keyword.task_set.count()) >= 1:
+                    t.worker.score -= 1
+                    t.worker.save()
+                    logger.info('Keyword "' + kw + '" has wrong catgory set.' + str(t.worker.id)+ ' was degraded')
             except Keyword.DoesNotExist:
                 if t.feed.content.find(kw) == -1:  #if keyword is not found in text of the feed
-                    t.worker.score-=1
+                    t.worker.score -= 1
                     t.worker.save()
                     logger.info('Keyword "' + kw + '" was not found in feed. worker ' + str(t.worker.id)+ ' was degraded')
                 else:

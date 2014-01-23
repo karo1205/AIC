@@ -47,7 +47,7 @@ class Keyword(models.Model):
     score = models.IntegerField(default=0)
 
     def __unicode__(self):
-        return self.text
+        return self.text + "[" + self.category + "]"
 
 
 class Order(models.Model):
