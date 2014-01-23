@@ -68,6 +68,9 @@ def process_task_answers():
                 t.keywords.add(keyword)
                 logger.info('Keyword "' + kw + '" assigned to Task' + str(t.id))
             except Keyword.DoesNotExist:
+                if t.feed.content.find(kw) == -1:  #if keyword is not found in text of the feed
+                    t.worker.score-=1
+                    logger.info('Keyword "' + kw + '" was not found in feed. worker ' + str(t.worker.id)+ ' was degraded')
                 newkeyword=Keyword(text=str(kw), category=answer['keywords'][kw])
                 newkeyword.save()
                 t.keywords.add(newkeyword)

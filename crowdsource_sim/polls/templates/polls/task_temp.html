@@ -108,14 +108,14 @@
 	sonst eine Combobox mit den möglichen Werten zur Auswahl. Liste wird verwendet z.B. in taks 1 für "P", "C" bzw. Rating (1..5) -->
 		{% if h.values|length > 0 %}
 							<!-- Eine liste von Werten ==> Combobox -->
-				            <td><select class="form-control" name="{{ h }}_{{ row }}" value="">
+				            <td><select class="form-control" name="{{ h.text }}_{{ row }}" value="">
 			{% for value in h.values %}
 								  <option>{{ value }}</option>
 			{% endfor %}
 							</select></td>
 		{% else %}
 							<!-- TODO Name the fields of the table, so that they can be accessed on form-action -->
-				            <td><input class="form-control" name="{{ h }}_{{ row }}" value=""/></td>
+				            <td><input class="form-control" name="{{ h.text }}_{{ row }}" value=""/></td>
 		{% endif %}
 		
 	{% endfor %} <!-- headers -->
