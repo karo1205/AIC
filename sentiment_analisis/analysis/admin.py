@@ -24,7 +24,7 @@ class WorkerAdmin(admin.ModelAdmin):
 
     """This class controls the admin interface for Feeds."""
 
-    list_display = ('id', 'worker_uri')
+    list_display = ('id', 'worker_uri', 'score')
 
 
 class KeywordAdmin(admin.ModelAdmin):
