@@ -70,11 +70,13 @@ def process_task_answers():
                 # TODO debug here
                 keyword_inverse = Keyword.objects.filter(text=kw).exclude(category=answer['keywords'][kw])
                 if len(keyword_inverse) == 0:
+                    logger.info("no inverse keyword found. skipping")
                     continue
-                elif keyword.task_set.count() / (keyword_inverse.task_set.count() + keyword.task_set.count()) >= 1:
+                elif keyword.task_set.count() / (keyword_inverse[0].task_set.count() + keyword.task_set.count()) <= 0.34:
                     t.worker.score -= 1
                     t.worker.save()
                     logger.info('Keyword "' + kw + '" has wrong catgory set.' + str(t.worker.id)+ ' was degraded')
+                logger.info("no penalty with" + str(keyword.task_set.count() / (keyword_inverse[0].task_set.count() + keyword.task_set.coun())))
             except Keyword.DoesNotExist:
                 if t.feed.content.find(kw) == -1:  #if keyword is not found in text of the feed
                     t.worker.score -= 1
