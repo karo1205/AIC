@@ -16,20 +16,44 @@ def transform_task_to_data(task):
 
     """
 
-    data={}
-    data['header'] = "Identify Product and Company Names"
-    data['question'] = """
-    Plaese read this text carefully, filter out product and
-    company names and put them into the textfields below.
-    """
-    data['additional_header'] = "Instructions"
-    #data['additional_input']={}
-    #for i in range(1,6):
-    #    data['additional_input']['keyword' + str(i)] = ""
-    data['additional_input'] = "Please identifiy product and company names out of the given text and put the names into the 'keywords' collumn. Further put either a 'C' for company or a 'P' for product in to the second collumn"
-    data['headers'] = [{"text":"Keyword","values":[]}, {"text":"Product or Company?","values":["P","C"]}]
-    data['input'] = nltk.clean_html(task.feed.content)
-    data['keyword_count'] = 5
+    if task.question=="Question1":
+        data={}
+        data['header'] = "Identify Product and Company Names"
+        data['question'] = """
+        Please read this text carefully, filter out product and
+        company names and put them into the textfields below.
+        """
+        data['additional_header'] = "Instructions"
+        #data['additional_input']={}
+        #for i in range(1,6):
+        #    data['additional_input']['keyword' + str(i)] = ""
+        data['additional_input'] = "Please identifiy product and company names out of the given text and put the names into the 'keywords' collumn. Further put either a 'C' for company or a 'P' for product in to the second collumn"
+        data['headers'] = [{"text":"Keyword","values":[]}, {"text":"Product or Company?","values":["P","C"]}]
+        data['input'] = nltk.clean_html(task.feed.content)
+        data['keyword_count'] = 5
+    elif task.question == "Question2":
+        data = {}
+        data['header'] = "Sentiment regarding Product and Company Names"
+        data['question'] = """
+        Please read this text carefully and rate your sentiment regarding the keywords provided below.
+        Please rate how positive do you think the keyword is mentioned in the text.
+        1......very positive
+        2......positive
+        3......neutral
+        4......negative
+        5......very negative
+        """
+        data['additional_header'] = "Instructions"
+        #data['additional_input']={}
+        #for i in range(1,6):
+        #    data['additional_input']['keyword' + str(i)] = ""
+        data['additional_input'] = ""
+        data['headers'] = [{"text":"Keyword","values":[]}, {"text":"Your Sentiment?","values":["P","C"]}]
+        data['input'] = "input"
+        data['keyword_count'] = 5
+
+    else:
+        logger.error("Format Error: Please check content of task " + str(task.id))
     return data
 
 
