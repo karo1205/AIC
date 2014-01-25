@@ -65,9 +65,17 @@ def detail(request, task_id):
 
       print headers
 
-      answers_amount = [i + 1 for i in range(int(9))]
+      answers_amount = [i + 1 for i in range(int(9))]  # TODO change to JSON value
     #context = {'userid' : 'iwas', 'question': 'Meine Frage?', 'header' : 'Mein Header !', 'input' : 'Input is das ;-)', 'taskid' : '1', 'headers' : headers}
-      context = {'userid' : 'MyUser', 'question' : taskDescription, 'header' : taskTitle, 'input' : taskInput, 'additional_input' : additionalInput, 'additional_header' : additional_header, 'taskid': task_id, 'headers' : headers, 'answers_amount' : answers_amount}
+      context = {'userid': 'MyUser',
+                 'question': taskDescription,
+                 'header': taskTitle,
+                 'input': taskInput,
+                 'additional_input': additionalInput,
+                 'additional_header': additional_header,
+                 'taskid': task_id,
+                 'headers': headers,
+                 'answers_amount': answers_amount}
     #return render(request, 'polls/task_temp.html', context)
       return render_to_response('polls/task_temp.html', RequestContext(request, context))
     except (ValueError, KeyError, TypeError):
@@ -100,11 +108,12 @@ def submit(request, task_id):
             buff['keywords'] = {}
 
             for row in range(1, 9):
-                buff['keywords'][request.POST[headers[0] + '_' + str(row)]] = request.POST[headers[1] + '_' + str(row)]
+                buff['keywords'][request.POST[headers[0]['text'] + '_' + str(row)]] = request.POST[headers[1]['text'] + '_' + str(row)]
             try:
                 buff['keywords'].pop('')
             except KeyError:
                 pass
+            print t.answer
             t.answer = json.dumps(buff)
             #t.answer = buff
             t.save()
