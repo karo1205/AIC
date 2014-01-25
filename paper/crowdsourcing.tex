@@ -30,6 +30,7 @@
 %\usepackage{graphicx}
 %\usepackage{natbib}
 \usepackage[utf8]{inputenc}
+\usepackage{hyperref}
 %\usepackage{tabularx}
 %\usepackage{hyperref}
 %\usepackage{color}
@@ -118,32 +119,64 @@ collaborative paper writing tool as well.}
 \keywords{Crowdsourcing, some, more, keywords} % NOT required for Proceedings
 
 \section{Introduction}
-\textit{ The paper should provide an overview about the scientific state of the art in crowdsourcing. Note
-that the paper is not the documentation of your tool – it should discuss scientific papers related
-to this topic in the style of a seminar paper. Good starting points for finding related scientific
-papers are the sources cited in this text, Google Scholar 6 , IEEEXplorer 7 or the ACM Digital
-Library 8 . Use the ACM ’tight’ conference style 9 (two columns), and keep it brief (3 pages). You
-do not necessarily need to install a LaTeX environment for this - you can use writeLaTeX 10 , a
-collaborative paper writing tool as well.
-}
+\label{sect:intro}
+
+\begin{quote} 
+  Definition of crowdsourcing
+\end{quote}
 
 Write something useful about how crowdsourcing has been developed over time, history and the like.
 Come then to the current state of the topic and give a brief overview about the (possible) future.
 
 %/footnote{some text in here}
 
-\section{History of Crowdsourcing}
+\section{History of crowdsourcing}
+\label{sect:history}
+The term \textit{crowdsourcing} has been coined by the american journalist Jeff Howe \cite{howe:rise}. It has first been mentioned in the article \textit{The Rise Of Crowdsourcing}, published in the Wired Magazin\footnote{http://www.wired.com}. \\
+In this article Howe describes that and why crowd sourcing may be the next big thing in the internet 2.0. He connects the term \textit{outcourcing} (giving work to well known and specialized group of persons) with \textit{crowdsourcing}, meaning that the group of participants is open. The transition from outsourcing to crowdsourcing is done by examples like a site named iStockphoto\footnote{http://www.istockphoto.com}, which raised by a image-sharing community. iSockphoto's micro-payment system allows a large community of more or less professional photographers to sell their pictures. Although this might not be a crowdsourcing system as it has been defined it certainly leads to it.\\
+However crowdsourcing is much older and is not necessarily related to the internet. In the past crowdsourcing has often been used as a competition in order to discover a solution. The following examples are by no means complete and shall just show that crowdsourcing type of work has been around for a long time before the term has been established and even before the internet exists.
+\subsection*{The longitude price}
+In 1714 the British Government offered  to a solution to a problem named \textit{The Longitude Problem} \footnote{http://en.wikipedia.org/wiki/Longitude\_prize/}. Sailing was very dangerous at this times. One of the problems was to measure the current longitude. Eventually John Harrison won the main price by inventing the chronometer. Several other persons also benefited from the offer.\\
+It shall be mentioned that quite similar offers have been done even earlier, in the late 16\textsuperscript{th} century but by then nobody could solve the problems.
+\subsection*{Toyota Logo Contest}
+In 1963 Toyota held a contest to design a new logo. They received about 25.000 entries. The winning one was the well known three ellipses.
+\subsection*{Youtube, Wikipedia ...}
+With the rise of the internet collaborative sites like youtube and wikipedia rose as well. The connection to the field of crowdsourcing is obvious: a large group of people invest time and effort to create a larger whole.
 
-\section{Current use cases}
+\subsection{Prominent crowdsourcing sites}
+In general crowdsourcing means that a group of \textit{workers} participate in finding a solution to a given problem, mostly by solving small parts of the problem. There are several web sites online which provide the technical and logistical infrastructure to support this kind of problem solving. We provided list is by no means complete but shall rather give a brief overview. Different sites cover different more or less specialized aspects of crowd sourcing (see Section~\ref{sect:types}).
+\subsection*{Freelancer.com\footnote{http://www.freelancer.com/}}
+This site offers online jobs to freelancers who bid on projects or problems posted by companies or individuals on a set price. The kind of problems to solve range from programming tasks to design projects. Similar web sites are for example ScriptLance\footnote{http://www.scriptlance.com}, Elance\footnote{http://www.elance.com} or guru\footnote{http://www.guru.com})
+\subsection*{CrowdSpring\footnote{https://www.crowdspring.com}}
+A site specialized to graphic design projects. Similar sites are: 99designs\footnote{http://99designs.com/} or hatchwise\footnote{http://www.hatchwise.com}.
+\subsection*{Utest\footnote{https://www.utest.com}}
+This site offers software testing, that relies on crowdsourcing. Similar pages are: UserTesting\footnote{http://www.usertesting.com}, Feedback Army\footnote{http://feedbackarmy.com} (for web sites) and others.
+\subsection*{Amazon Mechanical Turk\footnote{https://www.mturk.com/mturk/welcome}}
+One of the best known crowdsourcing sites. Best suited for small and simple tasks like finding or extracting of certain information, tagging pictures... Each task is really simple and donated by just a few cent.
+\subsection*{InnoCentive\footnote{http://www.innocentive.com/}}
+On the contrary to the Mechanical Turk InnoCentive aims to solve complex and more comprehensive questions. Comparable to Innovation Exchange\footnote{http://www.innovationexchange.com/}.
+
+Those are just a few of many, many crowdsourcing sites in the internet. A comprehensive list can be found at \href{http://www.crowdsourcing.org/directory}{www.crowdsourcing.org}.
+
+\section{Types of crowdsourcing}
+\label{sect:types}
 This section shall contain some of the currently used crowd sourcing applications. How is it used currently? What are the benefits/advantages compared to other methods, like algorithmic approaches? ``Is it worth it?''
 
+\section{Problems with crowdsourcing}
+\label{sect:problems}
+This section shall contain information about what problems the crowd sourcing sites are facing (quality of service, cheating workers, ...).
+
 \section {Current scientific works}
+\label{sect:current}
 %Citations to articles \cite{bowman:reasoning, clark:pct, braams:babel, herlihy:methodology},
 What are the current scientific areas in conjunction with crowdsourcing? 
 
 \section{Future of Crowdsourcing}
+\label{sect:future}
 
 \section{Conclusion}
+\label{sect:conclusion}
+
 Some final words about crowd sourcing in general and the future of it.
 
 
@@ -156,6 +189,7 @@ Some final words about crowd sourcing in general and the future of it.
 
 %ACKNOWLEDGMENTS are optional
 \section{Acknowledgments}
+\cite{howe:rise, marjanovic:current, div:crowd}, 
 This section is optional; it is a location for you
 to acknowledge grants, funding, editing assistance and
 what have you.  In the present case, for example, the
