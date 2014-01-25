@@ -27,11 +27,8 @@ def transform_task_to_data(task):
         company names and put them into the textfields below.
         """
         data['additional_header'] = "Instructions"
-        #data['additional_input']={}
-        #for i in range(1,6):
-        #    data['additional_input']['keyword' + str(i)] = ""
-        data['additional_input'] = "Please identifiy product and company names out of the given text and put the names into the 'keywords' collumn. Further put either a 'C' for company or a 'P' for product in to the second collumn"
-        data['headers'] = [{"text":"Keyword","values":[]}, {"text":"Product or Company?","values":["P","C"]}]
+        #data['additional_input'] = "Please identifiy product and company names out of the given text and put the names into the 'keywords' collumn. Further put either a 'C' for company or a 'P' for product in to the second collumn"
+        data['headers'] = [{"text":"Keyword","values":[],"type":"input"}, {"text":"Product or Company?","values":["P","C"],"type":"combo"}]
         data['input'] = nltk.clean_html(task.feed.content)
         data['keyword_count'] = 5
     elif task.question == "Question2":
@@ -46,15 +43,14 @@ def transform_task_to_data(task):
         4......negative
         5......very negative
         """
-        data['additional_header'] = "Instructions"
-        #data['additional_input']={}
-        #for i in range(1,6):
-        #    data['additional_input']['keyword' + str(i)] = ""
-        data['additional_input'] = ""
-        data['headers'] = [{"text":"Keyword","values":[]}, {"text":"Your Sentiment?","values":["P","C"]}]
-        data['input'] = nltk.clean_html(task.feed.content)
-        data['keyword_count'] = 5
+        data['additional_header'] = ""
+        data['additional_input'] = []
+        for kw in task.keywords.values():
+            data['additional_input'].append(kw['text'])
 
+        data['headers'] = [{"text":"Keyword","values":[],"type":"input_readonly"}, {"text":"Your Sentiment?","values":["P","C"],"type":"combo"}]
+        data['input'] = nltk.clean_html(task.feed.content)
+        data['keyword_count'] = len(data['additional_input'])
     else:
         logger.error("Format Error: Please check content of task " + str(task.id))
     return data
@@ -75,7 +71,7 @@ def post_task2_to_crowd(f):
     payload['question'] = 'Please state your sentiments about this text'
     #TODO: callback uri
     payload['callback_uri'] = 'http://127.0.0.1:8000/api/v1/task/'+ str(t.id) +'/'
-    payload['keyword_count'] = 5
+    #payload['keyword_count'] = 5
     payload.pop('resource_uri')
     payload.pop('id')
     logger.info('payload = ' + json.dumps(payload)[:50])
@@ -125,7 +121,9 @@ def process_task_answers():
             try:
                 keyword = Keyword.objects.get(text = kw, category = answer['keywords'][kw])
                 logger.info('Keyword "' + kw + '" already in DB')
-                t.keywords.add(keyword)
+                t.keywords.add(keyword)  # add Task --> Keyword Relationship
+                keyword.feed.add(t.feed)  # add Keyword --> Feed Relationship
+                keyword.save()
                 logger.info('Keyword "' + kw + '" assigned to Task' + str(t.id))
                 # TODO debug here
                 keyword_inverse = Keyword.objects.filter(text=kw).exclude(category=answer['keywords'][kw])
@@ -144,6 +142,7 @@ def process_task_answers():
                     logger.info('Keyword "' + kw + '" was not found in feed. worker ' + str(t.worker.id)+ ' was degraded')
                 else:
                     newkeyword=Keyword(text=str(kw), category=answer['keywords'][kw])
+                    newkeyword.feed.add(t.feed)  # add Keyword --> Feed Relationship
                     newkeyword.save()
                     t.keywords.add(newkeyword)
                     logger.info('new keyword "' + kw + '" created and assigned to Task' + str(t.id))
