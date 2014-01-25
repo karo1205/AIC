@@ -100,7 +100,7 @@
 {% endfor %}
 				          </tr>
 				        <tbody>
-{% load poll_extras %}
+{% load polls_extras %}
  <!-- FIRST VERSION: just one fixed sized tabel with as many comuns as there are headers and 10 rows -->
 {% for row in answers_amount %}	<!-- i know, hacky but simple... (see http://stackoverflow.com/questions/1107737/numeric-for-loop-in-django-templates -->
 				          <tr>
@@ -119,7 +119,7 @@
 				            <td><input class="form-control" name="{{ h.text }}_{{ row }}" value=""/></td>
 		{% elif h.type == "input_readonly" %}
 							<!-- Eine liste von schreibgeschützen Textfeldern -->
-                            <td><input class="form-control" name="{{ h.text }}_{{ row }}" value="{{ additional_input|lookup:row }}{{ row }}" readonly/></td>
+                            <td><input class="form-control" name="{{ h.text }}_{{ row }}" value="{{ additional_input|lookup:row }}" readonly/></td>
         {% endif %}
 		
 	{% endfor %} <!-- headers -->
