@@ -52,7 +52,7 @@ def transform_task_to_data(task):
         #    data['additional_input']['keyword' + str(i)] = ""
         data['additional_input'] = ""
         data['headers'] = [{"text":"Keyword","values":[]}, {"text":"Your Sentiment?","values":["P","C"]}]
-        data['input'] = "input"
+        data['input'] = nltk.clean_html(task.feed.content)
         data['keyword_count'] = 5
 
     else:
@@ -68,7 +68,7 @@ def post_task2_to_crowd(f):
 
     t = Task(pub_date=timezone.now(), question='Question2', feed=f)
     t.save()
-    logger.info("new task was stored")
+    logger.info("new task2 was stored")
     payload = json.load(urllib2.urlopen('http://127.0.0.1:8002/api/v1/task/1/?format=json'))
     payload['data'] = json.dumps(transform_task_to_data(t))
     payload['price'] = 0
