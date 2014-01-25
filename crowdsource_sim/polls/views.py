@@ -101,7 +101,7 @@ def submit(request, task_id):
             buff['worker'] = request.POST.get("worker")
             buff['keywords'] = {}
 
-            for row in range(0, 9):  # TODO adapt range to JSON
+            for row in range(decoded['keyword_count']):  # TODO adapt range to JSON
                 buff['keywords'][request.POST[headers[0]['text'] + '_' + str(row)]] = request.POST[headers[1]['text'] + '_' + str(row)]
             try:
                 buff['keywords'].pop('')
@@ -129,7 +129,7 @@ def submit(request, task_id):
                 return HttpResponse('This Task already has been answered')
 
         except (ValueError, KeyError, TypeError):
-            print "JSON format error"
+            logger.error("JSON format error")
 
         logger.info("Task " + str(t.id) + "has been answered")
         return HttpResponse('Task finished successfully ')

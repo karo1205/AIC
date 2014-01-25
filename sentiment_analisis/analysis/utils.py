@@ -27,8 +27,8 @@ def transform_task_to_data(task):
         company names and put them into the textfields below.
         """
         data['additional_header'] = "Instructions"
-        #data['additional_input'] = "Please identifiy product and company names out of the given text and put the names into the 'keywords' collumn. Further put either a 'C' for company or a 'P' for product in to the second collumn"
-        data['headers'] = [{"text":"Keyword","values":[],"type":"input"}, {"text":"Product or Company?","values":["P","C"],"type":"combo"}]
+        data['additional_input'] = "Please identifiy product and company names out of the given text and put the names into the 'keywords' collumn. Further put either a 'C' for company or a 'P' for product in to the second collumn"
+        data['headers'] = [{"text":"Keyword","values":[],"type":"input"}, {"text":"[P]roduct or [C]ompany?","values":["P","C"],"type":"combo"}]
         data['input'] = nltk.clean_html(task.feed.content)
         data['keyword_count'] = 5
     elif task.question == "Question2":
@@ -45,7 +45,7 @@ def transform_task_to_data(task):
         """
         data['additional_header'] = ""
         data['additional_input'] = []
-        for kw in task.keywords.values():
+        for kw in task.feed.keyword_set.values():
             data['additional_input'].append(kw['text'])
 
         data['headers'] = [{"text":"Keyword","values":[],"type":"input_readonly"}, {"text":"Your Sentiment?","values":["P","C"],"type":"combo"}]
@@ -134,17 +134,19 @@ def process_task_answers():
                     t.worker.score -= 1
                     t.worker.save()
                     logger.info('Keyword "' + kw + '" has wrong catgory set.' + str(t.worker.id)+ ' was degraded')
-                logger.info("no penalty with" + str(keyword.task_set.count() / (keyword_inverse[0].task_set.count() + keyword.task_set.coun())))
+                else:
+                    logger.info("no penalty with" + str(keyword.task_set.count() / (keyword_inverse[0].task_set.count() + keyword.task_set.coun())))
             except Keyword.DoesNotExist:
                 if t.feed.content.find(kw) == -1:  #if keyword is not found in text of the feed
                     t.worker.score -= 1
                     t.worker.save()
                     logger.info('Keyword "' + kw + '" was not found in feed. worker ' + str(t.worker.id)+ ' was degraded')
-                else:
+                else:   # TODO: Debug here
                     newkeyword=Keyword(text=str(kw), category=answer['keywords'][kw])
-                    newkeyword.feed.add(t.feed)  # add Keyword --> Feed Relationship
                     newkeyword.save()
                     t.keywords.add(newkeyword)
+                    newkeyword.feed.add(t.feed)  # add Keyword --> Feed Relationship
+                    newkeyword.save()
                     logger.info('new keyword "' + kw + '" created and assigned to Task' + str(t.id))
 
         t.status='P'  # set status to processed
