@@ -48,7 +48,7 @@ def transform_task_to_data(task):
         for kw in task.feed.keyword_set.values():
             data['additional_input'].append(kw['text'])
 
-        data['headers'] = [{"text":"Keyword","values":[],"type":"input_readonly"}, {"text":"Your Sentiment?","values":["P","C"],"type":"combo"}]
+        data['headers'] = [{"text":"Keyword","values":[],"type":"input_readonly"}, {"text":"Your Sentiment?","values":["1","2","3","4","5"],"type":"combo"}]
         data['input'] = nltk.clean_html(task.feed.content)
         data['keyword_count'] = len(data['additional_input'])
     else:
