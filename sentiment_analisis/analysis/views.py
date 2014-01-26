@@ -3,7 +3,7 @@ from django.http import HttpResponse
 
 from django.shortcuts import render, get_object_or_404
 
-from analysis.models import Keyword, Sentiment, Order, Feed
+from analysis.models import Keyword, Sentiment, Order, Feed, Task
 
 def query(request):
     
@@ -33,10 +33,21 @@ def confirm(request):
       order.keyword.add(k)
     order.save()
     
-# get all feeds from relevant time
+# get all feeds from relevant time # TODO: Task or Feed Date ? 
+#    alltasks = Task.objects.filter(keywords__in = keys).exclude(com_date__gte=dateend).filter(pub_date__gte=datestart) 
+#    print alltasks
+    
+#    if not alltasks:
+#      print "no feed for this keywords"
+ #     return render(request,'analysis/error.html')
+    #allfeeds = Feed.objects.filter(id__in= alltask)
+#    allfeeds = []
+#    for buftask in alltasks:
+#      allfeeds.append(buftask.feed)
+    
 
-     
-       
+#    print allfeeds   
+    
 #    task_amount = budget * 
 
     context = {'userid' : username, 'keywords' : keywords, 'startdate' : datestart, 'enddate' : dateend, 'budget' : budget }
