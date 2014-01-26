@@ -97,7 +97,7 @@ def process_task_answers():
 
     """
 
-    logger.info("start processing keywords")
+    logger.info("start processing... ")
 
 
     opentasks = Task.objects.filter(status='D')  # get all started tasks
@@ -112,12 +112,10 @@ def process_task_answers():
             continue    # if there is not valid JSON there is no pint of considerung this answer
                         # TODO: Implement quality control and pot task
                         # again
-        """
-        Process Task Type 1
 
-        """
+        # Process Task Type 1
         if t.question == "Question1":
-
+            logger.info("processing question1... ")
             for kw in answer['keywords'].keys():
                 try:
                     keyword = Keyword.objects.get(text = kw, category = answer['keywords'][kw])
@@ -148,31 +146,29 @@ def process_task_answers():
                         newkeyword.feed.add(t.feed)  # add Keyword --> Feed Relationship
                         newkeyword.save()
                         logger.info('new keyword "' + kw + '" created and assigned to Task' + str(t.id))
-
-            t.status='P'  # set status to processed
-            t.save()
-
-            #post_task2_to_crowd(t.feed)
-
-        """
-            Process Task Type 2.
-        """
-        if t.question == "Question2":
-            for sen in answer['sentiments'].keys():
-                try:
-                    sentiment = Sentiment.objects.get(text = kw, category = answer['sentiments'][kw])
-                    logger.info('Sentiment "' + sen + '" already in DB')
-                    t.sentiment.add(sentiment)  # add Task --> sentiment Relationship
-                    sentiment.feed=t.feed  # add sentiment --> Feed Relationship
-                    sentiment.save()
-                    logger.info('Sentiment "' + sen + '" assigned to Task' + str(t.id))
-                except Sentiment.DoesNotExist:
-                    newsentiment=Sentiment(text=str(kw), category=answer['sentiments'][kw])
-                    newsentiment.save()
-                    t.sentiment.add(newsentiment)
-                    newsentiment.feed.add(t.feed)  # add Sentiment --> Feed Relationship
-                    newsentiment.save()
-                    logger.info('new sentiment "' + kw + '" created and assigned to Task' + str(t.id))
-
             t.status = 'P'  # set status to processed
             t.save()
+            #post_task2_to_crowd(t.feed)
+        # Process Task Type 2
+        elif t.question == "Question2":
+            logger.info("processing question1... ")
+            for sen in answer['keywords'].keys():
+                logger.info("processing Sentiment " + sen + "(" + answer['keywords'][sen] + ")")
+                keywords = Keyword.objects.filter(text=sen)
+                if len(keywords) == 0:
+                    logger.error("Received sentiment for non existing Keyword")
+                else:
+                    new_sentiment = Sentiment(score=answer['keywords'][sen])
+                    new_sentiment.worker = t.worker  # all the are Forein Keys of Sentiment
+                    new_sentiment.feed = t.feed
+                    new_sentiment.keyword = keywords[0] # choose better keyword instead of always the first
+                    new_sentiment.save()
+                    logger.info('new sentiment "' + sen +
+                                '" created with score "' + str(new_sentiment.score) +
+                                '" and relationships set: worker=' + t.worker.worker_uri +
+                                ' feed=' + str(t.feed.id) +
+                                ' keyword=' + str(keywords[0].text))
+            t.status = 'P'  # set status to processed
+            t.save()
+        else:
+            logger.error("Keywords/Sentiments could not be processed.Something is wrong with task")
