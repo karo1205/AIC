@@ -51,13 +51,8 @@ class Keyword(models.Model):
 
 
 class Order(models.Model):
-<<<<<<< HEAD
-=======
-
     """Docstring."""
 
-    keyword = models.ForeignKey(Keyword)
->>>>>>> master
     budgetlimit = models.IntegerField(default=0)
     start_date = models.DateTimeField('start date', default=datetime.datetime(2000, 1, 1, 1, 1, 1))
     end_date = models.DateTimeField('end date', default=datetime.datetime(2000, 1, 1, 1, 1, 1))
@@ -102,16 +97,6 @@ class Task(models.Model):
     def __unicode__(self):
         return self.question
 
-
-<<<<<<< HEAD
-class Sentiment(models.Model):
-    keyword = models.ForeignKey(Keyword)
-    worker = models.ForeignKey(Worker)
-    score = models.IntegerField(default=0)
-    com_date = models.DateTimeField('date completed', default=datetime.datetime(2000, 1, 1, 1, 1, 1))
-#   feed = models.ForeignKey(Feed)
-=======
-#@receiver(post_save, sender=Task)
 def save_task_and_worker(sender, **kwargs):
     """Docstring."""
 
@@ -139,7 +124,6 @@ def save_task_and_worker(sender, **kwargs):
 
         process_task_answers()
 post_save.connect(save_task_and_worker, sender=Task)
->>>>>>> master
 
 #at the end because of circular imports of models
 from analysis.utils import *
