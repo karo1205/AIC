@@ -6,6 +6,8 @@ from django.shortcuts import render, get_object_or_404
 
 from analysis.models import Keyword, Sentiment, Order, Feed, Task
 
+from analysis.utils import *
+
 def query(request):
     
     context = {'userid' : 'MyUser', 'keywords' : Keyword.objects.all()}
@@ -82,6 +84,7 @@ def confirm(request):
  
     for i in range(0, task_amount):
       for feed in allfeeds:
+        post_task2_to_crowd(feed)
         print "create Task2 with "+str(feed)    
    
 
