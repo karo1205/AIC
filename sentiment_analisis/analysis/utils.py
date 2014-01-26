@@ -148,7 +148,9 @@ def process_task_answers():
                         logger.info('new keyword "' + kw + '" created and assigned to Task' + str(t.id))
             t.status = 'P'  # set status to processed
             t.save()
+            #uncomment the following line if no autmatic post of task 2 is required
             post_task2_to_crowd(t.feed)
+
         # Process Task Type 2
         elif t.question == "Question2":
             logger.info("processing question1... ")
