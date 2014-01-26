@@ -34,9 +34,17 @@ def confirm(request):
     order.save()
     
 # get all feeds from relevant time # TODO: Task or Feed Date ? 
-#    alltasks = Task.objects.filter(keywords__in = keys).exclude(com_date__gte=dateend).filter(pub_date__gte=datestart) 
-#    print alltasks
+    print keys
+#    allkeywords = Keyword.objects.filter(self__in = keys)
     
+    allfeeds = []
+    for tmpkey in keys:
+      allfeeds.append(tmpkey.feed.exclude(pub_date__gte=dateend).filter(pub_date__gte=datestart))
+    
+ 
+    print allfeeds
+     
+       
 #    if not alltasks:
 #      print "no feed for this keywords"
  #     return render(request,'analysis/error.html')
