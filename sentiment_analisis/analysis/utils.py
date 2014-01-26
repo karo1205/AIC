@@ -148,7 +148,7 @@ def process_task_answers():
                         logger.info('new keyword "' + kw + '" created and assigned to Task' + str(t.id))
             t.status = 'P'  # set status to processed
             t.save()
-            #post_task2_to_crowd(t.feed)
+            post_task2_to_crowd(t.feed)
         # Process Task Type 2
         elif t.question == "Question2":
             logger.info("processing question1... ")
@@ -161,7 +161,7 @@ def process_task_answers():
                     new_sentiment = Sentiment(score=answer['keywords'][sen])
                     new_sentiment.worker = t.worker  # all the are Forein Keys of Sentiment
                     new_sentiment.feed = t.feed
-                    new_sentiment.keyword = keywords[0] # choose better keyword instead of always the first
+                    new_sentiment.keyword = keywords[0] # choose better keyword instead of always thealways the  first
                     new_sentiment.save()
                     logger.info('new sentiment "' + sen +
                                 '" created with score "' + str(new_sentiment.score) +
