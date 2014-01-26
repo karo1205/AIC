@@ -91,29 +91,11 @@ def results(request, task_id):
 def submit(request, task_id):
     if request.method == 'POST':  # If the form has been submitted...
         t = get_object_or_404(Task, id=task_id)
-	print request
+
         try:
             decoded = json.loads(t.data)
             headers = decoded['headers']
             try:  # see if worker alread is known
-<<<<<<< HEAD
-              w = Worker.objects.get(name=request.POST.get("worker"))
-            except Worker.DoesNotExist:
-                    # create new worker
-              newworker=Worker(name=request.POST.get("worker"))
-              newworker.save() # save befor assigning to t becasue newworker hast'got an id yet
-              t.worker_id=newworker.id
-              t.save()
-
-	    buff={}
-            buff['worker']=request.POST.get("worker")
-            buff['keywords']={}
-	    
-            for row in range(1,9):
-             # print request.POST[headers[0] + '_' + str(row)]+" : "+ request.POST[headers[1] + '_' + str(row)]      
-	      buff['keywords'][request.POST[headers[0] + '_' + str(row)]]=request.POST[headers[1] + '_' + str(row)]
-            t.answer = buff
-=======
                 w = Worker.objects.get(name=request.POST.get("worker"))
                 t.worker_id = w.id
             except Worker.DoesNotExist:     # create new worker
@@ -134,7 +116,6 @@ def submit(request, task_id):
             print t.answer
             t.answer = json.dumps(buff)
             #t.answer = buff
->>>>>>> master
             t.save()
             #TODO: implement callback
             try:  # try if the callback location is still available
