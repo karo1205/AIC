@@ -73,7 +73,7 @@ def results(request, task_id):
 def submit(request, task_id):
     if request.method == 'POST':  # If the form has been submitted...
         t = get_object_or_404(Task, id=task_id)
-
+	print request
         try:
             decoded = json.loads(t.data)
             headers = decoded['headers']
@@ -91,8 +91,7 @@ def submit(request, task_id):
             buff['keywords']={}
 	    
             for row in range(1,9):
-              print request.POST[headers[0] + '_' + str(row)]+" : "+ request.POST[headers[1] + '_' + str(row)]
-                
+             # print request.POST[headers[0] + '_' + str(row)]+" : "+ request.POST[headers[1] + '_' + str(row)]      
 	      buff['keywords'][request.POST[headers[0] + '_' + str(row)]]=request.POST[headers[1] + '_' + str(row)]
             t.answer = buff
             t.save()

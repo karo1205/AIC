@@ -3,7 +3,7 @@ from django.http import HttpResponse
 
 from django.shortcuts import render, get_object_or_404
 
-from analysis.models import Keyword, Sentiment, Order
+from analysis.models import Keyword, Sentiment, Order, Feed
 
 def query(request):
     
@@ -11,17 +11,35 @@ def query(request):
     return render(request, 'analysis/query.html', context)
 
 def confirm(request):
-#TODO:    order = Order(keyword)
-    
-    
-    keywords = request.POST.getlist('mytextarea')
-    budget = request.POST['budget']
-    datestart = request.POST['datestart']
-    dateend = request.POST['dateend']
-    userid = request.POST['username']
-    #order = Order()
 
-    context = {'userid' : 'USERNAME', 'keywords' : {'WORD1','WORD2'}, 'startdate' : 'STARTDATE', 'enddate' : 'ENDDATE', 'budget' : 'BUDGET' }
+    if not request.method == 'POST':    
+      print "Not Post !"
+      http.HttpResponseForbidden()
+  
+    keywords = request.POST.getlist('mytextarea[]')
+    
+    keys = []
+    for ids in keywords:
+      keys.append(get_object_or_404(Keyword, id=ids))
+   
+# create new Order and save it to db
+    budget = request.POST.get('budget')
+    datestart = request.POST.get('datestart')
+    dateend = request.POST.get('dateend')
+    username = request.POST.get('username')
+    order = Order(budgetlimit = budget, start_date = datestart, end_date = dateend, customer = username) 
+    order.save()
+    for k in keys:
+      order.keyword.add(k)
+    order.save()
+    
+# get all feeds from relevant time
+
+     
+       
+#    task_amount = budget * 
+
+    context = {'userid' : username, 'keywords' : keywords, 'startdate' : datestart, 'enddate' : dateend, 'budget' : budget }
     return render(request, 'analysis/confirm.html',context)
 
 def result(request):
