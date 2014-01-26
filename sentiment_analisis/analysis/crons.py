@@ -34,6 +34,7 @@ class Fetch_Feeds(CronJobBase):
                 pass
             else:
                 f = Feed(link=item.id, title=item.title, content=item.summary_detail.value)
+                # pub_date=datetime.fromtimestamp(mktime(item.published_parsed)
                 f.save()
                 logger.info("new feed was stored: " + item.id)
                 t = Task(pub_date=timezone.now(), question='Question1', feed=f)

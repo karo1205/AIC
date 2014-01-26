@@ -33,9 +33,17 @@ class KeywordAdmin(admin.ModelAdmin):
 
     list_display = ('id', 'text', 'category')
 
+
+class SentimentAdmin(admin.ModelAdmin):
+
+    """This class controls the admin interface for Sentiment"""
+
+    list_display = ('id', 'score')
+
+
 admin.site.register(Feed, FeedAdmin)
 admin.site.register(Keyword, KeywordAdmin)
 admin.site.register(Worker, WorkerAdmin)
 admin.site.register(Task, TaskAdmin)
-admin.site.register(Sentiment)
+admin.site.register(Sentiment, SentimentAdmin)
 admin.site.register(Order)
