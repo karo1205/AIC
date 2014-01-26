@@ -55,17 +55,31 @@ def confirm(request):
 # get all feeds from relevant time # TODO: Task or Feed Date ? 
 #    print keys
 #    allkeywords = Keyword.objects.filter(self__in = keys)
-    
+    totallength = 0
+    counter = 0
     allfeeds = []
     for tmpkey in keys:
       for tmp in tmpkey.feed.exclude(pub_date__gte=dateend).filter(pub_date__gte=datestart):
         allfeeds.append(tmp)
-    
-    
-    print allfeeds
+        totallength += tmp.content.__len__()
+        counter = counter + 1
 
-    task_amount = int((int(budget)/10) * 3) 
-   
+   # print allfeeds
+   # print (totallength/counter)
+
+# calculate task amount and create Task2 s
+        
+   # print int(budget)
+   # print (totallength/counter)
+   # print ((int(budget)*300)/(totallength/counter))
+    task_amount = ((int(budget)*300)/(totallength/counter)) 
+  
+    min_amount = int(((totallength/counter)/300))
+
+    if task_amount < 1:
+      context = {'userid' : username, 'error_message' : 'Error! Too less budget, you need at least '+str(min_amount)+'!'}
+      return render(request, 'analysis/error.html',context)
+ 
     for i in range(0, task_amount):
       for feed in allfeeds:
         print "create Task2 with "+str(feed)    
