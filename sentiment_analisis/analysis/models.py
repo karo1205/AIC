@@ -65,10 +65,10 @@ class Sentiment(models.Model):
     """Docstring."""
 
     keyword = models.ForeignKey(Keyword)
-    worker = models.ManyToManyField(Worker)
+    worker = models.ForeignKey(Worker)
     score = models.IntegerField(default=0)
     feed = models.ForeignKey(Feed)
-    com_date = models.DateTimeField('date completed', default=datetime.datetime(2000, 1, 1, 1, 1, 1))
+    com_date = models.DateTimeField('date completed', default=timezone.now())
 
 
 class Task(models.Model):
