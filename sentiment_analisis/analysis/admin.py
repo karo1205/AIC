@@ -27,11 +27,16 @@ class WorkerAdmin(admin.ModelAdmin):
     list_display = ('id', 'worker_uri', 'score')
 
 
+class SentimentInline(admin.TabularInline):
+    model = Sentiment
+
+
 class KeywordAdmin(admin.ModelAdmin):
 
     """This class controls the admin interface for Feeds."""
 
     list_display = ('id', 'text', 'category')
+    inlines = [SentimentInline]
 
 
 class SentimentAdmin(admin.ModelAdmin):

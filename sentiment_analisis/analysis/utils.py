@@ -7,7 +7,7 @@ import requests
 import nltk
 import random
 import logging
-from analysis.models import Task, Keyword, Sentiment
+from analysis.models import Task, Keyword, Sentiment, Feed
 from django.utils import timezone
 
 logger = logging.getLogger(__name__)
@@ -158,15 +158,20 @@ def process_task_answers():
                 keywords = Keyword.objects.filter(text=sen)
                 if len(keywords) == 0:
                     logger.error("Received sentiment for non existing Keyword")
+                    continue
                 else:
                     # Quality Contol
                     new_score = answer['keywords'][sen]
                     scores=[]
                     for k in keywords:
-                       scores.extend(k.get_sentiment_scores())
-                       print scores
-                    if abs(median(scores) - new_score ) >= 3:
+                        scores.extend(k.get_sentiment_scores())
+                        print scores
+                    if len(scores) <= 3:
+                        logger.info("to few sentiments: Keyword " + sen + "has only " + str(len(scores)) + " sentiments")
+                    elif abs(median(scores) - int(new_score)) >= 3:
                         logger.info("bad sentiment")
+                        t.worker.score -= 1
+                        logger.info('Worker ' + str(t.worker.id)+ ' was degraded')
                     #save sentiment
                     new_sentiment = Sentiment(score=new_score)
                     new_sentiment.worker = t.worker  # all the are Forein Keys of Sentiment
@@ -188,6 +193,7 @@ def process_task_answers():
 def median(mylist):
     sorts = sorted(mylist)
     length = len(sorts)
+    print mylist
     if not length % 2:
         return (sorts[length / 2] + sorts[length / 2 - 1]) / 2.0
     return sorts[length / 2]
@@ -200,6 +206,7 @@ def create_test_sentiment_data(count):
     t.answer['worker'] = 'testworker'
     t.answer['keywords'] = {}
     t.status = 'D'
+    t.feed = Feed.objects.order_by('?')[0]
     for i in range(0,count):
         rand_keyword = Keyword.objects.order_by('?')[0]
         rand_sen = random.randint(1,5)
