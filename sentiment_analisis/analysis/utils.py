@@ -5,6 +5,7 @@ import json
 import urllib2
 import requests
 import nltk
+import random
 import logging
 from analysis.models import Task, Keyword, Sentiment
 from django.utils import timezone
@@ -163,7 +164,8 @@ def process_task_answers():
                     scores=[]
                     for k in keywords:
                        scores.extend(k.get_sentiment_scores())
-                    if abs(median(scores) - new_score ) >=3:
+                       print scores
+                    if abs(median(scores) - new_score ) >= 3:
                         logger.info("bad sentiment")
                     #save sentiment
                     new_sentiment = Sentiment(score=new_score)
@@ -189,3 +191,20 @@ def median(mylist):
     if not length % 2:
         return (sorts[length / 2] + sorts[length / 2 - 1]) / 2.0
     return sorts[length / 2]
+
+
+def create_test_sentiment_data(count):
+    t = Task(question="Question2",
+             feed_id=0)
+    t.answer = {}
+    t.answer['worker'] = 'testworker'
+    t.answer['keywords'] = {}
+    t.status = 'D'
+    for i in range(0,count):
+        rand_keyword = Keyword.objects.order_by('?')[0]
+        rand_sen = random.randint(1,5)
+        t.answer['keywords'][rand_keyword.text]=str(rand_sen)
+        print "rand sentiment" + str(rand_sen) + " for keyword " + rand_keyword.text
+    print t.answer
+    t.answer=json.dumps(t.answer)
+    t.save()
