@@ -146,8 +146,6 @@ def process_task_answers():
                         newkeyword.feed.add(t.feed)  # add Keyword --> Feed Relationship
                         newkeyword.save()
                         logger.info('new keyword "' + kw + '" created and assigned to Task' + str(t.id))
-            t.status = 'P'  # set status to processed
-            t.save()
             #uncomment the following line if no autmatic post of task 2 is required
             post_task2_to_crowd(t.feed)
 
@@ -160,7 +158,15 @@ def process_task_answers():
                 if len(keywords) == 0:
                     logger.error("Received sentiment for non existing Keyword")
                 else:
-                    new_sentiment = Sentiment(score=answer['keywords'][sen])
+                    # Quality Contol
+                    new_score = answer['keywords'][sen]
+                    scores=[]
+                    for k in keywords:
+                       scores.extend(k.get_sentiment_scores())
+                    if abs(median(scores) - new_score ) >=3:
+                        logger.info("bad sentiment")
+                    #save sentiment
+                    new_sentiment = Sentiment(score=new_score)
                     new_sentiment.worker = t.worker  # all the are Forein Keys of Sentiment
                     new_sentiment.feed = t.feed
                     new_sentiment.keyword = keywords[0] # choose better keyword instead of always thealways the  first
@@ -170,7 +176,16 @@ def process_task_answers():
                                 '" and relationships set: worker=' + t.worker.worker_uri +
                                 ' feed=' + str(t.feed.id) +
                                 ' keyword=' + str(keywords[0].text))
-            t.status = 'P'  # set status to processed
-            t.save()
         else:
             logger.error("Keywords/Sentiments could not be processed.Something is wrong with task")
+
+        t.status = 'P'  # set status to processed
+        t.save()
+
+
+def median(mylist):
+    sorts = sorted(mylist)
+    length = len(sorts)
+    if not length % 2:
+        return (sorts[length / 2] + sorts[length / 2 - 1]) / 2.0
+    return sorts[length / 2]

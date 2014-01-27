@@ -36,7 +36,7 @@ class KeywordAdmin(admin.ModelAdmin):
 
 class SentimentAdmin(admin.ModelAdmin):
 
-    """This class controls the admin interface for Sentiment"""
+    """This class controls the admin interface for Sentiment."""
 
     list_display = ('id', 'score')
 

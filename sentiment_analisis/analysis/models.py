@@ -49,6 +49,12 @@ class Keyword(models.Model):
     def __unicode__(self):
         return self.text + "[" + self.category + "," + str(self.score) + "]"
 
+    def get_sentiment_scores(self):
+        data = []
+        for sen in self.sentiment_set.values():
+           data.append(int(sen["score"]))
+        return data
+
 
 class Order(models.Model):
 
