@@ -17,7 +17,7 @@ class FeedAdmin(admin.ModelAdmin):
 
     """This class controls the admin interface for Feeds."""
 
-    list_display = ('title', 'link')
+    list_display = ('title', 'link', 'pub_date')
 
 
 class WorkerAdmin(admin.ModelAdmin):

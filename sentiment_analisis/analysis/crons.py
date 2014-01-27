@@ -8,6 +8,8 @@ import feedparser
 import json
 import urllib2
 import requests
+from time import mktime
+from datetime import datetime
 import logging
 logger = logging.getLogger(__name__)
 
@@ -33,8 +35,10 @@ class Fetch_Feeds(CronJobBase):
                 logger.info("feed already in db: " + item.id)
                 pass
             else:
-                f = Feed(link=item.id, title=item.title, content=item.summary_detail.value)
-                # pub_date=datetime.fromtimestamp(mktime(item.published_parsed)
+                f = Feed(link=item.id,
+                         title=item.title,
+                         content=item.summary_detail.value,
+                         pub_date=datetime.fromtimestamp(mktime(item.published_parsed)))
                 f.save()
                 logger.info("new feed was stored: " + item.id)
                 t = Task(pub_date=timezone.now(), question='Question1', feed=f)
