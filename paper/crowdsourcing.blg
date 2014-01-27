@@ -3,46 +3,49 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: crowdsourcing.aux
 The style file: abbrv.bst
 Database file #1: crowdsourcing.bib
-Warning--empty year in div:crowd
-You've used 3 entries,
+Name 1 in "AnHai Doan, Raghu Ramakrishnan, and Alon Y. Halevy" has a comma at the end for entry doan:crowd
+while executing---line 1049 of file abbrv.bst
+Name 1 in "AnHai Doan, Raghu Ramakrishnan, and Alon Y. Halevy" has a comma at the end for entry doan:crowd
+while executing---line 1090 of file abbrv.bst
+You've used 7 entries,
             2118 wiz_defined-function locations,
-            514 strings with 4186 characters,
-and the built_in function-call counts, 741 in all, are:
-= -- 71
-> -- 27
+            538 strings with 4677 characters,
+and the built_in function-call counts, 1584 in all, are:
+= -- 151
+> -- 61
 < -- 0
-+ -- 13
-- -- 8
-* -- 38
-:= -- 138
-add.period$ -- 12
-call.type$ -- 3
-change.case$ -- 13
++ -- 26
+- -- 18
+* -- 88
+:= -- 299
+add.period$ -- 22
+call.type$ -- 7
+change.case$ -- 29
 chr.to.int$ -- 0
-cite$ -- 4
-duplicate$ -- 34
-empty$ -- 63
-format.name$ -- 8
-if$ -- 150
+cite$ -- 7
+duplicate$ -- 72
+empty$ -- 129
+format.name$ -- 18
+if$ -- 317
 int.to.chr$ -- 0
-int.to.str$ -- 3
-missing$ -- 3
-newline$ -- 20
-num.names$ -- 6
-pop$ -- 17
+int.to.str$ -- 7
+missing$ -- 8
+newline$ -- 39
+num.names$ -- 14
+pop$ -- 25
 preamble$ -- 1
-purify$ -- 10
+purify$ -- 23
 quote$ -- 0
-skip$ -- 19
+skip$ -- 54
 stack$ -- 0
-substring$ -- 17
-swap$ -- 4
+substring$ -- 36
+swap$ -- 7
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 12
-warning$ -- 1
-while$ -- 6
-width$ -- 4
-write$ -- 36
-(There was 1 warning)
+type$ -- 26
+warning$ -- 0
+while$ -- 14
+width$ -- 8
+write$ -- 78
+(There were 2 error messages)

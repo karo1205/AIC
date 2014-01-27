@@ -1,10 +1,26 @@
 \begin{thebibliography}{1}
 
-\bibitem{div:crowd}
-Diverse.
-\newblock Wikipedia: Crowdsourcing.
-\newblock {\em http://en.wikipedia.org/wiki/Crowdsourcing}.
-\newblock [Online; accessed 25-January-2014].
+\bibitem{doan:crowd}
+R.~R. AnHai~Doan and A.~Y. Halevy.
+\newblock Crowdsourcing systems on the world-wide web.
+\newblock {\em Communications of the ACM}, 54(4), April 2011.
+
+\bibitem{brabham:crowd1}
+D.~Brabham.
+\newblock Crowdsourcing as a model for problem solving: An introduction and
+  cases.
+\newblock {\em Convergence: The International Journal of Research into New
+  Media Technologie}, 14(1), 2008.
+
+\bibitem{brabham:crowd}
+D.~C. Brabham.
+\newblock {\em Crowdsourcing}.
+\newblock MIT Press, 2013.
+
+\bibitem{arolas:definition}
+E.~Estellés-Arolas.
+\newblock Towards an integrated crowdsourcing definition.
+\newblock {\em Journal of Information Science}, XX(X), 2012.
 
 \bibitem{howe:rise}
 J.~Howe.
@@ -13,11 +29,16 @@ J.~Howe.
   2006.
 \newblock [Online; accessed 10-January-2014].
 
-\bibitem{marjanovic:current}
-O.~Marjanovic and N.~Roztocki.
-\newblock The current research landscape of crowdsourcing: Implications for
-  emerging economies.
-\newblock In {\em Proceedings of the International Conference on ICT
-  Managemen}. ICTM 2013, September 2013.
+\bibitem{yuen:select}
+I.~K. Man-Ching~Yuen and K.-S. Leung.
+\newblock Task matching in crowdsourcing.
+\newblock {\em IEEE International Conferences on Internet of Things, and Cyber,
+  Physical and Social Computing}, June 2011.
+
+\bibitem{whitla:crowd}
+P.~Whitla.
+\newblock Crowdsourcing and its application in marketing activities.
+\newblock {\em Contemporary Management Research / CMR / ISSN 1813-5498}, 5(1),
+  2009.
 
 \end{thebibliography}
