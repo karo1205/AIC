@@ -16,7 +16,7 @@ def query(request):
 def confirm(request):
 
     if not request.method == 'POST':    
-      print "Not Post !"
+      logger.error("Confirm: Not Post !")
       http.HttpResponseForbidden()
   
     keywords = request.POST.getlist('mytextarea[]')
@@ -45,8 +45,6 @@ def confirm(request):
       context = {'userid' : username, 'error_message' : 'Error! Dates has to be written as YYYY-MM-DD !'}
       return render(request, 'analysis/error.html',context)
     
-
-#    username = request.POST.get('username')
     order = Order(budgetlimit = budget, start_date = datestart, end_date = dateend, customer = username) 
     
     order.save()
@@ -54,9 +52,7 @@ def confirm(request):
       order.keyword.add(k)
     order.save()
     
-# get all feeds from relevant time # TODO: Task or Feed Date ? 
-#    print keys
-#    allkeywords = Keyword.objects.filter(self__in = keys)
+# get all feeds from relevant time 
     totallength = 0
     counter = 0
     allfeeds = []
@@ -66,14 +62,7 @@ def confirm(request):
         totallength += tmp.content.__len__()
         counter = counter + 1
 
-   # print allfeeds
-   # print (totallength/counter)
-
-# calculate task amount and create Task2 s
-        
-   # print int(budget)
-   # print (totallength/counter)
-   # print ((int(budget)*300)/(totallength/counter))
+# calculate task amount and create Task2 s        
     task_amount = ((int(budget)*300)/(totallength/counter)) 
   
     min_amount = int(((totallength/counter)/300))
@@ -85,25 +74,9 @@ def confirm(request):
     for i in range(0, task_amount):
       for feed in allfeeds:
         post_task2_to_crowd(feed)
-        print "create Task2 with "+str(feed)    
-   
+	logger.info("create Task2 with "+str(feed))    
 
-#TODO: Create Task2 s 
-
- 
-       
-#    if not alltasks:
-#      print "no feed for this keywords"
- #     return render(request,'analysis/error.html')
-    #allfeeds = Feed.objects.filter(id__in= alltask)
-#    allfeeds = []
-#    for buftask in alltasks:
-#      allfeeds.append(buftask.feed)
-    
-
-#    print allfeeds   
-    
-#    task_amount = budget * 
+#Create Task2s 
 
     context = {'userid' : username, 'keywords' : keywords, 'startdate' : datestart, 'enddate' : dateend, 'budget' : budget }
     return render(request, 'analysis/confirm.html',context)
@@ -114,8 +87,6 @@ def error(request):
 
 def result(request):
     
-#    sentiments = Sentiment.objects.filter(keyword = request.POST['selectbox'])	
-
     context = {'userid' : 'MyUser', 'sentiments' : {1,2}, 'keyword' : 'keyword1'}#Keyword.objects.get(id=request.POST['selectbox'])}
     return render(request, 'analysis/result.html', context)
 
