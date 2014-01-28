@@ -3,49 +3,50 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: crowdsourcing.aux
 The style file: abbrv.bst
 Database file #1: crowdsourcing.bib
-Name 1 in "AnHai Doan, Raghu Ramakrishnan, and Alon Y. Halevy" has a comma at the end for entry doan:crowd
+Too many commas in name 1 of "John Le, Andy Edmonds, Vaughn Hester, Lukas Biewald" for entry le:ensure
 while executing---line 1049 of file abbrv.bst
-Name 1 in "AnHai Doan, Raghu Ramakrishnan, and Alon Y. Halevy" has a comma at the end for entry doan:crowd
+Warning--empty booktitle in kittur:studies
+Too many commas in name 1 of "John Le, Andy Edmonds, Vaughn Hester, Lukas Biewald" for entry le:ensure
 while executing---line 1090 of file abbrv.bst
-You've used 7 entries,
+You've used 9 entries,
             2118 wiz_defined-function locations,
-            538 strings with 4677 characters,
-and the built_in function-call counts, 1584 in all, are:
-= -- 151
-> -- 61
+            548 strings with 5035 characters,
+and the built_in function-call counts, 2072 in all, are:
+= -- 197
+> -- 75
 < -- 0
-+ -- 26
-- -- 18
-* -- 88
-:= -- 299
-add.period$ -- 22
-call.type$ -- 7
-change.case$ -- 29
++ -- 32
+- -- 22
+* -- 111
+:= -- 380
+add.period$ -- 29
+call.type$ -- 9
+change.case$ -- 37
 chr.to.int$ -- 0
-cite$ -- 7
-duplicate$ -- 72
-empty$ -- 129
-format.name$ -- 18
-if$ -- 317
+cite$ -- 10
+duplicate$ -- 99
+empty$ -- 183
+format.name$ -- 22
+if$ -- 425
 int.to.chr$ -- 0
-int.to.str$ -- 7
-missing$ -- 8
-newline$ -- 39
-num.names$ -- 14
-pop$ -- 25
+int.to.str$ -- 9
+missing$ -- 10
+newline$ -- 49
+num.names$ -- 18
+pop$ -- 42
 preamble$ -- 1
-purify$ -- 23
+purify$ -- 29
 quote$ -- 0
-skip$ -- 54
+skip$ -- 65
 stack$ -- 0
-substring$ -- 36
-swap$ -- 7
+substring$ -- 46
+swap$ -- 10
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 26
-warning$ -- 0
-while$ -- 14
-width$ -- 8
-write$ -- 78
+type$ -- 34
+warning$ -- 1
+while$ -- 18
+width$ -- 10
+write$ -- 99
 (There were 2 error messages)

@@ -5,6 +5,11 @@ R.~R. AnHai~Doan and A.~Y. Halevy.
 \newblock Crowdsourcing systems on the world-wide web.
 \newblock {\em Communications of the ACM}, 54(4), April 2011.
 
+\bibitem{kittur:studies}
+B.~S. Aniket~Kittur, Ed H.~Chi.
+\newblock Crowdsourcing user studies with mechanical turk.
+\newblock CHI, April 2008.
+
 \bibitem{brabham:crowd1}
 D.~Brabham.
 \newblock Crowdsourcing as a model for problem solving: An introduction and
@@ -28,6 +33,13 @@ J.~Howe.
 \newblock {\em http://www.wired.com/wired/archive/14.06/crowds.html}, June
   2006.
 \newblock [Online; accessed 10-January-2014].
+
+\bibitem{le:ensure}
+V.~H. L.~B. John~Le, Andy~Edmonds.
+\newblock Ensuring quality in crowdsourced search relevance evaluation: The
+  effects of training question distribution.
+\newblock In {\em Proceedings of the SIGIR 2010 Workshop on Crowdsourcing for
+  Search Evaluation}. SIGIR 2010, July 2010.
 
 \bibitem{yuen:select}
 I.~K. Man-Ching~Yuen and K.-S. Leung.
