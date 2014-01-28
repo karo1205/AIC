@@ -127,6 +127,7 @@ INSTALLED_APPS = (
     'tastypie',
     'django_cron',
     'south',
+    'chart_tools',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
