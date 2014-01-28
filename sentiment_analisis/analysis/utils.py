@@ -149,7 +149,7 @@ def process_task_answers():
                         newkeyword.save()
                         logger.info('new keyword "' + kw + '" created and assigned to Task' + str(t.id))
             #uncomment the following line if no autmatic post of task 2 is required
-            post_task2_to_crowd(t.feed)
+            #post_task2_to_crowd(t.feed)
 
         # Process Task Type 2
         elif t.question == "Question2":

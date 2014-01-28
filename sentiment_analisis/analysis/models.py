@@ -131,6 +131,7 @@ def save_task_and_worker(sender, **kwargs):
             t.worker_id = newworker.id
             logger.info("new worker created: id = " + str(newworker.id))
             logger.info("worker " + str(newworker.id) + " did task " + str(t.id))
+        t.com_date=timezone.now()
         t.save()
         post_save.connect(save_task_and_worker, sender=Task)
 
