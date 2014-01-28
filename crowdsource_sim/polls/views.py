@@ -16,12 +16,15 @@ logger = logging.getLogger(__name__)
 def index(request):
 #    latest_poll_list = Task.objects.all().order_by('-id')[:5]
 #    context = {'latest_poll_list': latest_poll_list}
-    test = 'Meine UserId'
-    test2 = 'Das ist noch ein Test :-)'
-    headers = {'Header1', 'Header2', 'Header3'}
-    context = {'userid' : test, 'question': 'Meine Frage?', 'header' : 'Mein Header !', 'input' : 'Input is das ;-)', 'taskid' : '1', 'headers' : headers}
-    return render(request, 'polls/task_temp.html', context)
+    select_task = request.POST.get('selecttask')    
 
+    if select_task == None:
+      opentasks = Task.objects.all().filter(answer = 'NULL')
+      context = {'userid' : 'USERID', 'opentasks': opentasks}
+      return render(request, 'polls/task_list.html', context)
+    else:
+      print select_task
+      return detail(request, select_task)	
 
 def detail(request, task_id):
     task = get_object_or_404(Task, id=task_id)
