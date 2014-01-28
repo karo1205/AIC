@@ -8,6 +8,11 @@ from analysis.models import Keyword, Sentiment, Order, Feed, Task
 
 from analysis.utils import *
 
+def index(request):
+    now = datetime.datetime.now()
+    html = "<html><body>It is now %s.</body></html>" % now
+    return HttpResponse(html)
+
 def query(request):
     
     context = {'userid' : 'MyUser', 'keywords' : Keyword.objects.all()}
@@ -95,9 +100,24 @@ def error(request):
   context = {'userid' : 'user'}
   return render(request, 'analysis/error.html',context) 
 
-def result(request):
+def result(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
     
-    context = {'userid' : 'MyUser', 'sentiments' : {1,2}, 'keyword' : 'keyword1'}#Keyword.objects.get(id=request.POST['selectbox'])}
+    keywords = order.keyword.all() 
+
+    allsentiments =  Sentiment.objects.all()
+
+    sentiments = []
+    for s in allsentiments:
+      for k in keywords:
+        if s.keyword == k:
+          sentiments.append(s)
+          
+    sentiments = sorted(sentiments, key=lambda sentiment: sentiment.com_date)
+ 
+    logger.info('Sorted Sentiments for result: '+str(sentiments))
+
+    context = {'userid' : 'MyUser', 'sentiments' : sentiments}#Keyword.objects.get(id=request.POST['selectbox'])}
     return render(request, 'analysis/result.html', context)
 
 # Create your views here.

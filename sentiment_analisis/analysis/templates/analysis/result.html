@@ -45,9 +45,30 @@
 
 		</div>
 
+							<h3 >List of open Tasks</h3>
+				    <div class="table-scroll">
+				      <table class="table">
+          <thead>
+            <tr>
+              <th>Keyword</th>
+              <th>Sentimentation Date</th>
+              <th>Sentiment</th>
+            </tr>
+          </thead>
+          <tbody>
+{% for s in sentiments %}
+	<tr>
+              <td>{{ s.keyword.text}}</td>
+              <td>{{ s.com_date }}</td>
+              <td>{{ s.score }}</td>
+        </tr>
+{% endfor %}
+          </tbody>
+        </table>
+				</div>
 
 
-				<div class="list-group">
+<!--				<div class="list-group">
 
 <form action="{% url 'analysis:query' %}" method="post">
 {% csrf_token %}
@@ -67,7 +88,7 @@
 			</div>
 		</div>
 			
-	</form>
+	</form>-->
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="https://code.jquery.com/jquery.js"></script>
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
