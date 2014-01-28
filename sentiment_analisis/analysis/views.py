@@ -62,10 +62,13 @@ def confirm(request):
         totallength += tmp.content.__len__()
         counter = counter + 1
 
-# calculate task amount and create Task2 s        
-    task_amount = ((int(budget)*300)/(totallength/counter)) 
-  
-    min_amount = int(((totallength/counter)/300))
+# calculate task amount and create Task2 s 
+    if counter > 0:       
+      task_amount = ((int(budget)*300)/((totallength/counter)+1)) 
+      min_amount = int((((totallength/counter)+1)/300))
+    else:
+      task_amount = 1
+      min_amount = 5
 
     if task_amount < 1:
       context = {'userid' : username, 'error_message' : 'Error! Too less budget, you need at least '+str(min_amount)+'!'}
