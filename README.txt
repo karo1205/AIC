@@ -1,20 +1,24 @@
 OS: Ubuntu
 
 
-Vorgehensweise:
+Instructions:
 
 cd DIRECTORY_WHERE_IT_SHOULD_BE
 sudo apt-get install python-setuptools
 
 sudo easy_install virtualenv
-#create virtuel environment
+
+#create virtuel environment:
+
 virtualenv --no-site-packages django
 
 #enter virtual environment
 source django/bin/activate
 
 cd django/
-#install django(withou sudo becasue already intu the virtualenv)
+
+#install django(without sudo becasue already in the virtualenv):
+
 easy_install django==1.5
 
 git clone https://github.com/karo1205/AIC.git
@@ -34,13 +38,15 @@ pip install feedparser
 
 cd sentiment_analisis
 python manage.py syncdb
-##Enter Your Username and Password
+
+##Choose "yes" and enter Your Username and Password
 
 
 cd ../crowdsource_sim
 python manage.py syncdb
 
-##Enter Your Username and Password
+##Choose "yes" and enter Your Username and Password
+
 
 python manage.py sqlcustom polls | ./manage.py dbshell
 
@@ -62,6 +68,8 @@ Run new terminal: (on every terminal you have to "source django/bin/activate")
 Second Terminal:
 
 cd django/sentiment_analisis/
+
+python manage.py syncdb --all
 
 python manage.py runcrons    
 
