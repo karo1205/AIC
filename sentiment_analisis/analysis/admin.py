@@ -2,7 +2,7 @@
 
 
 from django.contrib import admin
-from analysis.models import Feed, Keyword, Worker, Task, Sentiment
+from analysis.models import Feed, Keyword, Worker, Task, Sentiment, Order
 # Register your models here.
 
 
@@ -51,3 +51,4 @@ admin.site.register(Keyword, KeywordAdmin)
 admin.site.register(Worker, WorkerAdmin)
 admin.site.register(Task, TaskAdmin)
 admin.site.register(Sentiment, SentimentAdmin)
+admin.site.register(Order)

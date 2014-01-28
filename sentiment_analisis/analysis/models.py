@@ -57,13 +57,13 @@ class Keyword(models.Model):
 
 
 class Order(models.Model):
-
     """Docstring."""
 
-    keyword = models.ForeignKey(Keyword)
     budgetlimit = models.IntegerField(default=0)
     start_date = models.DateTimeField('start date', default=datetime.datetime(2000, 1, 1, 1, 1, 1))
     end_date = models.DateTimeField('end date', default=datetime.datetime(2000, 1, 1, 1, 1, 1))
+    customer = models.CharField(max_length=500)
+    keyword = models.ManyToManyField(Keyword)
 
 
 class Sentiment(models.Model):
@@ -103,8 +103,6 @@ class Task(models.Model):
     def __unicode__(self):
         return self.question
 
-
-#@receiver(post_save, sender=Task)
 def save_task_and_worker(sender, **kwargs):
     """Docstring."""
 

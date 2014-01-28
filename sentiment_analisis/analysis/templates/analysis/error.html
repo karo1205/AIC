@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Make Order</title>
+		<title>Errorpage</title>
 		<meta name="viewport" content="widtd=device-widtd, initial-scale=1.0">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<!-- Bootstrap -->
@@ -36,7 +36,7 @@
 						<a class="navbar-brand" href="#">SourceTheCrowd</a>
 					</div>
 					<div>
-					<!--	<ul class="nav navbar-nav navbar-right">
+						<ul class="nav navbar-nav navbar-right">
 						<li class="active"><a href="#">Logout</a></li>
 						<li>Logged in as: <bl>{{ userid }} </bl></li>
 						</ul>
@@ -46,42 +46,18 @@
 		</div>
 
 
+
 				<div class="list-group">
 
-<form action="{% url 'analysis:confirm' %}" method="post">
+<form action="{% url 'analysis:query' %}" method="post">
 {% csrf_token %}
-		
-		<h3 >Make an Order for Sentiment Analysis!</h3>
-		
-		<br><br>
-		<label >Username:</label>
-		<input type="text" name="username" class="textfield"/>
-		<br>
 
-		<br><br>
-		<label >Date-start (YYYY-MM-DD):</label>
-		<input type="text" name="datestart" class="textfield"/>
-		<br>
-	
-		<br><br>
-		<label >Date-end (YYYY-MM-DD):</label>
-		<input type="text" name="dateend" class="textfield"/>
-		<br><br>
+		<h3 >Error: {{error_message}}</h3>
 		
-		<label >Select Keywords:</label>
-		<br>
-		<select name="mytextarea[]" size=5 multiple="multiple">
-{% for k in keywords %}
-		<option value="{{ k.id }}">{{ k.text }}</option>
-{% endfor %}
-		</select> 
-  			<br><br>
-		<label >Budget:</label>
-		<input type="text" name="budget" class="textfield"/>
-		<br>
+
 		<div class="col-md-12">
 			<div class="list-group">
-				<button type="submit" class="btn btn-default btn-lg" >Send</button>
+				<button type="submit" class="btn btn-default btn-lg" >Back</button>
 			</div>
 		</div>
 			
