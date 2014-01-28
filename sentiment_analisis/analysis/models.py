@@ -85,7 +85,8 @@ class Task(models.Model):
 	('N', 'new'),
 	('S', 'started'),
 	('D', 'done'),
-    ('P', 'processed')
+    ('P', 'processed'),
+    ('X', 'dead')
     )
     status = models.CharField(max_length=1,choices=STATUS_CHOICES,default='N')
     pub_date = models.DateTimeField('date publisheid', default=timezone.now())
@@ -102,6 +103,11 @@ class Task(models.Model):
 
     def __unicode__(self):
         return self.question
+
+    def age_in_days(self):
+        now = timezone.now()
+        diff = now - self.pub_date
+        return diff.days
 
 def save_task_and_worker(sender, **kwargs):
     """Docstring."""

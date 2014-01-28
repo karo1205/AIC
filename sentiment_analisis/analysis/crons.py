@@ -68,6 +68,21 @@ class Fetch_Feeds(CronJobBase):
                     logger.error("Problem with CrowdSourcing App: " + str(response.status_code) + " " + response.reason)
 
 
+class Garbage_Collection(CronJobBase):
+    """
+    This cronjobs performs a garbage collection on orphande task.
+    If a task hasn't been done within one month the task should be deleted.
+    """
+
+    RUN_EVERY_MINS = 1440  # every day
+
+    schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
+    code = 'analysis.garbage_collection'    # a unique code
+
+    def do(self):
+        collect_garbage()
+        delete_dead_tasks_in_crowd()
+
 class Get_Tasks(CronJobBase):
 
     """

@@ -223,17 +223,17 @@ def populate_db(min_sentiment = 10, min_worker = 1, min_feeds = 1, min_keywords 
   all_worker = Worker.objects.all()
   if all_worker.__len__() < min_worker:
     for i in range(0,min_worker-len(all_worker)):
-      Worker(score = 10, blocked = False).save()  
+      Worker(score = 10, blocked = False).save()
 
   all_worker = Worker.objects.all()
-  
-  logger.info('All Worker are: '+str(all_worker))  
+
+  logger.info('All Worker are: '+str(all_worker))
 
   all_feeds = Feed.objects.all()
   if all_feeds.__len__() < min_feeds:
     for i in range(len(all_feeds),min_feeds):
       Feed(title = 'myTitle'+str(i), link = 'myLink'+str(i), content = 'myContent'+str(i), pub_date = timezone.now()).save()
-  
+
   all_feeds = Feed.objects.all()
 
   logger.info('All Feeds are: '+str(all_feeds))
@@ -247,20 +247,20 @@ def populate_db(min_sentiment = 10, min_worker = 1, min_feeds = 1, min_keywords 
       new_keywords[i].feed = all_feeds[0:random.randint(0,len(all_feeds)-1)]
       new_keywords[i].worker = all_worker[0:random.randint(0,len(all_worker)-1)]
       new_keywords[i].save()
-  
-  
+
+
   all_keywords = Keyword.objects.all()
-  
+
   logger.info('All Keywords are: '+str(all_keywords))
 
   all_sentiments = Sentiment.objects.all()
-  
+
   if len(all_sentiments) < min_sentiment:
     new_sents = []
     for i in range(0,min_sentiment-len(all_sentiments)):
-      new_sents.append(Sentiment(score=random.randint(0,5),com_date = timezone.now(),worker = all_worker[random.randint(0,len(all_worker)-1)],feed = all_feeds[random.randint(0,len(all_feeds)-1)],keyword = all_keywords[random.randint(0,len(all_keywords)-1)])) #TODO: Random Date ? 
-      new_sents[i].save()  
-   
+      new_sents.append(Sentiment(score=random.randint(0,5),com_date = timezone.now(),worker = all_worker[random.randint(0,len(all_worker)-1)],feed = all_feeds[random.randint(0,len(all_feeds)-1)],keyword = all_keywords[random.randint(0,len(all_keywords)-1)])) #TODO: Random Date ?
+      new_sents[i].save()
+
   logger.info('All Sentiments are: '+str(Sentiment.objects.all()))
 
 def populate_db(min_sentiment = 10, min_worker = 1, min_feeds = 1, min_keywords = 1):
@@ -268,17 +268,17 @@ def populate_db(min_sentiment = 10, min_worker = 1, min_feeds = 1, min_keywords 
   all_worker = Worker.objects.all()
   if all_worker.__len__() < min_worker:
     for i in range(0,min_worker-len(all_worker)):
-      Worker(score = 10, blocked = False).save()  
+      Worker(score = 10, blocked = False).save()
 
   all_worker = Worker.objects.all()
-  
-  logger.info('All Worker are: '+str(all_worker))  
+
+  logger.info('All Worker are: '+str(all_worker))
 
   all_feeds = Feed.objects.all()
   if all_feeds.__len__() < min_feeds:
     for i in range(len(all_feeds),min_feeds):
       Feed(title = 'myTitle'+str(i), link = 'myLink'+str(i), content = 'myContent'+str(i), pub_date = timezone.now()).save()
-  
+
   all_feeds = Feed.objects.all()
 
   logger.info('All Feeds are: '+str(all_feeds))
@@ -292,18 +292,46 @@ def populate_db(min_sentiment = 10, min_worker = 1, min_feeds = 1, min_keywords 
       new_keywords[i].feed = all_feeds[0:random.randint(0,len(all_feeds)-1)]
       new_keywords[i].worker = all_worker[0:random.randint(0,len(all_worker)-1)]
       new_keywords[i].save()
-  
+
   all_keywords = Keyword.objects.all()
-  
+
   logger.info('All Keywords are: '+str(all_keywords))
 
   all_sentiments = Sentiment.objects.all()
-  
+
   if len(all_sentiments) < min_sentiment:
     new_sents = []
     for i in range(0,min_sentiment-len(all_sentiments)):
-      new_sents.append(Sentiment(score=random.randint(0,5),com_date = timezone.now(),worker = all_worker[random.randint(0,len(all_worker)-1)],feed = all_feeds[random.randint(0,len(all_feeds)-1)],keyword = all_keywords[random.randint(0,len(all_keywords)-1)])) #TODO: Random Date ? 
-      new_sents[i].save()  
-   
+      new_sents.append(Sentiment(score=random.randint(0,5),com_date = timezone.now(),worker = all_worker[random.randint(0,len(all_worker)-1)],feed = all_feeds[random.randint(0,len(all_feeds)-1)],keyword = all_keywords[random.randint(0,len(all_keywords)-1)])) #TODO: Random Date ?
+      new_sents[i].save()
+
   logger.info('All Sentiments are: '+str(Sentiment.objects.all()))
+
+
+def collect_garbage():
+
+    logger.info('starting garbage collection')
+    trash_tasks = Task.objects.filter(status='S')
+    for tt in trash_tasks:
+        if tt.age_in_days() > 30:
+            logger.info('Task ' + str(tt.id) + ' is orphaned and set to "dead"')
+            tt.status = 'X'  # set to dead
+            tt.save()
+
+
+def delete_dead_tasks_in_crowd():
+    deadlist=Task.objects.filter(status='X').exclude(task_uri='NULL')
+
+    for dt in deadlist:
+        url = dt.task_uri
+        headers = {'content-type': 'application/json'}
+        response = requests.delete(url, data="", headers=headers)
+
+        if response.status_code == 204 or response.status_code == 404:  # HTTP no content or HTTP not found
+            logger.info("Task sucessfull deleted: " + str(response.status_code) + " " + response.reason)
+            dt.task_uri = "NULL"
+            dt.save()
+        else:
+            logger.error("Problem with CrowdSourcing App: " + str(response.status_code) + " " + response.reason)
+
 
