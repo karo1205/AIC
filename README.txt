@@ -42,11 +42,11 @@ python manage.py syncdb
 
 ##Enter Your Username and Password
 
+python manage.py sqlcustom polls | ./manage.py dbshell
+
 python manage.py runserver 8002
 
-##Open on Web Browser: 127.0.0.1:8002/admin
-##Enter Your Username and Password
-## Add Worker and Task to database
+
 
 Run new terminal: (on every terminal you have to "source django/bin/activate")
 
@@ -81,8 +81,6 @@ Sentiment_analisis:
 127.0.0.1:8000/makeorder --> make new Order for sentimentanalysis
 127.0.0.1:8000/makeorder/<order-id>/ --> get Results of Order with <order-id>
  
-
-
 
 
 #leave virtualenv

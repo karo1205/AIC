@@ -46,8 +46,14 @@
 		
 	<form role="form action="{% url 'polls:index' %}" method="post"">
 {% csrf_token %}
-					<h3 >List of open Tasks</h3>
-				    <div class="table-scroll">
+					<h3 >List of open Tasks (question - price)</h3>
+		<br>
+		<select name="selecttask" size=20>
+{% for t in opentasks %}
+		<option value="{{ t.id }}">{{ t.question }} - {{ t.price }} </option>
+{% endfor %}
+		</select> 
+<!--				    <div class="table-scroll">
 				      <table class="table">
           <thead>
             <tr>
@@ -67,14 +73,8 @@
           </tbody>
         </table>
 				</div>
+-->
 
-
-Select Task: 	
-		<select name="selecttask">
-{% for t in opentasks %}
-		<option value="{{ t.id }}">{{ t.id }}</option>
-{% endfor %}
-		</select> 
 
 				<div class="col-md-12">
 					<div class="list-group">
