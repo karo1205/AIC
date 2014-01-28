@@ -127,7 +127,8 @@ Come then to the current state of the topic and give a brief overview about the 
 
 %/footnote{some text in here}
 \section{Definition}
-As also discussed in Section \ref{sect:history} the term ``Crowdsourcing'' has been introduced by Jeff Howe\cite{howe:rise}. Howe itself described crowdsourcing as
+There are many definitions of the term \textit{crowdsourcing}. \\
+As we will discuss in Section \ref{sect:history} the term ``Crowdsourcing'' has been introduced by Jeff Howe\cite{howe:rise}. Howe himself described crowdsourcing as
 \begin{quote}
 [..]the act of a company or institution taking a function once performed by employees and outsourcing it to an undefined (and generally large) network of people in the form of an open call.
 \end{quote}
@@ -135,13 +136,12 @@ Daran C. Brabham first defined \textit{Crowdsourcing} in an scientific article \
 \begin{quote}
  [..]an online, distributed problem-solving and production model.
 \end{quote}
-but this definition fails on two accounts: first - as history tells us - Crowdsourcing is not bound to online sources and second and more importantly it is not always used for problem solving.
-
+but this definition fails on two accounts: first - as history tells us - Crowdsourcing is not bound to online sources and second and more importantly it is not always used for solving problems but can be seen in a wider view.\\
 Another rather older definition of the term has been stated in 2009 by Paul Whitla in his paper \textit{Crowdsourcing and Its Application in Marketing Activities}\cite{whitla:crowd}:
 \begin{quote}
 Crowdsourcing is a newly developed term which refers to the process of outsourcing of activities by a firm to an online community or crowd in the form of an ‘open call’. Any member of the crowd can then complete an assigned task and be paid for their efforts. 
 \end{quote}
-If we take for example wikipedia or the development of Linux into consideration as being a crowdsource effort as well, this definition is no longer true as those participants are obviously not paid and no \textit{firm} is involved and no payment is done. It also does not take into consideration, that the effort of the crowd can be acquired implicitly as well (see Section \ref{sect:types}).
+If we take for example wikipedia or the development of Linux into consideration as being a crowdsource effort as well, this definition is no longer true as the participants for those projects are obviously not paid and no \textit{firm} is involved and no payment is done. It also does not take into consideration, that the effort of the crowd can be acquired implicitly as well (see Section \ref{sect:types}).
 
 As \textit{crowdsourcing} is a relatively new concept this leads to the fact that it may be identified with many internet-based collaborative work initiatives and in fact it is not always clear where to draw a line between crowdsourcing efforts and something else. Consequently many definitions of the term \textit{crowdsourcing} have been developed over time. Enrique Estellés-Arolas studied more than 40 papers with varying definitions of the term \cite{arolas:definition}. His definition based on his analysis tries to cover all types of crowdsourcing initiative:
 \begin{quote}
@@ -220,17 +220,15 @@ Doan identifies this as one of the most important problems. He outlines five maj
 One would be to \textit{require} people to contribute but this only possible if the crowdsourcer hires people which in turn somehow contradicts the idea of crowdsourcing. Another possibility to meet this challenge is to pay for the effort. Most of the web sites we showed in Section \ref{sect:history} follow this approach. Problem is, that for very simple the payment is very low (e.g. Mechanical Turk), so that the motivation to provide good work might be low.\\
 The third possibility is to just \textit{ask people} to contribute. This is also a widely used method but can only be established in fields where ``workers'' are interested in doing the work. For example open source development works this way\footnote{And it works quite well in many cases!}.
 
-\textbf{What contributions can users make: }\\
-
 \textbf{How to combine contributions: }\\
 Especially microwork sites like Amazon Mechanical Turk distribute a certain task among many people. All of them only solve a small part of the overall problem or task and submit their solution to this part. Sometimes the combination of the different submissions is quite easy and straightforward. For example the rating system of amazon just computes a medium of all the ratings and this might be enough for this kind of problem. There is no need to combine the outcomes of several users and to combine them to a greater whole. But this is no longer true for microwork sites. The challenges here are (among others): how to make sure, that the each part of the problem is tackled by a minimum number of workers? How to combine them to a final solution? An additional problem is, that different workers might work on the same part of the problem but with different outcome. How to distinguish between it? This types of problems arises whenever workers act collaborative. Most of the CS systems simply do not combine or rate contributions at all but let the crowdsourcer decide on how to interpret the single results.
 
 \textbf{How to evaluate users and contributions: }\\ 
-
+There are several sites 
 But still there might be problems: how to recognize and eliminate notoriously bad ratings from users who just want to mess around?\\
 Even worse is the scenario at microwork sites. As we already mentioned, the payment is quite 
 
-This seems to be one of the 
+How well users perform depends on how motivated they are to work on a problem on the long run. Man-Ching Yuen et. al propose a method to support workers by selecting tasks on crowdsourcing platforms easily and effectively using a special task matching algorithm\cite{yuen:select}.
 
 \section{Future of Crowdsourcing}
 \label{sect:future}
