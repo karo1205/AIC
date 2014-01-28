@@ -41,31 +41,34 @@ class Fetch_Feeds(CronJobBase):
                          pub_date=datetime.fromtimestamp(mktime(item.published_parsed)))
                 f.save()
                 logger.info("new feed was stored: " + item.id)
-                t = Task(pub_date=timezone.now(), question='Question1', feed=f)
-                t.save()
-                logger.info("new task was stored")
-                payload = json.load(urllib2.urlopen('http://127.0.0.1:8002/api/v1/task/1/?format=json'))
-                payload['data'] = json.dumps(transform_task_to_data(t))
-                payload['price'] = 0
-                payload['question'] = 'Please find keywords in this text'
-                #TODO: callback uri
-                payload['callback_uri'] = 'http://127.0.0.1:8000/api/v1/task/'+ str(t.id) +'/'
-                payload['keyword_count'] = 5
-                payload.pop('resource_uri')
-                payload.pop('id')
-                logger.info('payload = ' + json.dumps(payload)[:50])
+                #preparing HTTP payload
+                template = json.load(urllib2.urlopen('http://127.0.0.1:8002/api/v1/task/1/?format=json'))
+                template['price'] = 0
+                template['keyword_count'] = 5
+                template['question'] = 'Please find keywords in this text'
+                template.pop('resource_uri')
+                template.pop('id')
+                headers = {'content-type': 'application/json'}
                 url = 'http://127.0.0.1:8002/api/v1/task/'
 
-                headers = {'content-type': 'application/json'}
-                response = requests.post(url, data=json.dumps(payload), headers=headers)
-
-                if response.status_code == 201:
-                    logger.info("Task sucessfull postet: " + str(response.status_code) + " " + response.reason)
-                    t.status = 'S'
-                    t.task_uri = response.headers.get('location')  # get the location of the saved Item
+                for i in range(0,3):
+                    payload=template
+                    t = Task(pub_date=timezone.now(), question='Question1', feed=f)
                     t.save()
-                else:
-                    logger.error("Problem with CrowdSourcing App: " + str(response.status_code) + " " + response.reason)
+                    logger.info("new task was stored")
+                    payload['data'] = json.dumps(transform_task_to_data(t))
+                    payload['callback_uri'] = 'http://127.0.0.1:8000/api/v1/task/'+ str(t.id) +'/'
+                    logger.info('payload = ' + json.dumps(payload)[:50])
+
+                    response = requests.post(url, data=json.dumps(payload), headers=headers)
+
+                    if response.status_code == 201:
+                        logger.info("Task sucessfull postet: " + str(response.status_code) + " " + response.reason)
+                        t.status = 'S'
+                        t.task_uri = response.headers.get('location')  # get the location of the saved Item
+                        t.save()
+                    else:
+                        logger.error("Problem with CrowdSourcing App: " + str(response.status_code) + " " + response.reason)
 
 
 class Garbage_Collection(CronJobBase):
