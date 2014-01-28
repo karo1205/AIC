@@ -108,16 +108,30 @@ def result(request, order_id):
     allsentiments =  Sentiment.objects.all()
 
     sentiments = []
+    sumkeys = {}
+    countkeys = {} 
     for s in allsentiments:
       for k in keywords:
         if s.keyword == k:
           sentiments.append(s)
-          
+	  try:
+            sumkeys[k] = sumkeys[k]+s.score
+          except KeyError:
+            sumkeys[k] = s.score
+          try:       
+            countkeys[k] = countkeys[k] + 1
+          except KeyError:
+            countkeys[k] = 1
+
     sentiments = sorted(sentiments, key=lambda sentiment: sentiment.com_date)
  
     logger.info('Sorted Sentiments for result: '+str(sentiments))
+    
+    averagekeys = {}
+    for keys in sumkeys.keys():
+      averagekeys[keys] = sumkeys[keys] / countkeys[keys]  
 
-    context = {'userid' : 'MyUser', 'sentiments' : sentiments}#Keyword.objects.get(id=request.POST['selectbox'])}
+    context = {'userid' : 'MyUser', 'sentiments' : sentiments,'averages' : averagekeys }#Keyword.objects.get(id=request.POST['selectbox'])}
     return render(request, 'analysis/result.html', context)
 
 # Create your views here.

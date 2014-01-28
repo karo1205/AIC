@@ -44,9 +44,30 @@
 				</nav>
 
 		</div>
+		
+							<h3 >Average sentiment value:</h3>
+<!--<div class="panel-body"> -->
+				      <table class="table">
+          <thead>
+            <tr>
+              <th>Keyword</th>
+              <th>Average Sentiment</th>
+            </tr>
+          </thead>
+          <tbody>
+{% for key,values in averages.items %}
+	<tr>
+              <td>{{ key.text}}</td>
+              <td>{{ values }}</td>
+        </tr>
+{% endfor %}
+          </tbody>
+        </table>
+				
 
-							<h3 >List of open Tasks</h3>
-				    <div class="table-scroll">
+
+							<h3 >List of all Sentiments:</h3>
+				
 				      <table class="table">
           <thead>
             <tr>
@@ -65,7 +86,7 @@
 {% endfor %}
           </tbody>
         </table>
-				</div>
+				
 
 
 <!--				<div class="list-group">
