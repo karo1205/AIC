@@ -35,7 +35,7 @@ class TaskResource(ModelResource):
 
     class Meta:
         queryset = Task.objects.all()
-        allowed_methods = ['get', 'post']
+        allowed_methods = ['get', 'post', 'delete']
         resource_name = 'task'
         #authorization = DjangoAuthorization()
         authorization = Authorization()

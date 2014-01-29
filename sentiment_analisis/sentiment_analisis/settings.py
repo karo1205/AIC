@@ -191,6 +191,7 @@ LOGGING = {
 
 CRON_CLASSES = [
         "analysis.crons.Fetch_Feeds",
+        "analysis.crons.Garbage_Collection",
         #"analysis.crons.Get_Tasks",
         #  ...
 ]

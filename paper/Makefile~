@@ -1,0 +1,6 @@
+all:
+	pdflatex mswp2013-proposal
+	- bibtex mswp2013-proposal && pdflatex mswp2013-proposal && pdflatex mswp2013-proposal
+
+clean:
+	(rm -rf *.ps *.log *.dvi *.aux *.*% *.lof *.lop *.lot *.toc *.idx *.ilg *.ind *.bbl *blg)
