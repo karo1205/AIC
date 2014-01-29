@@ -48,9 +48,9 @@
 {% csrf_token %}
 					<h3 >List of open Tasks (question - price)</h3>
 		<br>
-		<select name="selecttask" size=20>
+		<select name="selecttask" size=20 style="width: 600px">
 {% for t in opentasks %}
-		<option value="{{ t.id }}">{{ t.question }} - {{ t.price }} </option>
+		<option value="{{ t.id }}">{{ t.id }}: {{ t.question }} - {{ t.price }} </option>
 {% endfor %}
 		</select> 
 <!--				    <div class="table-scroll">

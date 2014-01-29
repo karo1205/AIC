@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Task 2</title>
+		<title>Source the Crowd</title>
 		<meta name="viewport" content="widtd=device-widtd, initial-scale=2.0">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<!-- Bootstrap -->
@@ -62,16 +62,16 @@
 				<!-- Text field with article -->
 					<div class="col-md-12">
 						<div class="list-group">
-							<h3 >Input</h3>
+							<h3 >Article</h3>
 							<!--	<textarea class="form-control" rows="7" value="" readonly> --> {{ input | safe }} <!--</textarea> -->
 						</div>
 					</div>
 				</div>
-{% if additional_input %}
-				<!-- Already found keywords -->
+{% if additional_header %}
+				<!-- Instructions for user-->
 				<div class="list-group">
 					<h3 >  {{ additional_header }} </h3>
-						<textarea class="form-control" rows="1" value="" readonly>  {{ additional_input.0 }} </textarea>
+						<textarea class="form-control" rows="4" value="" readonly>  {{ additional_input }} </textarea>
 				</div>
 </p>{% endif %}
 <!-- Already found keywords -->

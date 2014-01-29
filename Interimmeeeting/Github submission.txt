@@ -1,0 +1,15 @@
+Group 1, Topic 2.
+Members:
+--------
+Bernhard Gößwein
+David Riepl
+Robert Kapeller
+
+
+The submission of our group can be found at:
+
+https://github.com/karo1205/AIC
+
+Branch master.
+Please follow the README.txt for installation and test.
+
