@@ -45,6 +45,7 @@ class Fetch_Feeds(CronJobBase):
                 template = json.load(urllib2.urlopen('http://127.0.0.1:8002/api/v1/task/1/?format=json'))
                 template['price'] = 0
                 template['keyword_count'] = 5
+                template['answer'] = 'NULL'
                 template['question'] = 'Please find keywords in this text'
                 template.pop('resource_uri')
                 template.pop('id')
