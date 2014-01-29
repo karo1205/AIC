@@ -1,4 +1,4 @@
-## Basic UsageOS: Ubuntu
+### Basic UsageOS: Ubuntu
 
 Instructions:
 
@@ -7,16 +7,16 @@ sudo apt-get install python-setuptools
 
 sudo easy_install virtualenv
 
-# create virtuel environment:
+### create virtual environment:
 
 virtualenv --no-site-packages django
 
-# enter the virtual environment
+### enter the virtual environment
 source django/bin/activate
 
 cd django/
 
-# install django (without sudo becasue already in the virtualenv):
+### install django (without sudo becasue already in the virtualenv):
 
 easy_install django==1.5
 
@@ -39,55 +39,55 @@ pip install django-chart-tools
 cd sentiment_analisis
 python manage.py syncdb
 
-# Choose "yes" and choose a Username and Password
+### Choose "yes" and choose a Username and Password
 
 cd ../crowdsource_sim
 python manage.py syncdb
 
-# Choose "yes" and choose a Username and Password
+### Choose "yes" and choose a Username and Password
 
 
-# Add some initial data to the database
+### Add some initial data to the database
 python manage.py sqlcustom polls | ./manage.py dbshell
 
-# start crowdsourcing platform simulator
+### start crowdsourcing platform simulator
 python manage.py runserver 8002
 
-# Run new terminal: (on every terminal you have to "source django/bin/activate")
+### Run new terminal: (on every terminal you have to "source django/bin/activate")
 
-# Second Terminal:
+### Second Terminal:
 
 
 cd django/sentiment_analisis/
 
-# start sentiment analysis
+### start sentiment analysis
 python manage.py runserver
 
-# Run new terminal: (on every terminal you have to "source django/bin/activate")
+### Run new terminal: (on every terminal you have to "source django/bin/activate")
 
-# Third Terminal:
+### Third Terminal:
 
 cd django/sentiment_analisis/
 
 python manage.py syncdb --all
 
-# start feed parser crons
+### start feed parser crons
 python manage.py runcrons    
 
-# This Downloads Feeds from Source page and generates Task1s  Do this as often as you like
+### This Downloads Feeds from Source page and generates Task1s  Do this as often as you like
 
-# Do Things with App: 
-# Important Urls: 
+### Do Things with App: 
+### Important Urls: 
 
-# Crowdsourcing_sim:
+### Crowdsourcing_sim:
 
 127.0.0.1:8002/polls/ 			# --> choose an open Task from all open Tasks 
 127.0.0.1:8002/polls/<task-id>/ # --> get Task with <task-id>
 
-# Sentiment_analisis:
+### Sentiment_analisis:
 
 127.0.0.1:8000/makeorder 			# --> make new Order for sentimentanalysis
 127.0.0.1:8000/makeorder/<order-id>/ 	# --> get Results of Order with <order-id>
  
-# leave virtualenv
+### leave virtualenv
 deactivate 
