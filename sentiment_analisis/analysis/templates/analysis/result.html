@@ -90,22 +90,25 @@
         {% load chart_tags %}
         {% chart %}
                    http://chart.apis.google.com/chart
-                   ?chxr=0,0,160
                    &chxt=y
+                   &chxl=1:1|2|3|4|5   
+                   &chco=FF0000,00FF00,0000FF,0F0000, F00000, 00F000, 000F00, 0000F0, 00000F
                    &chbh=a
                    &chs=440x220
                    &cht=bvg
-                   &chds=0,160
-                   &chd=t:10,50,60|80,40,60,30
-                   &chtt=Horizontal+bar+chart
-                   &chdl=Microsoft|Samsung
+                   &chds=a
+                   &chd=t: {{ allvalues|join:'|' }}
+                   &chtt=Average+Sentiments+Chart
+                   &chdl= {{ allkeys|join:'|' }}
                    {% endchart %}
 				</div>
 
 
 
 <!--				<div class="list-group">
-
+{% for key,values in averages.items %}{{ values }}, {{ values }} | {% endfor %}
+{% for key,values in averages.items %} {{key}} | {% endfor %}
+   ?chxr=0,1
 <form action="{% url 'analysis:query' %}" method="post">
 {% csrf_token %}
 

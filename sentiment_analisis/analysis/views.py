@@ -128,10 +128,17 @@ def result(request, order_id):
     logger.info('Sorted Sentiments for result: '+str(sentiments))
     
     averagekeys = {}
+    allkeystext = []
     for keys in sumkeys.keys():
-      averagekeys[keys] = sumkeys[keys] / countkeys[keys]  
-
-    context = {'userid' : 'MyUser', 'sentiments' : sentiments,'averages' : averagekeys }#Keyword.objects.get(id=request.POST['selectbox'])}
+       allkeystext.append(keys.text)
+       averagekeys[keys] = sumkeys[keys] / countkeys[keys]  
+    
+    print averagekeys.values()
+    print allkeystext
+    
+    
+  
+    context = {'userid' : 'MyUser', 'sentiments' : sentiments,'averages' : averagekeys, 'allkeys' : allkeystext, 'allvalues' : averagekeys.values() }#Keyword.objects.get(id=request.POST['selectbox'])}
     return render(request, 'analysis/result.html', context)
 
 # Create your views here.
