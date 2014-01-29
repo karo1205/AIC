@@ -1,4 +1,4 @@
-OS: Ubuntu
+## Basic UsageOS: Ubuntu
 
 Instructions:
 
