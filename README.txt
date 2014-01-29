@@ -86,7 +86,7 @@ python manage.py runcrons
 
 # Sentiment_analisis:
 
-127.0.0.1:8000/makeorder 				# --> make new Order for sentimentanalysis
+127.0.0.1:8000/makeorder 			# --> make new Order for sentimentanalysis
 127.0.0.1:8000/makeorder/<order-id>/ 	# --> get Results of Order with <order-id>
  
 # leave virtualenv
