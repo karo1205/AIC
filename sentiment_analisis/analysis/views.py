@@ -8,6 +8,11 @@ from analysis.models import Keyword, Sentiment, Order, Feed, Task
 
 from analysis.utils import *
 
+def index(request):
+    now = datetime.datetime.now()
+    html = "<html><body>It is now %s.</body></html>" % now
+    return HttpResponse(html)
+
 def query(request):
     
     context = {'userid' : 'MyUser', 'keywords' : Keyword.objects.all()}
@@ -74,8 +79,15 @@ def confirm(request):
       context = {'userid' : username, 'error_message' : 'Error! Too less budget, you need at least '+str(min_amount)+'!'}
       return render(request, 'analysis/error.html',context)
  
+#    logger.info('!!range(0,'+str(task_amount))
+#    logger.info("!! all Feeds are: "+str(allfeeds)) 
+    if len(allfeeds) < 1:
+      context = {'userid' : username, 'error_message' : 'Error! No Articles found at the given timeperiod: '+str(datestart)+' - '+str(dateend)+' !'}
+      return render(request, 'analysis/error.html',context)
+   
     for i in range(0, task_amount):
       for feed in allfeeds:
+#        logger.info('!!bin in schleife')
         post_task2_to_crowd(feed)
 	logger.info("create Task2 with "+str(feed))    
 
@@ -88,9 +100,60 @@ def error(request):
   context = {'userid' : 'user'}
   return render(request, 'analysis/error.html',context) 
 
-def result(request):
+def result(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
     
-    context = {'userid' : 'MyUser', 'sentiments' : {1,2}, 'keyword' : 'keyword1'}#Keyword.objects.get(id=request.POST['selectbox'])}
+    keywords = order.keyword.all() 
+
+    allsentiments =  Sentiment.objects.all()
+
+    sentiments = []
+    sumkeys = {}
+    countkeys = {} 
+    for s in allsentiments:
+      for k in keywords:
+        if s.keyword == k:
+          sentiments.append(s)
+	  try:
+            sumkeys[k] = sumkeys[k]+s.score
+          except KeyError:
+            sumkeys[k] = s.score
+          try:       
+            countkeys[k] = countkeys[k] + 1
+          except KeyError:
+            countkeys[k] = 1
+
+    sentiments = sorted(sentiments, key=lambda sentiment: sentiment.com_date)
+ 
+    logger.info('Sorted Sentiments for result: '+str(sentiments))
+    
+    averagekeys = {}
+    allkeystext = []
+    for keys in sumkeys.keys():
+       allkeystext.append(keys.text)
+       averagekeys[keys] = sumkeys[keys] / countkeys[keys]  
+    
+    print averagekeys.values()
+    print sentiments
+    
+    keylist = {}
+    stringlist = ""
+    for s in sentiments:
+      try:
+        keylist[s.keyword].append(s.score)
+    #    print keylist[s.keyword]
+      except KeyError:
+        keylist[s.keyword] = [s.score]
+  
+    stringlist =  str(keylist.values())
+    print "MYSTRIN: "+ stringlist
+    stringlist = stringlist.replace('], [','|')
+    stringlist = stringlist.replace('[','')
+    stringlist = stringlist.replace(']','')   
+    print "MYSTRIN: "+ stringlist
+
+
+    context = {'userid' : 'MyUser', 'sentiments' : sentiments,'averages' : averagekeys, 'allkeys' : allkeystext, 'allvaluesavg' : averagekeys.values(), 'allvalues' : stringlist }
     return render(request, 'analysis/result.html', context)
 
 # Create your views here.

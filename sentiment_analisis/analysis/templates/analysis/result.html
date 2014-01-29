@@ -44,11 +44,87 @@
 				</nav>
 
 		</div>
+		
+							<h3 >Average sentiment value:</h3>
+<!--<div class="panel-body"> -->
+				      <table class="table">
+          <thead>
+            <tr>
+              <th>Keyword</th>
+              <th>Average Sentiment</th>
+            </tr>
+          </thead>
+          <tbody>
+{% for key,values in averages.items %}
+	<tr>
+              <td>{{ key.text}}</td>
+              <td>{{ values }}</td>
+        </tr>
+{% endfor %}
+          </tbody>
+        </table>
+				
+
+
+							<h3 >List of all Sentiments:</h3>
+				
+				      <table class="table">
+          <thead>
+            <tr>
+              <th>Keyword</th>
+              <th>Sentimentation Date</th>
+              <th>Sentiment</th>
+            </tr>
+          </thead>
+          <tbody>
+{% for s in sentiments %}
+	<tr>
+              <td>{{ s.keyword.text}}</td>
+              <td>{{ s.com_date }}</td>
+              <td>{{ s.score }}</td>
+        </tr>
+{% endfor %}
+          </tbody>
+        </table>
+
+        {% load chart_tags %}
+        {% chart %}
+                   http://chart.apis.google.com/chart
+                   &chxt=y
+                   &chxl=1:1|2|3|4|5   
+                   &chco=FF0000,00FF00,0000FF,0F0000, F00000, 00F000, 000F00, 0000F0, 00000F
+                   &chbh=a
+                   &chs=440x220
+                   &cht=bvg
+                   &chds=a
+                   &chd=t: {{ allvaluesavg|join:'|' }}
+                   &chtt=Average+Sentiments+Chart
+                   &chdl= {{ allkeys|join:'|' }}
+                   {% endchart %}
+
+ {% load chart_tags %}
+        {% chart %}
+                   http://chart.apis.google.com/chart
+                   &chxt=y,x   
+                   &chco=FF0000,00FF00,0000FF,0F0000, F00000, 00F000, 000F00, 0000F0, 00000F
+                   &chbh=a
+                   &chs=440x220
+                   &cht=lc
+                   &chds=a
+                   &chd=t:{{ allvalues }}
+                   &chtt=Average+Sentiments+Chart
+                   &chdl= {{ allkeys|join:'|' }}
+                   {% endchart %}
+				</div>
 
 
 
-				<div class="list-group">
 
+
+<!--				<div class="list-group">
+{% for key,values in averages.items %}{{ values }}, {{ values }} | {% endfor %}
+{% for key,values in averages.items %} {{key}} | {% endfor %}
+   ?chxr=0,1
 <form action="{% url 'analysis:query' %}" method="post">
 {% csrf_token %}
 
@@ -67,7 +143,7 @@
 			</div>
 		</div>
 			
-	</form>
+	</form>-->
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="https://code.jquery.com/jquery.js"></script>
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
