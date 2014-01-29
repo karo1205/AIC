@@ -27,223 +27,156 @@
 % For tracking purposes - this is V3.1SP - APRIL 2009
 
 \documentclass{acm_proc_article-sp}
-%\usepackage{graphicx}
-%\usepackage{natbib}
 \usepackage[utf8]{inputenc}
 \usepackage{hyperref}
-%\usepackage{tabularx}
-%\usepackage{hyperref}
 \usepackage{color}
-%\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
 
 \begin{document}
 
-\title{Crowdsourcing: State of the art}
-%\subtitle{}
-%
-% You need the command \numberofauthors to handle the 'placement
-% and alignment' of the authors beneath the title.
-%
-% For aesthetic reasons, we recommend 'three authors at a time'
-% i.e. three 'name/affiliation blocks' be placed beneath the title.
-%
-% NOTE: You are NOT restricted in how many 'rows' of
-% "name/affiliations" may appear. We just ask that you restrict
-% the number of 'columns' to three.
-%
-% Because of the available 'opening page real-estate'
-% we ask you to refrain from putting more than six authors
-% (two rows with three columns) beneath the article title.
-% More than six makes the first-page appear very cluttered indeed.
-%
-% Use the \alignauthor commands to handle the names
-% and affiliations for an 'aesthetic maximum' of six authors.
-% Add names, affiliations, addresses for
-% the seventh etc. author(s) as the argument for the
-% \additionalauthors command.
-% These 'additional authors' will be output/set for you
-% without further effort on your part as the last section in
-% the body of your article BEFORE References or any Appendices.
+  \title{Crowdsourcing: State of the art}
 
-\numberofauthors{3} %  in this sample file, there are a *total*
-% of EIGHT authors. SIX appear on the 'first-page' (for formatting
-% reasons) and the remaining two appear in the \additionalauthors section.
-%
-\author{
-  % You can go ahead and credit any number of authors here,
-  % e.g. one 'row of three' or two rows (consisting of one row of three
-  % and a second row of one, two or three).
-  %
-  % The command \alignauthor (no curly braces needed) should
-  % precede each author name, affiliation/snail-mail address and
-  % e-mail address. Additionally, tag each line of
-  % affiliation/address with \affaddr, and tag the
-  % e-mail address with \email.
-  %
-  % 1st. author
-  \alignauthor
-  Bernhard Gößwein\\%\titlenote{This author is one of them who did all the really hard work.}\\
-        \affaddr{some really, really important information here}\\
-	\affaddr{e8727334@student.tuwien.ac.at}
-  % 2nd. author
-  \alignauthor
-  Robert Kapeller\\
-        \affaddr{some really, really important information here}\\
-	\affaddr{e106884@student.tuwien.ac.at}
-  % 3rd. author
-  \alignauthor
-  David Riepl\\%\titlenote{This author is one of them who did all the really hard work.}\\
-        \affaddr{some really, really important information here}\\
-	\affaddr{e0625016@student.tuwien.ac.at}
-  %\and  % use '\and' if you need 'another row' of author names
-  % 4th. author
-} %/author
-\date{30 January 2014}
-% Just remember to make sure that the TOTAL number of authors
-% is the number that will appear on the first page PLUS the
-% number that will appear in the \additionalauthors section.
+  \numberofauthors{3}
+  \author{
+    \alignauthor
+    Bernhard Gößwein\\
+	  \affaddr{some really, really important information here}\\
+	  \affaddr{e8727334@student.tuwien.ac.at}
+    % 2nd. author
+    \alignauthor
+    Robert Kapeller\\
+	  \affaddr{some really, really important information here}\\
+	  \affaddr{e106884@student.tuwien.ac.at}
+    % 3rd. author
+    \alignauthor
+    David Riepl\\
+	  \affaddr{some really, really important information here}\\
+	  \affaddr{e0625016@student.tuwien.ac.at}
+  } %/author
+  \date{30 January 2014}
 
-\maketitle
-\begin{abstract}
-From the beginning in about 2000 crowdsourcing has rapidly emerged. Crowdsourcing methods have been used for a long time implicitly but in recent years a large amount of web sites have been created to support the crowdsourcing paradigm in an explicit way in many different fields from microwork to collaborative design.\\
-This paper gives a brief overview of the current state of the art in crowdsourcing. We do this by looking at the history of crowdsourcing as well as the current situation. We explain the main concepts of crowdsourcing, list exemplarily some of the more prominent sites and take a look to the problems and challenges which may arise and propose possible solutions to them. 
-\end{abstract}
+  \maketitle
+  \begin{abstract}
+    From the beginning in about 2000 crowdsourcing has rapidly emerged. Crowdsourcing methods have been used for a long time implicitly but in recent years a large amount of web sites have been established to support the crowdsourcing paradigm in an explicit way in many different fields from microwork to collaborative design.\\
+    This paper gives a brief overview of the current state of the art in crowdsourcing. We do this by looking at the history of crowdsourcing as well as the current situation. We explain the main concepts of crowdsourcing, list exemplarily some of the more prominent sites and take a look to the problems and challenges which may arise and propose possible solutions to them. 
+  \end{abstract}
 
-%\terms{Crowdsourcing}
+  \keywords{Crowdsourcing, crowdsourcing platform, crowdsourcing history, Crowdwisdom, Mechanical Turk} % NOT required for Proceedings
 
-\keywords{Crowdsourcing, crowdsourcing platform, crowdsourcing history, Crowdwisdom, Mechanical Turk} % NOT required for Proceedings
+  \section{Introduction}
+  \label{sect:intro}
+  Crowdsourcing is to use the contribution of a large group of individuals - not necessarily, but mostly an online community - to solve certain problems or fulfill certain tasks. The individual persons keep anonymous mostly but this depend on the nature of the task to be worked on. Crowdsourcing methods contrast to traditional ones of hiring experts or a known group of persons or institutions (like a firm or some professionals). It is assumed that - since several people offer their best skills - overall quality of the result should be better than at traditional methods. However, as it turns out, quality control is one of the main challenges in crowdsourcing. Workers are usually paid low wages and this can be one reason that the motivation to provide good quality might be low. \\
+  As we will see, crowdsourcing ideas are not new and existed since a long time. However, by the rise of the internet, they became more popular and more and more implementations for them are found. Crowdsourcing is a relatively new scientific field, and it is typical for new, emerging areas, that names and definitions are not yet 100\% consolidated and change constantly.
+  \section{Definition}
+  There are many definitions of the term \textit{crowdsourcing} which evolved over time. \\
+  As we will discuss in Section \ref{sect:history} it has been introduced by Jeff Howe\cite{howe:rise}. Howe himself described crowdsourcing as
+  \begin{quote}
+    ``[..]the act of a company or institution taking a function once performed by employees and outsourcing it to an undefined (and generally large) network of people in the form of an open call.''
+  \end{quote}
+  Daran C. Brabham first defined \textit{crowdcing} in an scientific article \cite{brabham:crowd1} as:
+  \begin{quote}
+    ``[..]an online, distributed problem-solving and production model''\footnote{Brabham was the first person who mentioned crowdsourcing in an scientific article}
+  \end{quote}
+  This definition fails on two accounts: first - as history tells us - crowdcing is not bound to online sources and second and more importantly it is not always used for solving problems but should be seen in a wider view.\\
+  Another rather aged definition of the term has been stated in 2009 by Paul Whitla in his paper \textit{crowdcing and Its Application in Marketing Activities}\cite{whitla:crowd}:
+  \begin{quote}
+    ``Crowdsourcing is a newly developed term which refers to the process of outsourcing of activities by a firm to an online community or crowd in the form of an ‘open call’. Any member of the crowd can then complete an assigned task and be paid for their efforts.''
+  \end{quote}
+  If we take for example wikipedia or the development of Linux into consideration as being a crowdsource effort as well, the definition of Whitla is no longer true as the participants for those projects are obviously not paid and no firm is involved. It also does not consider that the effort of the crowd can be acquired implicitly as well (see Section \ref{sect:types}).\\
+  As \textit{crowdsourcing} is a relatively new concept this leads to the fact that it may be identified with many internet-based collaborative work initiatives and in fact it is not always clear where to draw a line between crowdsourcing efforts and something else. Consequently many definitions of the term \textit{crowdsourcing} have been developed over time. Enrique Estellés-Arolas studied more than 40 papers with varying definitions of the term \cite{arolas:definition}. His definition based on his analysis tries to cover all types of crowdsourcing initiative:
+  \begin{quote}
+    ``Crowdsourcing is a type of participative online activity in which an individual, an institution, a non-profit organization, or company proposes to a group of individuals of varying knowledge, heterogeneity, and number, via a flexible open call, the voluntary undertaking of a task.  The undertaking of the task, of variable complexity and modularity, and in which the crowd should participate bringing their work, money, knowledge and/or experience, always entails mutual benefit. The user will receive the satisfaction of a given type of need, be it economic, social recognition, self-esteem, or the development of individual skills, while the crowdsourcer will obtain and utilize to their advantage that what the user has brought to the venture, whose form will depend on the type of activity undertake.''
+  \end{quote}
+  This characterization however misses the fact, that crowdsourcing is not necessarily bound to an \textit{online activity}. As we will show in Section \ref{sect:history} crowdsourcing existed before someone thought about such thing as the ``WWW''.\\
+  In literature often the general term \textit{crowdsourcer} is used for the purchaser of a crowdsourcing task.
 
-\section{Introduction}
-\label{sect:intro}
+  \section{History of crowdsourcing}
+  \label{sect:history}
+  The term \textit{crowdsourcing} has been coined by the american journalist Jeff Howe \cite{howe:rise}. It has first been mentioned in the article \textit{The Rise Of Crowdsourcing}, published in the Wired Magazin\footnote{http://www.wired.com}. \\
+  In this article Howe describes that and why crowdsourcing may be the next big thing in the internet 2.0. He connects the term \textit{outsourcing} (giving work to well known and specialized group of persons) with \textit{crowd} to crowdsourcing, meaning, that the group of participants is open. The transition from outsourcing to crowdsourcing is described by examples like a site named iStockphoto\footnote{http://www.istockphoto.com}, which was originally raised by a image-sharing community. iSockphoto's micro-payment system allows a large community of more or less professional photographers to sell their pictures. Although this might not be a crowdsourcing system as it has been defined it certainly leads to it.\\
+  However crowdsourcing is much older and is not necessarily related to the internet. In the past crowdsourcing has often been used as a competition in order to create or discover a solution. The following examples are by no means complete and shall just show that crowdsourcing type of work has been around for a long time before the term has been established and even before the internet exists.
 
-Write something useful about how crowdsourcing has been developed over time, history and the like.
-Come then to the current state of the topic and give a brief overview about the (possible) future.
+  \textbf{1714: The longitude price}\\
+  In 1714 the British Government offered a price for a solution to a problem named \textit{The Longitude Problem} \footnote{http://en.wikipedia.org/wiki/Longitude\_prize/} to the public. Sailing was very dangerous at this times. One of the problems was to measure the current longitude. Eventually John Harrison won the main price by inventing the chronometer. Several other persons also benefited from the offer.\\
+  It shall be mentioned that quite similar offers have been done even earlier, in the late 16\textsuperscript{th} century but by then nobody could solve the problems.
 
-%/footnote{some text in here}
-\section{Definition}
-There are many definitions of the term \textit{crowdsourcing}. \\
-As we will discuss in Section \ref{sect:history} it has been introduced by Jeff Howe\cite{howe:rise}. Howe himself described crowdsourcing as
-\begin{quote}
-``[..]the act of a company or institution taking a function once performed by employees and outsourcing it to an undefined (and generally large) network of people in the form of an open call.''
-\end{quote}
-Daran C. Brabham first defined \textit{crowdcing} in an scientific article \cite{brabham:crowd1} as:
-\begin{quote}
- ``[..]an online, distributed problem-solving and production model''
-\end{quote}
-but this definition fails on two accounts: first - as history tells us - crowdcing is not bound to online sources and second and more importantly it is not always used for solving problems but should be seen in a wider view.\\
-Another rather aged definition of the term has been stated in 2009 by Paul Whitla in his paper \textit{crowdcing and Its Application in Marketing Activities}\cite{whitla:crowd}:
-\begin{quote}
-``Crowdsourcing is a newly developed term which refers to the process of outsourcing of activities by a firm to an online community or crowd in the form of an ‘open call’. Any member of the crowd can then complete an assigned task and be paid for their efforts.''
-\end{quote}
-If we take for example wikipedia or the development of Linux into consideration as being a crowdsource effort as well, the definition of Whitla is no longer true as the participants for those projects are obviously not paid and no firm is involved. It also does not consider that the effort of the crowd can be acquired implicitly as well (see Section \ref{sect:types}).\\
-As \textit{crowdsourcing} is a relatively new concept this leads to the fact that it may be identified with many internet-based collaborative work initiatives and in fact it is not always clear where to draw a line between crowdsourcing efforts and something else. Consequently many definitions of the term \textit{crowdsourcing} have been developed over time. Enrique Estellés-Arolas studied more than 40 papers with varying definitions of the term \cite{arolas:definition}. His definition based on his analysis tries to cover all types of crowdsourcing initiative:
-\begin{quote}
-``Crowdsourcing is a type of participative online activity in which an individual, an institution, a non-profit organization, or company proposes to a group of individuals of varying knowledge, heterogeneity, and number, via a flexible open call, the voluntary undertaking of a task.  The undertaking of the task, of variable complexity and modularity, and in which the crowd should participate bringing their work, money, knowledge and/or experience, always entails mutual benefit. The user will receive the satisfaction of a given type of need, be it economic, social recognition, self-esteem, or the development of individual skills, while the crowdsourcer will obtain and utilize to their advantage that what the user has brought to the venture, whose form will depend on the type of activity undertake.''
-\end{quote}
-This characterization however misses the fact, that crowdsourcing is not necessarily bound to an \textit{online activity}. As we will show in Section \ref{sect:history} crowdsourcing existed before someone thought about such thing as the ``WWW''.
+  \textbf{1936: Toyota Logo Contest}\\
+  In 1963 Toyota held a contest to design a new logo. They received about 25.000 entries. The winning one was the well known three ellipses.
 
-\section{History of crowdsourcing}
-\label{sect:history}
-The term \textit{crowdsourcing} has been coined by the american journalist Jeff Howe \cite{howe:rise}. It has first been mentioned in the article \textit{The Rise Of Crowdsourcing}, published in the Wired Magazin\footnote{http://www.wired.com}. \\
-In this article Howe describes that and why crowdsourcing may be the next big thing in the internet 2.0. He connects the term \textit{outsourcing} (giving work to well known and specialized group of persons) with \textit{crowd} to crowdsourcing, meaning, that the group of participants is open. The transition from outsourcing to crowdsourcing is described by examples like a site named iStockphoto\footnote{http://www.istockphoto.com}, which was originally raised by a image-sharing community. iSockphoto's micro-payment system allows a large community of more or less professional photographers to sell their pictures. Although this might not be a crowdsourcing system as it has been defined it certainly leads to it.\\
-However crowdsourcing is much older and is not necessarily related to the internet. In the past crowdsourcing has often been used as a competition in order to discover a solution. The following examples are by no means complete and shall just show that crowdsourcing type of work has been around for a long time before the term has been established and even before the internet exists.
+  \textbf{2001 - 2005: Youtube, Wikipedia ...}\\
+  With the rise of the internet collaborative sites like youtube and wikipedia rose as well. The connection to the field of crowdsourcing is obvious: a large group of people invest time and effort to create a larger whole.
 
-\textbf{1714: The longitude price}\\
-In 1714 the British Government offered a price for a solution to a problem named \textit{The Longitude Problem} \footnote{http://en.wikipedia.org/wiki/Longitude\_prize/} to the public. Sailing was very dangerous at this times. One of the problems was to measure the current longitude. Eventually John Harrison won the main price by inventing the chronometer. Several other persons also benefited from the offer.\\
-It shall be mentioned that quite similar offers have been done even earlier, in the late 16\textsuperscript{th} century but by then nobody could solve the problems.
+  \textbf{2006 ff: Crowdsourcing}\\
+  As already mentioned, the term \textit{crowdsourcing} has been stated in 2006 by Jeff Howe. From mid 2000 until now a wide large number of different specialized crowdsourcing sites have been established covering different domains. One can in fact see an explosion in crowdsourcing related web sites during the last years. \href{http://www.crowdsourcing.org/directory}{www.crowdsourcing.org} lists more than 2500 sites which are related to crowdsourcing in different categories and the list is constantly growing.\\
+  The next chapter will cover some of the sites in an exemplary way.
 
-\textbf{1936: Toyota Logo Contest}\\
-In 1963 Toyota held a contest to design a new logo. They received about 25.000 entries. The winning one was the well known three ellipses.
+  \subsection{Prominent crowdsourcing sites}
+  In general crowdsourcing means that a group of \textit{workers} participate in finding a solution to a given problem, mostly by solving small parts of the problem. There are several web sites online which provide the technical and logistical infrastructure to support this kind of problem solving. The provided list is by no means complete but shall rather give a brief overview. Different sites cover different more or less specialized types of crowdsourcing. In Section~\ref{sect:types} we will list and explain some of the most common crowdsourcing types.
 
-\textbf{2001 - 2005: Youtube, Wikipedia ...}\\
-With the rise of the internet collaborative sites like youtube and wikipedia rose as well. The connection to the field of crowdsourcing is obvious: a large group of people invest time and effort to create a larger whole.
+  \textbf{Freelancer.com\footnote{http://www.freelancer.com/}}\\
+  This site offers online jobs to freelancers who bid on projects or problems posted by companies or individuals on a set price. The kind of problems to solve range from programming tasks to design projects. Similar web sites are for example ScriptLance\footnote{http://www.scriptlance.com}, Elance\footnote{http://www.elance.com} or guru\footnote{http://www.guru.com})
 
-\textbf{2006 ff: Crowdsourcing}\\
-As already mentioned, the term \textit{crowdsourcing} has been stated in 2006 by Jeff Howe. From mid 2000 until now a wide large number of different crowdsourcing sites has been established covering different domains. One can in fact see an explosion in crowdsourcing related web sites during the last years. \href{http://www.crowdsourcing.org/directory}{www.crowdsourcing.org} lists more than 2500 sites which are related to crowdsourcing in different categories and the list is constantly growing.\\
-The next chapter will cover some of the sites in an exemplary way.
+  \textbf{CrowdSpring\footnote{https://www.crowdspring.com}}\\
+  A site specialized to graphic design projects. Similar sites are: 99designs\footnote{http://99designs.com/} or hatchwise\footnote{http://www.hatchwise.com}.
 
-\subsection{Prominent crowdsourcing sites}
-In general crowdsourcing means that a group of \textit{workers} participate in finding a solution to a given problem, mostly by solving small parts of the problem. There are several web sites online which provide the technical and logistical infrastructure to support this kind of problem solving. The provided list is by no means complete but shall rather give a brief overview. Different sites cover different more or less specialized aspects of crowdsourcing. In Section~\ref{sect:types} we will list and explain some of the most common crowdsourcing types.
+  \textbf{Utest\footnote{https://www.utest.com}}\\
+  This site offers software testing that relies on crowdsourcing. Similar pages are: UserTesting\footnote{http://www.usertesting.com}, Feedback Army\footnote{http://feedbackarmy.com} (for web sites) and others.
 
-\textbf{Freelancer.com\footnote{http://www.freelancer.com/}}\\
-This site offers online jobs to freelancers who bid on projects or problems posted by companies or individuals on a set price. The kind of problems to solve range from programming tasks to design projects. Similar web sites are for example ScriptLance\footnote{http://www.scriptlance.com}, Elance\footnote{http://www.elance.com} or guru\footnote{http://www.guru.com})
+  \textbf{Amazon Mechanical Turk\footnote{https://www.mturk.com/mturk/welcome}}\\
+  One of the best known crowdsourcing sites. Best suited for small and simple tasks like finding or extracting of certain information, tagging pictures... Each task is relatively simple and donated by just a few cent.
 
-\textbf{CrowdSpring\footnote{https://www.crowdspring.com}}\\
-A site specialized to graphic design projects. Similar sites are: 99designs\footnote{http://99designs.com/} or hatchwise\footnote{http://www.hatchwise.com}.
+  \textbf{InnoCentive\footnote{http://www.innocentive.com/}}\\
+  On the contrary to the Mechanical Turk InnoCentive aims to solve complex and more comprehensive questions. Comparable to Innovation Exchange\footnote{http://www.innovationexchange.com/}.
 
-\textbf{Utest\footnote{https://www.utest.com}}\\
-This site offers software testing that relies on crowdsourcing. Similar pages are: UserTesting\footnote{http://www.usertesting.com}, Feedback Army\footnote{http://feedbackarmy.com} (for web sites) and others.
+  Those are just a few of the, many crowdsourcing sites in the internet. \\A comprehensive list can be found at \href{http://www.crowdsourcing.org/directory}{www.crowdsourcing.org}.
 
-\textbf{Amazon Mechanical Turk\footnote{https://www.mturk.com/mturk/welcome}}\\
-One of the best known crowdsourcing sites. Best suited for small and simple tasks like finding or extracting of certain information, tagging pictures... Each task is relatively simple and donated by just a few cent.
+  \section{Types of crowdsourcing}
+  \label{sect:types}
+  It turns out that a decent definition and typification of crowdsourcing systems is not straight forward. As we have already seen the variety of CS-systems range from collaborative sites like wikipedia to micro-task sites like the Amacon Mechanical Turk. One could say that CS is to be defined as a system where a large group of collaborators participate to create a defined artefact, as it is the case at Wikipedia or Linux. On the other hand, this would ignore systems, that for example tasks (and pays) people to find certain information on the web (or else where). Obviously no lasting ``artifact'' is created in this case. So it seems not appropriate to distinguish the type of CS according to the target problem alone.
 
-\textbf{InnoCentive\footnote{http://www.innocentive.com/}}\\
-On the contrary to the Mechanical Turk InnoCentive aims to solve complex and more comprehensive questions. Comparable to Innovation Exchange\footnote{http://www.innovationexchange.com/}.
+  Doan et. al \cite{doan:crowd} mainly distinguishes between \textit{explicit} and \textit{implicit} systems.
+  \begin{itemize}
+  \item \textbf{Explicit} systems let users collaborate explicitly, that is, users register, accept tasks, work on it and submit their solutions. This is the most obvious category and does not need further explanation.
+  \item The intention of \textbf{Implicit} systems is, to motivate the user to collaborate without explicitly having the task in mind. Sometimes the user does not even know, that a current interaction might be used to gain additional information. For example Amazon-users implicitly solve the task of making a product more or less prominent by rating it (same is true for purchaser).
+  \end{itemize}
+  Doan adds 8 more distinguishing dimensions: type of target problem, how to recruit and retain users, what users can do, how to combine their inputs, how to evaluate them, degree of manual effort, role of human users, standalone versus piggyback architectures. We will not go into detail for the other dimension. Please refer to the paper for details.\\
+  Daren C. Brabham\cite{brabham:crowd} uses a rather problem based typology. He categorizes CS to:
+  \begin{itemize}
+    \item \textbf{Distributed Human Intelligence Tasking:} The crowd processes and analyses information.
+    \item \textbf{Knowledge Discovery \& Management:} The crowd finds and assembles information.
+    \item \textbf{Broadcast search:} The crowd comes up with an objective solution of a problem.
+    \item \textbf{Peer-Vetted Creative Production:} The crowd comes up with an subjective solution of a problem (e.g. design...)
+  \end{itemize}
+  Jeff Howe also stated categories of crowdsourcing. He attracts the problem on a higher level of abstraction. Howe proposes the categories \textit{crowdvoting, crowdfunding, microwork, creative crowdsourcing, wisdom of the crowd and inducement price contests}.\\
+  Last but not least as an example I want to mention the web site www.hongkiat.com, which is dedicated to \textit{Design, Inspiration, Technology}, as it states. In his article \textit{Crowdsourcing: Pros, Cons, And More}\footnote{http://www.hongkiat.com/blog/what-is-crowdsourcing/} Darren Stevens simply distinguishes between \textit{Crowdfunding, Crowdsourced design} and \textit{Crowdwisdom}.
 
-Those are just a few of the, many crowdsourcing sites in the internet. \\A comprehensive list can be found at \href{http://www.crowdsourcing.org/directory}{www.crowdsourcing.org}.
+  As one can see, different views to the problem \textit{categorization} create different solutions to it. Maybe one shall let the crowd decide on how to categorise crowdsourcing.
 
-\section{Types of crowdsourcing}
-\label{sect:types}
-It turns out that a decent definition and typification of 	crowdsourcing systems is not straight forward. As we have already seen the variety of CS-systems range from collaborative sites like wikipedia to micro-task sites like the Amacon Mechanical Turk. One could say that CS is to be defined as a system where a large group of collaborators participate to create a defined artefact, as it is the case at Wikipedia or Linux. On the other hand, this would ignore systems, that for example tasks (and pays) people to find certain information on the web (or else where). Obviously no lasting ``artifact'' is created in this case. So it seems not appropriate to distinguish the type of CS according to the target problem alone.
+  \section{Challenges with crowdsourcing}
+  \label{sect:problems}
+  The idea of crowdsourcing is, that one can receive better quality results, since several people offer their best ideas, skills and support. It also let the crowdsourcer select the ``best entries''. Instead of receiving just one result from a single contractor. It is expected, that the results are delivered quicker and with better quality than with traditional methods. However this is not always and automatically the case. Workers are typically paid below market price and this leads to less motivation to provide good quality. Additionally worker could just cheat. This is especially possible when it comes to micro-work like structures as promoted by for example Amazons Mechanical Turk.\\
+  Doan et. al. discuss the following main challenges\cite{doan:crowd}:
 
-Doan et. al \cite{doan:crowd} mainly distinguishes between \textit{explicit} and \textit{implicit} systems.
-\begin{itemize}
- \item \textbf{Explicit} systems let users collaborate explicitly, that is, users register, accept tasks, work on it and submit their solutions. This is the most obvious category and does not need further explanation.
- \item The intention of \textbf{Implicit} systems is, to motivate the user to collaborate without explicitly having the task in mind. Sometimes the user does not even know, that a current interaction might be used to gain additional information. For example Amazon-users implicitly solve the task to rate the usefulness of a product by rating it (same is true for purchaser).
-\end{itemize}
-Doan adds 8 more distinguishing dimensions: type of target problem, how to recruit and retain users, what users can do, how to combine their inputs, how to evaluate them, degree of manual effort, role of human users, standalone versus piggyback architectures. We will not go into detail for the other dimension. Please refer to the paper for details.\\
-Daren C. Brabham\cite{brabham:crowd} uses a rather problem based typology. He categorizes CS to:
-\begin{itemize}
-  \item \textbf{Distributed Human Intelligence Tasking:} The crowd processes and analyses information.
-  \item \textbf{Knowledge Discovery \& Management:} The crowd finds and assembles information.
-  \item \textbf{Broadcast search:} The crowd comes up with an objective solution of a problem.
-  \item \textbf{Peer-Vetted Creative Production:} The crowd comes up with an subjective solution of a problem (e.g. design...)
-\end{itemize}
-Jeff Howe also stated categories of crowdsourcing. He attracts the problem on a higher level of abstraction. Howe proposes the categories \textit{crowdvoting, crowdfunding, microwork, creative crowdsourcing, wisdom of the crowd and inducement price contests}.\\
-Last but not least as an example I want to mention the web site www.hongkiat.com, which is dedicated to \textit{Design, Inspiration, Techonolgy}, as it states. In his article \textit{Crowdsourcing: Pros, Cons, And More}\footnote{http://www.hongkiat.com/blog/what-is-crowdsourcing/} Darren Stevens simply distinguishes between \textit{Crowdfunding, Crowdsourced design} and \textit{Crowdwisdom}.
+  \textbf{How to recruit and retain users: }\\
+  Doan identifies this as one of the most important problems. He outlines five major solutions, I want to discuss three of them briefly:\\
+  One solution is to \textit{require} people to contribute but this only possible if the crowdsourcer hires people (and can therefore tell them what to do) which in turn somehow contradicts the idea of crowdsourcing.\\
+  Another possibility to meet this challenge is to \textit{pay for the effort}. Most of the web sites we showed in Section \ref{sect:history} follow this approach. Problem is, that for very simple problems the payment is very low (e.g. Mechanical Turk), so that the motivation to provide good work might be low.\\
+  The third possibility is to just \textit{ask people} to contribute. This is also a widely used method but can only be established in fields where ``workers'' are interested in doing the work. For example open source development works this way\footnote{And it works quite well in many cases!}.
 
-As one can see, different views to the problem create different solutions to it. Maybe one shall let the crowd decide on how to categorise crowdsourcing.
+  \textbf{How to combine contributions: }\\
+  Especially microwork sites distribute a certain task among many people. All of them only solve a small part of the overall problem or task and submit their solution to this part. Sometimes the combination of the different submissions is quite easy and straightforward. For example the rating system of Amazon just computes a medium of all the ratings and this might be enough for this kind of problem. There is no need to combine the outcomes of several users and to combine them to a greater whole. But this is no longer true for microwork sites. The challenges here are (among others): how to make sure, that the each part of the problem is tackled by a minimum number of workers? How to combine them to a final solution? An additional problem is, that different workers might work on the same part of the problem but with different outcome. How to distinguish between it? This types of problems arises whenever workers act collaborative. Most of the CS systems simply do not combine or rate contributions at all but let the crowdsourcer decide on how to interpret the single results.
 
-\section{Challenges with crowdsourcing}
-\label{sect:problems}
-The idea of crowdsourcing is, that one can receive better quality results, since several people offer their best ideas, skills and support. It also let the crowdsourcer select the ``best entries''. Instead of receiving just one result from a single contractor. It is expected, that the results are delivered quicker and with better quality than with traditional methods. However this is not always and automatically the case. Workers are typically paid below market price and this leads to less motivation to provide good quality. Additionally worker could just cheat. This is especially possible when it comes to micro-work like structures as promoted by for example Amazons Mechanical Turk.\\
-Doan et. al. discuss the following main challenges\cite{doan:crowd}:
+  \textbf{How to evaluate users and contributions: }\\ 
+  There are several methods to tackle this kind of problem. different sites use different techniques to evaluate users and contributions. The simplest one is to limit who may work on what kind of problem. Mechanical Turk for example categorizes tasks and let the worker decide, on which  kind of task he or she wants to work. Another possibility is to let a special kind of users rate the work of others. this way a worker can gain reputation and more trust. Collaborative sites like kernel development introduce some process to ensure quality.\\
+  To detect malicious users could be done in an automated way as well. However, this can be very tricky and is always error-prone. False positives must be avoided by all means. Automatic evaluation methods are for example to ask the worker questions he or she already knows (and rates the person accordingly). John Le et. al.\cite{le:ensure} do this by train the workers on defined tasks and check them later on during the real task. He suggests a dynamic learning approach to identify unethical workers and train ethical workers more effectively.\\
+  Among many others Aniket Kittur et al. showed that the type of the task, for example how it is split into sub-parts, is crucial for the quality of the outcome\cite{kittur:studies}. He also suggests to check for abnormalities in more than one dimension. For example checking for unusual short response times can detect unethical workers who just want to answer as many questions as possible.\\
+  \balancecolumns
+  Another aspect of contribute quality is motivation. How well users perform depends on how motivated they are to work on a problem on the long run. Man-Ching Yuen et. al propose a method to support workers by selecting tasks on crowdsourcing platforms easily and effectively using a special task matching algorithm\cite{yuen:select}.
+  \section{Conclusion}
+  \label{sect:conclusion}
+  CS systems can be applied to many problems. They vary from microwork like tasks like picture tagging over crowd-testing to collaborative- or crowd-design. CS systems certainly are a success and the number of CS sites is still growing constantly. For the future it can be expected, that the crowdsourcing paradigm will be applied to currently not covered areas as well and that new types of CS systems and sites will come into existence.\\
+  Nevertheless, new opportunities cause new challenges as well. The main challenges are how to ensure quality of the outcome given the fact that the workers are not necessarily trained in the needed field of expertise (or may just cheat) and how to combine parts of work to the final solution. Different CS sites try to incorporate mechanisms for solving those problems into their system but more support of the underlying web sites shall and can be expected in the future.
 
-\textbf{How to recruit and retain users: }\\
-Doan identifies this as one of the most important problems. He outlines five major solutions, I want to discuss three of them briefly:\\
-One solution is to \textit{require} people to contribute but this only possible if the crowdsourcer hires people (and can therefore tell them what to do) which in turn somehow contradicts the idea of crowdsourcing. Another possibility to meet this challenge is to \textit{pay for the effort}. Most of the web sites we showed in Section \ref{sect:history} follow this approach. Problem is, that for very simple problems the payment is very low (e.g. Mechanical Turk), so that the motivation to provide good work might be low. The third possibility is to just \textit{ask people} to contribute. This is also a widely used method but can only be established in fields where ``workers'' are interested in doing the work. For example open source development works this way\footnote{And it works quite well in many cases!}.
+  \bibliographystyle{abbrv}
+  \bibliography{crowdsourcing}  % sigproc.bib is the name of the Bibliography in this case
 
-\textbf{How to combine contributions: }\\
-Especially microwork sites like Amazon Mechanical Turk distribute a certain task among many people. All of them only solve a small part of the overall problem or task and submit their solution to this part. Sometimes the combination of the different submissions is quite easy and straightforward. For example the rating system of amazon just computes a medium of all the ratings and this might be enough for this kind of problem. There is no need to combine the outcomes of several users and to combine them to a greater whole. But this is no longer true for microwork sites. The challenges here are (among others): how to make sure, that the each part of the problem is tackled by a minimum number of workers? How to combine them to a final solution? An additional problem is, that different workers might work on the same part of the problem but with different outcome. How to distinguish between it? This types of problems arises whenever workers act collaborative. Most of the CS systems simply do not combine or rate contributions at all but let the crowdsourcer decide on how to interpret the single results.
-
-\textbf{How to evaluate users and contributions: }\\ 
-There are several methods to tackle this kind of problem. different sites use different techniques to evaluate users and contributions. The simplest one is to limit who may work on what kind of problem. Mechanical Turk for example categorizes tasks and let the worker decide, on which  kind of task he or she wants to work. Another possibility is to let a special kind of users rate the work of others. this way a worker can gain reputation and more trust. Collaborative sites like kernel development introduce some process to ensure quality.\\
-To detect malicious users could be done in an automated way as well. However, this can be very tricky and is always error-prone. False positives must be avoided by all means. Automatic evaluation methods are for example to ask the worker questions he or she already knows (and rates the person accordingly). John Le et. al.\cite{le:ensure} do this by train the workers on a defined tasks and check them later on during the real task. He suggests a dynamic learning approach to identify unethical workers and train ethical workers more effectively.\\
-Among many others Aniket Kittur et al showed that the type of the task, for example how it is split into sub-parts, is crucial for the quality of the outcome\cite{kittur:studies}. He also suggests to check for abnormalities in more than one dimension. For example checking the response time can detect unethical workers who just want to answer as many questions as pssoible.\\
-Another aspect of contribute quality is motivation. How well users perform depends on how motivated they are to work on a problem on the long run. Man-Ching Yuen et. al propose a method to support workers by selecting tasks on crowdsourcing platforms easily and effectively using a special task matching algorithm\cite{yuen:select}.
-\pagebreak
-\section{Conclusion}
-\label{sect:conclusion}
-CS systems can be applied to many problems. They vary from microwork like tasks like picture tagging over crowd-testing to collaborative- or crowd-design. CS systems certainly are a success and the number of CS sites is still growing constantly. For the future it can be expected, that the crowdsourcing paradigm will be applied to currently not covered areas as well and that new types of CS systems and sites will come into existence.\\
-Nevertheless, new opportunities cause new challenges as well. The main challenges are how to ensure quality of the outcome given the fact that the workers are not necessarily trained in the needed field of expertise (or may just cheat) and how to combine parts of work to the final solution. Different CS sites try to incorporate mechanisms for solving those problems into their system but more support of the underlying web sites can be expected in the future.
-
-%
-% The following two commands are all you need in the
-% initial runs of your .tex file to
-% produce the bibliography for the citations in your paper.
-\bibliographystyle{abbrv}
-\bibliography{crowdsourcing}  % sigproc.bib is the name of the Bibliography in this case
-% You must have a proper ".bib" file
-%  and remember to run:
-% latex bibtex latex latex
-% to resolve all references
-%
-% ACM needs 'a single self-contained file'!
-%
-%APPENDICES are optional
-%\balancecolumns
-%\appendix
-%Appendix A
-
-\balancecolumns
 \end{document}
