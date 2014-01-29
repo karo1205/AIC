@@ -70,6 +70,7 @@ def post_task2_to_crowd(f,price):
     payload = json.load(urllib2.urlopen('http://127.0.0.1:8002/api/v1/task/1/?format=json'))
     payload['data'] = json.dumps(transform_task_to_data(t))
     payload['price'] = price
+    payload['answer'] = 'NULL'
     payload['question'] = 'Please state your sentiments about this text'
     #TODO: callback uri
     payload['callback_uri'] = 'http://127.0.0.1:8000/api/v1/task/'+ str(t.id) +'/'
