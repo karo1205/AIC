@@ -133,8 +133,8 @@ def result(request, order_id):
        allkeystext.append(keys.text)
        averagekeys[keys] = sumkeys[keys] / countkeys[keys]  
     
-    print averagekeys.values()
-    print sentiments
+    #print averagekeys.values()
+    #print sentiments
     
     keylist = {}
     stringlist = ""
@@ -146,11 +146,11 @@ def result(request, order_id):
         keylist[s.keyword] = [s.score]
   
     stringlist =  str(keylist.values())
-    print "MYSTRIN: "+ stringlist
+    #print "MYSTRIN: "+ stringlist
     stringlist = stringlist.replace('], [','|')
     stringlist = stringlist.replace('[','')
     stringlist = stringlist.replace(']','')   
-    print "MYSTRIN: "+ stringlist
+    #print "MYSTRIN: "+ stringlist
 
 
     context = {'userid' : 'MyUser', 'sentiments' : sentiments,'averages' : averagekeys, 'allkeys' : allkeystext, 'allvaluesavg' : averagekeys.values(), 'allvalues' : stringlist }
