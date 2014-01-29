@@ -86,7 +86,22 @@
 {% endfor %}
           </tbody>
         </table>
-				
+
+        {% load chart_tags %}
+        {% chart %}
+                   http://chart.apis.google.com/chart
+                   ?chxr=0,0,160
+                   &chxt=y
+                   &chbh=a
+                   &chs=440x220
+                   &cht=bvg
+                   &chds=0,160
+                   &chd=t:10,50,60|80,40,60,30
+                   &chtt=Horizontal+bar+chart
+                   &chdl=Microsoft|Samsung
+                   {% endchart %}
+				</div>
+
 
 
 <!--				<div class="list-group">
