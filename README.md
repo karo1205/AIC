@@ -58,6 +58,7 @@ Choose "yes" and choose a Username and Password
 
 
 Add some initial data to the database
+    
     python manage.py sqlcustom polls | ./manage.py dbshell
 
 #### start crowdsourcing platform simulator
