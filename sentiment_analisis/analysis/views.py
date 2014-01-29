@@ -69,8 +69,8 @@ def confirm(request):
 
 # calculate task amount and create Task2 s 
     if counter > 0:       
-      task_amount = int(((int(budget))/((totallength/counter)+1))/10) 
-      min_amount = int((((totallength/counter)+1)*10))
+      task_amount = int(int(budget)/100)#int(((int(budget))/((totallength/counter)+1))/10) 
+      min_amount = 100#int((((totallength/counter)+1)*10))
     else:
       task_amount = 1
       min_amount = 5
@@ -88,13 +88,13 @@ def confirm(request):
     logger.info(task_amount)
     for i in range(0, task_amount):
       for feed in allfeeds:
-#        logger.info('!!bin in schleife')        
-        post_task2_to_crowd(feed,int(int(budget)/(task_amount+1)))
-	logger.info("create Task2 with "+str(feed)+"and price "+str(int(budget)/(task_amount+1)))    
+ #       logger.info('!!bin in schleife')        
+        post_task2_to_crowd(feed,int(float(budget)*float(float(len(feed.content))/float(totallength))))
+#	logger.info("create Task2 with "+str(feed)+"and price "+str(int(float(budget)*float(float(len(feed.content))/float(totallength))))    
 
 #Create Task2s 
 
-    context = {'userid' : username, 'keywords' : keywords, 'startdate' : datestart, 'enddate' : dateend, 'budget' : budget }
+    context = {'userid' : username, 'keywords' : keywords, 'startdate' : datestart, 'enddate' : dateend, 'budget' : budget, 'orderid' : order.id }
     return render(request, 'analysis/confirm.html',context)
 
 def error(request):

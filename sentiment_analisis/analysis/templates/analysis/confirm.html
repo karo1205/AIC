@@ -52,6 +52,8 @@
 <form action="{% url 'analysis:query' %}" method="get">
 {% csrf_token %}
 
+		<h2 >Your Order Id is: {{ orderid }}</h2>
+
 		<h3 >Sentiment Analysis for following Keywords from {{ startdate }} to {{ enddate }} with budget of {{ budget }}:</h3>
 
 		<ul>
