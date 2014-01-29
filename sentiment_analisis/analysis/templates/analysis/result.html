@@ -97,11 +97,27 @@
                    &chs=440x220
                    &cht=bvg
                    &chds=a
-                   &chd=t: {{ allvalues|join:'|' }}
+                   &chd=t: {{ allvaluesavg|join:'|' }}
+                   &chtt=Average+Sentiments+Chart
+                   &chdl= {{ allkeys|join:'|' }}
+                   {% endchart %}
+
+ {% load chart_tags %}
+        {% chart %}
+                   http://chart.apis.google.com/chart
+                   &chxt=y,x   
+                   &chco=FF0000,00FF00,0000FF,0F0000, F00000, 00F000, 000F00, 0000F0, 00000F
+                   &chbh=a
+                   &chs=440x220
+                   &cht=lc
+                   &chds=a
+                   &chd=t:{{ allvalues }}
                    &chtt=Average+Sentiments+Chart
                    &chdl= {{ allkeys|join:'|' }}
                    {% endchart %}
 				</div>
+
+
 
 
 

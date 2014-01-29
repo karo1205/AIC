@@ -35,6 +35,7 @@ pip install django-cron
 pip install requests
 pip install nltk
 pip install feedparser
+pip install django-chart-tools
 
 cd sentiment_analisis
 python manage.py syncdb

@@ -134,11 +134,26 @@ def result(request, order_id):
        averagekeys[keys] = sumkeys[keys] / countkeys[keys]  
     
     print averagekeys.values()
-    print allkeystext
+    print sentiments
     
-    
+    keylist = {}
+    stringlist = ""
+    for s in sentiments:
+      try:
+        keylist[s.keyword].append(s.score)
+    #    print keylist[s.keyword]
+      except KeyError:
+        keylist[s.keyword] = [s.score]
   
-    context = {'userid' : 'MyUser', 'sentiments' : sentiments,'averages' : averagekeys, 'allkeys' : allkeystext, 'allvalues' : averagekeys.values() }#Keyword.objects.get(id=request.POST['selectbox'])}
+    stringlist =  str(keylist.values())
+    print "MYSTRIN: "+ stringlist
+    stringlist = stringlist.replace('], [','|')
+    stringlist = stringlist.replace('[','')
+    stringlist = stringlist.replace(']','')   
+    print "MYSTRIN: "+ stringlist
+
+
+    context = {'userid' : 'MyUser', 'sentiments' : sentiments,'averages' : averagekeys, 'allkeys' : allkeystext, 'allvaluesavg' : averagekeys.values(), 'allvalues' : stringlist }
     return render(request, 'analysis/result.html', context)
 
 # Create your views here.
