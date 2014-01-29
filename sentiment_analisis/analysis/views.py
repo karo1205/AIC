@@ -69,14 +69,14 @@ def confirm(request):
 
 # calculate task amount and create Task2 s 
     if counter > 0:       
-      task_amount = ((int(budget)*300)/((totallength/counter)+1)) 
-      min_amount = int((((totallength/counter)+1)/300))
+      task_amount = int(((int(budget))/((totallength/counter)+1))/10) 
+      min_amount = int((((totallength/counter)+1)*10))
     else:
       task_amount = 1
       min_amount = 5
 
     if task_amount < 1:
-      context = {'userid' : username, 'error_message' : 'Error! Too less budget, you need at least '+str(min_amount)+'!'}
+      context = {'userid' : username, 'error_message' : 'Error! Too less budget, you need at least '+str(min_amount)+' or choose less keywords!'}
       return render(request, 'analysis/error.html',context)
  
 #    logger.info('!!range(0,'+str(task_amount))
@@ -85,11 +85,12 @@ def confirm(request):
       context = {'userid' : username, 'error_message' : 'Error! No Articles found at the given timeperiod: '+str(datestart)+' - '+str(dateend)+' !'}
       return render(request, 'analysis/error.html',context)
    
+    logger.info(task_amount)
     for i in range(0, task_amount):
       for feed in allfeeds:
-#        logger.info('!!bin in schleife')
-        post_task2_to_crowd(feed)
-	logger.info("create Task2 with "+str(feed))    
+#        logger.info('!!bin in schleife')        
+        post_task2_to_crowd(feed,int(int(budget)/(task_amount+1)))
+	logger.info("create Task2 with "+str(feed)+"and price "+str(int(budget)/(task_amount+1)))    
 
 #Create Task2s 
 
