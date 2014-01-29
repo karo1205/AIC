@@ -82,6 +82,7 @@ Don't mix the ports up!!
     python manage.py syncdb --all
 
 start feed parser crons
+    
     python manage.py runcrons    
 
 This Downloads Feeds from Source page and generates Task1s  Do this as often as you like
