@@ -4,6 +4,7 @@
 This Project contains of two django web applications:
 
 1.) A Sentiment Analysis app, which collects feed from Yahoo finance and posts them to a Crowssoucring application
+
 2.) A Crowdsourcing simulator which provides a rudimentary GUI for Task completion and pushes the answers back via callback function to the sentiment analysis application
 
 Both Application are connection via a REST API.
