@@ -52,11 +52,11 @@
 <form action="{% url 'analysis:query' %}" method="get">
 {% csrf_token %}
 
-		<h3 >Sentiment Analysis for following Keywords from {{ startdate }} to {{ enddate }} with budget of {{ budget }}:</h3>
+		<h5 >Sentiment Analysis for following Keywords from {{ startdate }} to {{ enddate }} with budget of {{ budget }}:</h5>
 
 		<ul>
 {% for kword in keywords %}
-		<li>{{ kword }}</li>
+		<li>{{ kword.text }}</li>
 {% endfor %}
 		</ul>	
 		
